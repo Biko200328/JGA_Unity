@@ -16,9 +16,11 @@ public class PlayerMove : MonoBehaviour
 	[Header("ジャンプ力")]
 	[SerializeField] private float jumpPower;
 
+	// コントローラーの入力数値
 	float inputHorizontal;
 	float inputVertical;
 
+	// 火がついてるかどうかフラグ
 	public bool isLightOn;
 
 	// privateで宣言してStartで取得する
@@ -116,7 +118,7 @@ public class PlayerMove : MonoBehaviour
 	private void TakeLight()
 	{
 		// オンオフ切り替え
-		if(Input.GetButtonDown("buttonRB"))
+		if(Input.GetButtonDown("buttonRB") || Input.GetKeyDown(KeyCode.Space))
 		{
 			isLightOn = !isLightOn;
 		}
