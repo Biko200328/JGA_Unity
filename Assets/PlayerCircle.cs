@@ -4,19 +4,60 @@ using UnityEngine;
 
 public class PlayerCircle : MonoBehaviour
 {
-	public float circleSize = 1;
-	private Vector3 circleVec;
+	[Header("円の最大直径")]
+	public float maxCircleSize = 1;
+
+	[Header("円の最小直径")]
+	public float minCircleSize = 0;
+
+	[Header("サイズ増減数値")]
+	[SerializeField] float changeSize;
+
+	// 現在の円の範囲
+	private float circleSize;
+
+	PlayerMove playerMove;
 
 	// Start is called before the first frame update
 	void Start()
 	{
-
+		GameObject player = GameObject.Find("Player");
+		playerMove = player.GetComponent<PlayerMove>();
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		circleVec = new Vector3(circleSize, circleSize / 2,circleSize);
+		if(playerMove.isLightOn)
+		{
+			//最大値より低かったら足す
+			if(circleSize < maxCircleSize)
+			{
+				circleSize += changeSize;
+			}
+
+			//最大値より大きかったら最大値に合わせる
+			if(circleSize > maxCircleSize)
+			{
+				circleSize = maxCircleSize;
+			}
+		}
+		else
+		{
+			// 最小値(0)より大きかったら引く
+			if (circleSize > minCircleSize)
+			{
+				circleSize -= changeSize;
+			}
+
+			//最小値より小さかったら最小値に合わせる
+			if (circleSize < minCircleSize)
+			{
+				circleSize = minCircleSize;
+			}
+		}
+
+		var circleVec = new Vector3(circleSize, circleSize / 2, circleSize);
 		transform.localScale = circleVec;
 	}
 

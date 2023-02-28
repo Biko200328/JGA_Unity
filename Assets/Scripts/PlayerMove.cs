@@ -16,6 +16,8 @@ public class PlayerMove : MonoBehaviour
 	float inputHorizontal;
 	float inputVertical;
 
+	public bool isLightOn;
+
 	// private‚ÅéŒ¾‚µ‚ÄStart‚Åæ“¾‚·‚é
 	// public RigidBody2D rb ‚É‚µ‚ÄInspectorƒrƒ…[‚Å’¼Ú“ü‚ê‚Ä‚à‚¢‚¢
 	Rigidbody2D rb;
@@ -38,6 +40,11 @@ public class PlayerMove : MonoBehaviour
 
 	// Update is called once per frame
 	void Update()
+	{
+		TakeLight();
+	}
+
+	private void FixedUpdate()
 	{
 		Move();
 		Jump();
@@ -86,6 +93,14 @@ public class PlayerMove : MonoBehaviour
 			{
 				rb.velocity += new Vector2(0, jumpPower);
 			}
+		}
+	}
+
+	private void TakeLight()
+	{
+		if(Input.GetButtonDown("buttonRB"))
+		{
+			isLightOn = !isLightOn;
 		}
 	}
 }
