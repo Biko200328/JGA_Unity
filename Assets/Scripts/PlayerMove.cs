@@ -58,11 +58,11 @@ public class PlayerMove : MonoBehaviour
 		// GetKeyDown         押した瞬間
 		// GetKeyUp           離した瞬間
 		// キーボード
-		if (Input.GetKey("left") || Input.GetKey(KeyCode.A))
+		if (Input.GetKey(KeyCode.A))
 		{
 			pos.x -= moveSpeed;
 		}
-		else if (Input.GetKey("right") || Input.GetKey(KeyCode.D))
+		else if (Input.GetKey(KeyCode.D))
 		{
 			pos.x += moveSpeed;
 		}
@@ -80,9 +80,12 @@ public class PlayerMove : MonoBehaviour
 	private void Jump()
 	{
 		//接地しているときにSpace(Jumpボタン)を押した時
-		if (hitFloor.isHit == true && Input.GetKeyDown(KeyCode.Space))
+		if (hitFloor.isHit == true)
 		{
-			rb.velocity += new Vector2(0, jumpPower);
+			if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("buttonA"))
+			{
+				rb.velocity += new Vector2(0, jumpPower);
+			}
 		}
 	}
 }

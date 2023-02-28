@@ -16,7 +16,7 @@ public class PlayerCircle : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		circleVec = new Vector3(circleSize, circleSize,circleSize);
+		circleVec = new Vector3(circleSize, circleSize / 2,circleSize);
 		transform.localScale = circleVec;
 	}
 
