@@ -13,6 +13,9 @@ public class PlayerMove : MonoBehaviour
 	[Header("ジャンプ力")]
 	[SerializeField] private float jumpPower;
 
+	float inputHorizontal;
+	float inputVertical;
+
 	// privateで宣言してStartで取得する
 	// public RigidBody2D rb にしてInspectorビューで直接入れてもいい
 	Rigidbody2D rb;
@@ -54,6 +57,7 @@ public class PlayerMove : MonoBehaviour
 		// GetKey             押している間
 		// GetKeyDown         押した瞬間
 		// GetKeyUp           離した瞬間
+		// キーボード
 		if (Input.GetKey("left") || Input.GetKey(KeyCode.A))
 		{
 			pos.x -= moveSpeed;
@@ -62,6 +66,12 @@ public class PlayerMove : MonoBehaviour
 		{
 			pos.x += moveSpeed;
 		}
+
+		//コントローラー
+		inputHorizontal = Input.GetAxis("cHorizontalL");
+		//inputVertical = Input.GetAxis("cVerticalL");
+
+		pos.x += inputHorizontal * moveSpeed;
 
 		//受け取って数値変更したposをrbに返します
 		rb.position = pos;
