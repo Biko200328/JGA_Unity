@@ -44,7 +44,7 @@ public class PlayerMove : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		//コントローラー
+		// コントローラーの左右入力数値を受け取る
 		inputHorizontal = Input.GetAxis("cHorizontalL");
 
 		//動いてるかどうか判断
@@ -85,30 +85,33 @@ public class PlayerMove : MonoBehaviour
 		// キーボード
 		if (Input.GetKey(KeyCode.A))
 		{
+			//左に移動
 			pos.x -= moveSpeed;
 		}
 		else if (Input.GetKey(KeyCode.D))
 		{
+			//右に移動
 			pos.x += moveSpeed;
 		}
 
+		// コントローラーの数値を足す
 		pos.x += inputHorizontal * moveSpeed;
 
 		//受け取って数値変更したposをrbに返します
 		rb.position = pos;
 	}
 
-	//private void Jump()
-	//{
-	//	//接地しているときにSpace(Jumpボタン)を押した時
-	//	if (hitFloor.isHit == true)
-	//	{
-	//		if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("buttonA"))
-	//		{
-	//			rb.velocity += new Vector2(0, jumpPower);
-	//		}
-	//	}
-	//}
+	private void Jump()
+	{
+		//接地しているときにSpace(Jumpボタン)を押した時
+		if (hitFloor.isHit == true)
+		{
+			if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("buttonA"))
+			{
+				rb.velocity += new Vector2(0, jumpPower);
+			}
+		}
+	}
 
 	private void TakeLight()
 	{
