@@ -9,6 +9,9 @@ public class PlayerMove : MonoBehaviour
 	// [SerializeField] は privateでもInspectorビューで数値が変更できる
 	[SerializeField] private float moveSpeed;
 
+	// 動いてるかどうか
+	bool isMove;
+
 	// スピードと同じようにジャンプ力の変数も作る
 	[Header("ジャンプ力")]
 	[SerializeField] private float jumpPower;
@@ -41,13 +44,28 @@ public class PlayerMove : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		//コントローラー
+		inputHorizontal = Input.GetAxis("cHorizontalL");
+
+		//動いてるかどうか判断
+		if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || inputHorizontal != 0)
+		{
+			isMove = true;
+		}
+		else
+		{
+			isMove = false;
+		}
+
+
 		TakeLight();
 	}
 
+	// 一定間隔で呼ぶupdate
 	private void FixedUpdate()
 	{
-		Move();
-		Jump();
+		// 動いているかのフラグがオンなら
+		if(isMove)Move();
 	}
 
 	private void Move()
@@ -74,30 +92,27 @@ public class PlayerMove : MonoBehaviour
 			pos.x += moveSpeed;
 		}
 
-		//コントローラー
-		inputHorizontal = Input.GetAxis("cHorizontalL");
-		//inputVertical = Input.GetAxis("cVerticalL");
-
 		pos.x += inputHorizontal * moveSpeed;
 
 		//受け取って数値変更したposをrbに返します
 		rb.position = pos;
 	}
 
-	private void Jump()
-	{
-		//接地しているときにSpace(Jumpボタン)を押した時
-		if (hitFloor.isHit == true)
-		{
-			if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("buttonA"))
-			{
-				rb.velocity += new Vector2(0, jumpPower);
-			}
-		}
-	}
+	//private void Jump()
+	//{
+	//	//接地しているときにSpace(Jumpボタン)を押した時
+	//	if (hitFloor.isHit == true)
+	//	{
+	//		if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("buttonA"))
+	//		{
+	//			rb.velocity += new Vector2(0, jumpPower);
+	//		}
+	//	}
+	//}
 
 	private void TakeLight()
 	{
+		// オンオフ切り替え
 		if(Input.GetButtonDown("buttonRB"))
 		{
 			isLightOn = !isLightOn;
