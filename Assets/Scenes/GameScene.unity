@@ -641,7 +641,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxCircleSize: 10
   minCircleSize: 0
-  changeSize: 0.8
+  changeSize: 2
 --- !u!212 &889248969
 SpriteRenderer:
   m_ObjectHideFlags: 0
