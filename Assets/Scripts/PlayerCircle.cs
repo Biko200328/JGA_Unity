@@ -63,16 +63,29 @@ public class PlayerCircle : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		
+		if(collision.gameObject.tag == "block")
+		{
+			Rigidbody2D blockRb = collision.gameObject.GetComponent<Rigidbody2D>();
+			blockRb.isKinematic = false;
+		}
 	}
 
 	private void OnTriggerStay2D(Collider2D collision)
 	{
-		
+		if (collision.gameObject.tag == "block")
+		{
+			Rigidbody2D blockRb = collision.gameObject.GetComponent<Rigidbody2D>();
+			blockRb.isKinematic = false;
+		}
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{
-		
+		if (collision.gameObject.tag == "block")
+		{
+			Rigidbody2D blockRb = collision.gameObject.GetComponent<Rigidbody2D>();
+			blockRb.isKinematic = true;
+			blockRb.velocity = Vector3.zero;
+		}
 	}
 }

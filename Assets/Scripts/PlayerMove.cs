@@ -10,6 +10,8 @@ public class PlayerMove : MonoBehaviour
 	[SerializeField] private float moveSpeed;
 
 	// 動いてるかどうか
+	bool isRightMove;
+	bool isLeftMove;
 	bool isMove;
 
 	// スピードと同じようにジャンプ力の変数も作る
@@ -50,7 +52,25 @@ public class PlayerMove : MonoBehaviour
 		inputHorizontal = Input.GetAxis("cHorizontalL");
 
 		//動いてるかどうか判断
-		if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || inputHorizontal != 0)
+		if(Input.GetKey(KeyCode.A))
+		{
+			isLeftMove = true;
+		}
+		else
+		{
+			isLeftMove = false;
+		}
+
+		if(Input.GetKey(KeyCode.D))
+		{
+			isRightMove = true;
+		}
+		else
+		{
+			isRightMove = false;
+		}
+
+		if (inputHorizontal != 0)
 		{
 			isMove = true;
 		}
@@ -67,7 +87,7 @@ public class PlayerMove : MonoBehaviour
 	private void FixedUpdate()
 	{
 		// 動いているかのフラグがオンなら
-		if(isMove)Move();
+		Move();
 	}
 
 	private void Move()
@@ -85,19 +105,15 @@ public class PlayerMove : MonoBehaviour
 		// GetKeyDown         押した瞬間
 		// GetKeyUp           離した瞬間
 		// キーボード
-		if (Input.GetKey(KeyCode.A))
-		{
-			//左に移動
-			pos.x -= moveSpeed;
-		}
-		else if (Input.GetKey(KeyCode.D))
-		{
-			//右に移動
-			pos.x += moveSpeed;
-		}
 
-		// コントローラーの数値を足す
-		pos.x += inputHorizontal * moveSpeed;
+		//左に移動
+		if (isLeftMove) pos.x -= moveSpeed;
+
+		//右に移動
+		if (isRightMove) pos.x += moveSpeed;
+
+		// コントローラー
+		if(isMove)pos.x += inputHorizontal * moveSpeed;
 
 		//受け取って数値変更したposをrbに返します
 		rb.position = pos;
