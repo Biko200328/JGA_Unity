@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.U2D.IK;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -12,6 +13,7 @@ public class PlayerMove : MonoBehaviour
 	// 動いてるかどうか
 	bool isRightMove;
 	bool isLeftMove;
+	bool isControllerMove;
 	bool isMove;
 
 	// スピードと同じようにジャンプ力の変数も作る
@@ -22,12 +24,12 @@ public class PlayerMove : MonoBehaviour
 	float inputHorizontal;
 	float inputVertical;
 
-    // 移動制限
-    float limitX = 15.5f;
-    float limitY = 8.0f;
+	// 移動制限
+	float limitX = 15.5f;
+	float limitY = 8.0f;
 
-    // 火がついてるかどうかフラグ
-    public bool isLightOn;
+	// 火がついてるかどうかフラグ
+	public bool isLightOn;
 
 	// privateで宣言してStartで取得する
 	// public RigidBody2D rb にしてInspectorビューで直接入れてもいい
@@ -56,7 +58,7 @@ public class PlayerMove : MonoBehaviour
 		inputHorizontal = Input.GetAxis("cHorizontalL");
 
 		//動いてるかどうか判断
-		if(Input.GetKey(KeyCode.A))
+		if (Input.GetKey(KeyCode.A))
 		{
 			isLeftMove = true;
 		}
@@ -65,7 +67,7 @@ public class PlayerMove : MonoBehaviour
 			isLeftMove = false;
 		}
 
-		if(Input.GetKey(KeyCode.D))
+		if (Input.GetKey(KeyCode.D))
 		{
 			isRightMove = true;
 		}
@@ -75,6 +77,15 @@ public class PlayerMove : MonoBehaviour
 		}
 
 		if (inputHorizontal != 0)
+		{
+			isControllerMove = true;
+		}
+		else
+		{
+			isControllerMove = false;
+		}
+
+		if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || inputHorizontal != 0)
 		{
 			isMove = true;
 		}
@@ -90,24 +101,69 @@ public class PlayerMove : MonoBehaviour
 	// 一定間隔で呼ぶupdate
 	private void FixedUpdate()
 	{
-		// 動いているかのフラグがオンなら
-		Move();
+		if(!isMove) { return; }
+		{
+			// 左フラグがオンなら
+			if (!isLeftMove)
+			{
+				var pos = rb.position;
+				pos.x += moveSpeed;
+
+				// 現在のポジションを保持する
+				Vector3 currentPos = pos;
+
+				// 範囲を超えていたら範囲内の値を代入する
+				currentPos.x = Mathf.Clamp(currentPos.x, -limitX, limitX);
+				currentPos.y = Mathf.Clamp(currentPos.y, -limitY, limitY);
+
+				// 受け取って数値変更したposをrbに返します
+				rb.position = currentPos;
+			}
+
+			// 右フラグがオンなら
+			else if (!isRightMove)
+			{
+				var pos = rb.position;
+				pos.x -= moveSpeed;
+
+				// 現在のポジションを保持する
+				Vector3 currentPos = pos;
+
+				// 範囲を超えていたら範囲内の値を代入する
+				currentPos.x = Mathf.Clamp(currentPos.x, -limitX, limitX);
+				currentPos.y = Mathf.Clamp(currentPos.y, -limitY, limitY);
+
+				// 受け取って数値変更したposをrbに返します
+				rb.position = currentPos;
+			}
+			// コントローラーフラグがオンなら
+			else if (!isControllerMove)
+			{
+				var pos = rb.position;
+				pos.x += inputHorizontal * moveSpeed;
+
+				// 現在のポジションを保持する
+				Vector3 currentPos = pos;
+
+				// 範囲を超えていたら範囲内の値を代入する
+				currentPos.x = Mathf.Clamp(currentPos.x, -limitX, limitX);
+				currentPos.y = Mathf.Clamp(currentPos.y, -limitY, limitY);
+
+				// 受け取って数値変更したposをrbに返します
+				rb.position = currentPos;
+			}
+			else
+			{
+				return;
+			}
+		}
+		
 	}
 
 	private void Move()
 	{
-		// varとは
-		// 初期値の内容から変数の型をC#コンパイラーが推測して自動的に設定してくれます(google先生より)
 		var pos = rb.position;
 
-		// ここではrb(RigidBody)のpositionをposとして一時保管します
-		// 理由としてはpositionのx,y,z 個々を直接いじれないのでpositionとして全部受け取り、そのまま全部返します
-		// 日本語難しい
-
-
-		// GetKey             押している間
-		// GetKeyDown         押した瞬間
-		// GetKeyUp           離した瞬間
 		// キーボード
 
 		//左に移動
@@ -117,17 +173,17 @@ public class PlayerMove : MonoBehaviour
 		if (isRightMove) pos.x += moveSpeed;
 
 		// コントローラー
-		if(isMove)pos.x += inputHorizontal * moveSpeed;
+		if (isControllerMove) pos.x += inputHorizontal * moveSpeed;
 
-        // 現在のポジションを保持する
-        Vector3 currentPos = pos;
+		// 現在のポジションを保持する
+		Vector3 currentPos = pos;
 
-        // 範囲を超えていたら範囲内の値を代入する
-        currentPos.x = Mathf.Clamp(currentPos.x, -limitX, limitX);
-        currentPos.y = Mathf.Clamp(currentPos.y, -limitY, limitY);
+		// 範囲を超えていたら範囲内の値を代入する
+		currentPos.x = Mathf.Clamp(currentPos.x, -limitX, limitX);
+		currentPos.y = Mathf.Clamp(currentPos.y, -limitY, limitY);
 
-        // 受け取って数値変更したposをrbに返します
-        rb.position = currentPos;
+		// 受け取って数値変更したposをrbに返します
+		rb.position = currentPos;
 	}
 
 	private void Jump()
@@ -145,7 +201,7 @@ public class PlayerMove : MonoBehaviour
 	private void TakeLight()
 	{
 		// オンオフ切り替え
-		if(Input.GetButtonDown("buttonRB") || Input.GetKeyDown(KeyCode.Space))
+		if (Input.GetButtonDown("buttonRB") || Input.GetKeyDown(KeyCode.Space))
 		{
 			isLightOn = !isLightOn;
 		}
