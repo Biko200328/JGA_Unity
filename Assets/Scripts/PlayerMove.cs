@@ -54,20 +54,14 @@ public class PlayerMove : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		MoveFlagChange();
+		Move();
 
 		TakeLight();
 	}
 
-	// 一定間隔で呼ぶupdate
-	private void FixedUpdate()
-	{
-		Move();
-	}
-
 	//動いてるかどうかのフラグ管理
 	// Updateに入れる
-	private void MoveFlagChange()
+	private void Move()
 	{
 		// コントローラーの左右入力数値を受け取る
 		inputHorizontal = Input.GetAxis("cHorizontalL");
@@ -75,100 +69,19 @@ public class PlayerMove : MonoBehaviour
 		//動いてるかどうか判断
 		if (Input.GetKey(KeyCode.A))
 		{
-			isLeftMove = true;
+			rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+		}
+		else if (Input.GetKey(KeyCode.D))
+		{
+			rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+		}
+		else if (inputHorizontal != 0)
+		{
+			rb.velocity = new Vector2(inputHorizontal * moveSpeed, rb.velocity.y);
 		}
 		else
 		{
-			isLeftMove = false;
-		}
-
-		if (Input.GetKey(KeyCode.D))
-		{
-			isRightMove = true;
-		}
-		else
-		{
-			isRightMove = false;
-		}
-
-		if (inputHorizontal != 0)
-		{
-			isControllerMove = true;
-		}
-		else
-		{
-			isControllerMove = false;
-		}
-
-		if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || inputHorizontal != 0)
-		{
-			isMove = true;
-		}
-		else
-		{
-			isMove = false;
-		}
-	}
-
-	// Flagがオンなら動かす処理
-	// rb使っているのでFixedUpdateに入れる
-	private void Move()
-	{
-		if (!isMove) { return; }
-		{
-			// 左フラグがオンなら
-			if (!isLeftMove)
-			{
-				var pos = rb.position;
-				pos.x += moveSpeed;
-
-				// 現在のポジションを保持する
-				Vector3 currentPos = pos;
-
-				// 範囲を超えていたら範囲内の値を代入する
-				currentPos.x = Mathf.Clamp(currentPos.x, -limitX, limitX);
-				currentPos.y = Mathf.Clamp(currentPos.y, -limitY, limitY);
-
-				// 受け取って数値変更したposをrbに返します
-				rb.position = currentPos;
-			}
-
-			// 右フラグがオンなら
-			else if (!isRightMove)
-			{
-				var pos = rb.position;
-				pos.x -= moveSpeed;
-
-				// 現在のポジションを保持する
-				Vector3 currentPos = pos;
-
-				// 範囲を超えていたら範囲内の値を代入する
-				currentPos.x = Mathf.Clamp(currentPos.x, -limitX, limitX);
-				currentPos.y = Mathf.Clamp(currentPos.y, -limitY, limitY);
-
-				// 受け取って数値変更したposをrbに返します
-				rb.position = currentPos;
-			}
-			// コントローラーフラグがオンなら
-			else if (!isControllerMove)
-			{
-				var pos = rb.position;
-				pos.x += inputHorizontal * moveSpeed;
-
-				// 現在のポジションを保持する
-				Vector3 currentPos = pos;
-
-				// 範囲を超えていたら範囲内の値を代入する
-				currentPos.x = Mathf.Clamp(currentPos.x, -limitX, limitX);
-				currentPos.y = Mathf.Clamp(currentPos.y, -limitY, limitY);
-
-				// 受け取って数値変更したposをrbに返します
-				rb.position = currentPos;
-			}
-			else
-			{
-				return;
-			}
+			rb.velocity = new Vector2(0, rb.velocity.y);
 		}
 	}
 

@@ -57,35 +57,122 @@ public class PlayerCircle : MonoBehaviour
 			}
 		}
 
-		var circleVec = new Vector3(circleSize, circleSize / 2, circleSize);
+		var circleVec = new Vector3(circleSize, circleSize, circleSize);
 		transform.localScale = circleVec;
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if(collision.gameObject.tag == "block")
+		// 普通のブロック
+		if (collision.gameObject.tag == "block")
 		{
 			Rigidbody2D blockRb = collision.gameObject.GetComponent<Rigidbody2D>();
 			blockRb.isKinematic = false;
+		}
+
+		// 左に移動するブロック
+		if (collision.gameObject.tag == "leftMoveBlock")
+		{
+			LeftMoveBlock leftMoveBlock = collision.gameObject.GetComponent<LeftMoveBlock>();
+			leftMoveBlock.isMove = true;
+		}
+
+		// 右に移動するブロック
+		if (collision.gameObject.tag == "rightMoveBlock")
+		{
+			RightMoveBlock rightMoveBlock = collision.gameObject.GetComponent<RightMoveBlock>();
+			rightMoveBlock.isMove = true;
+		}
+
+		// 上に移動するブロック
+		if(collision.gameObject.tag == "upMoveBlock")
+		{
+			UpMoveBlock upMoveBlock = collision.gameObject.GetComponent<UpMoveBlock>();
+			upMoveBlock.isMove = true;
+		}
+
+		// 下に移動するブロック
+		if(collision.gameObject.tag == "downMoveBlock")
+		{
+			DownMoveBlock downMoveBlock = collision.gameObject.GetComponent<DownMoveBlock>();
+			downMoveBlock.isMove = true;
 		}
 	}
 
 	private void OnTriggerStay2D(Collider2D collision)
 	{
+		// 普通のブロック
 		if (collision.gameObject.tag == "block")
 		{
 			Rigidbody2D blockRb = collision.gameObject.GetComponent<Rigidbody2D>();
 			blockRb.isKinematic = false;
 		}
+
+		// 左に移動するブロック
+		if (collision.gameObject.tag == "leftMoveBlock")
+		{
+			LeftMoveBlock leftMoveBlock = collision.gameObject.GetComponent<LeftMoveBlock>();
+			leftMoveBlock.isMove = true;
+		}
+
+		// 右に移動するブロック
+		if (collision.gameObject.tag == "rightMoveBlock")
+		{
+			RightMoveBlock rightMoveBlock = collision.gameObject.GetComponent<RightMoveBlock>();
+			rightMoveBlock.isMove = true;
+		}
+
+		// 上に移動するブロック
+		if (collision.gameObject.tag == "upMoveBlock")
+		{
+			UpMoveBlock upMoveBlock = collision.gameObject.GetComponent<UpMoveBlock>();
+			upMoveBlock.isMove = true;
+		}
+
+		// 下に移動するブロック
+		if (collision.gameObject.tag == "downMoveBlock")
+		{
+			DownMoveBlock downMoveBlock = collision.gameObject.GetComponent<DownMoveBlock>();
+			downMoveBlock.isMove = true;
+		}
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{
+		// 普通のブロック
 		if (collision.gameObject.tag == "block")
 		{
 			Rigidbody2D blockRb = collision.gameObject.GetComponent<Rigidbody2D>();
 			blockRb.isKinematic = true;
 			blockRb.velocity = Vector3.zero;
+		}
+
+		// 左に移動するブロック
+		if (collision.gameObject.tag == "leftMoveBlock")
+		{
+			LeftMoveBlock leftMoveBlock = collision.gameObject.GetComponent<LeftMoveBlock>();
+			leftMoveBlock.isMove = false;
+		}
+
+		// 右に移動するブロック
+		if (collision.gameObject.tag == "rightMoveBlock")
+		{
+			RightMoveBlock rightMoveBlock = collision.gameObject.GetComponent<RightMoveBlock>();
+			rightMoveBlock.isMove = false;
+		}
+
+		// 上に移動するブロック
+		if (collision.gameObject.tag == "upMoveBlock")
+		{
+			UpMoveBlock upMoveBlock = collision.gameObject.GetComponent<UpMoveBlock>();
+			upMoveBlock.isMove = false;
+		}
+
+		// 下に移動するブロック
+		if (collision.gameObject.tag == "downMoveBlock")
+		{
+			DownMoveBlock downMoveBlock = collision.gameObject.GetComponent<DownMoveBlock>();
+			downMoveBlock.isMove = false;
 		}
 	}
 }

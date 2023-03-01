@@ -8,10 +8,13 @@ public class HitFloor : MonoBehaviour
 	// PlayerMoveÇ…ìnÇ∑ÇÃÇ≈publicêÈåæ
 	public bool isHit;
 
+	Rigidbody2D playerRb;
+
 	// Start is called before the first frame update
 	void Start()
 	{
-
+		GameObject player = GameObject.Find("Player");
+		playerRb = player.gameObject.GetComponent<Rigidbody2D>();
 	}
 
 	// Update is called once per frame
@@ -40,6 +43,15 @@ public class HitFloor : MonoBehaviour
 	private void OnTriggerStay2D(Collider2D collision)
 	{
 		if (collision.gameObject.tag == "Floor") isHit = true;
+
+		if(collision.gameObject.tag != "Floor")
+		{
+			Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
+			if(rb.velocity.x != 0)
+			{
+				playerRb.velocity = new Vector2(rb.velocity.x, playerRb.velocity.y);
+			}
+		}
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)

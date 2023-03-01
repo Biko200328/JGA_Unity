@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Floor
+  - block
+  - leftMoveBlock
+  - rightMoveBlock
+  - upMoveBlock
+  - downMoveBlock
   layers:
   - Default
   - TransparentFX
