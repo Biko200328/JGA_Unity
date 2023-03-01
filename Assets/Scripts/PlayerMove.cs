@@ -54,6 +54,21 @@ public class PlayerMove : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		MoveFlagChange();
+
+		TakeLight();
+	}
+
+	// 一定間隔で呼ぶupdate
+	private void FixedUpdate()
+	{
+		Move();
+	}
+
+	//動いてるかどうかのフラグ管理
+	// Updateに入れる
+	private void MoveFlagChange()
+	{
 		// コントローラーの左右入力数値を受け取る
 		inputHorizontal = Input.GetAxis("cHorizontalL");
 
@@ -93,15 +108,13 @@ public class PlayerMove : MonoBehaviour
 		{
 			isMove = false;
 		}
-
-
-		TakeLight();
 	}
 
-	// 一定間隔で呼ぶupdate
-	private void FixedUpdate()
+	// Flagがオンなら動かす処理
+	// rb使っているのでFixedUpdateに入れる
+	private void Move()
 	{
-		if(!isMove) { return; }
+		if (!isMove) { return; }
 		{
 			// 左フラグがオンなら
 			if (!isLeftMove)
@@ -157,33 +170,6 @@ public class PlayerMove : MonoBehaviour
 				return;
 			}
 		}
-		
-	}
-
-	private void Move()
-	{
-		var pos = rb.position;
-
-		// キーボード
-
-		//左に移動
-		if (isLeftMove) pos.x -= moveSpeed;
-
-		//右に移動
-		if (isRightMove) pos.x += moveSpeed;
-
-		// コントローラー
-		if (isControllerMove) pos.x += inputHorizontal * moveSpeed;
-
-		// 現在のポジションを保持する
-		Vector3 currentPos = pos;
-
-		// 範囲を超えていたら範囲内の値を代入する
-		currentPos.x = Mathf.Clamp(currentPos.x, -limitX, limitX);
-		currentPos.y = Mathf.Clamp(currentPos.y, -limitY, limitY);
-
-		// 受け取って数値変更したposをrbに返します
-		rb.position = currentPos;
 	}
 
 	private void Jump()
