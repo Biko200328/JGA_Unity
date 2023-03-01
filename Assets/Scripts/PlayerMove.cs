@@ -22,8 +22,12 @@ public class PlayerMove : MonoBehaviour
 	float inputHorizontal;
 	float inputVertical;
 
-	// 火がついてるかどうかフラグ
-	public bool isLightOn;
+    // 移動制限
+    float limitX = 15.5f;
+    float limitY = 8.0f;
+
+    // 火がついてるかどうかフラグ
+    public bool isLightOn;
 
 	// privateで宣言してStartで取得する
 	// public RigidBody2D rb にしてInspectorビューで直接入れてもいい
@@ -115,8 +119,15 @@ public class PlayerMove : MonoBehaviour
 		// コントローラー
 		if(isMove)pos.x += inputHorizontal * moveSpeed;
 
-		//受け取って数値変更したposをrbに返します
-		rb.position = pos;
+        // 現在のポジションを保持する
+        Vector3 currentPos = pos;
+
+        // 範囲を超えていたら範囲内の値を代入する
+        currentPos.x = Mathf.Clamp(currentPos.x, -limitX, limitX);
+        currentPos.y = Mathf.Clamp(currentPos.y, -limitY, limitY);
+
+        // 受け取って数値変更したposをrbに返します
+        rb.position = currentPos;
 	}
 
 	private void Jump()
