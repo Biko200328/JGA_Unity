@@ -4,21 +4,29 @@ using UnityEngine;
 
 public class UpMoveBlock : MonoBehaviour
 {
+	[Header("ˆÚ“®‘¬“x")]
+	public float moveSpeed;
+
+	[Header("“®‚­ó‘Ô‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO")]
 	public bool isMove = false;
 
-	public float moveSpeed;
+	public FloorCheckUp floorCheckUp;
+
+	Rigidbody2D rb;
 	// Start is called before the first frame update
 	void Start()
 	{
-		
+		rb = GetComponent<Rigidbody2D>();
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		if (isMove)
+		//‰~‚Ì’†‚©‚ÂÕ“Ë”»’è‚ª‚È‚¢ê‡‚É
+		if (isMove && !floorCheckUp.isFloor)
 		{
-			transform.position += new Vector3(0, moveSpeed,0);
+			//“®‚©‚·
+			transform.position += new Vector3(0, moveSpeed, 0);
 		}
 	}
 }

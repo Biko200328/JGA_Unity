@@ -27,14 +27,15 @@ public class PlayerMove : MonoBehaviour
 	//float limitY = 8.0f;
 
 	// 火がついてるかどうかフラグ
+	[Header("フラグ")]
 	public bool isLightOn;
+
+	public bool isOnMoveBlock;
+
 
 	Rigidbody2D rb;
 
 	HitFloor hitFloor;
-
-	public bool isA;
-
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -102,30 +103,33 @@ public class PlayerMove : MonoBehaviour
 		}
 	}
 
-	private void OnCollisionEnter2D(Collision2D collision)
-	{
-		if(collision.gameObject.tag == "rightMoveBlock")
-		{
-			isA = true;
-			transform.SetParent(collision.transform);
-		}
-	}
+	//private void OnCollisionEnter2D(Collision2D collision)
+	//{
+	//	if(collision.gameObject.tag == "rightMoveBlock")
+	//	{
+	//		isOnMoveBlock = true;
+	//		transform.SetParent(collision.transform);
+	//	}
 
-	private void OnCollisionStay2D(Collision2D collision)
-	{
-		if (collision.gameObject.tag == "rightMoveBlock")
-		{
-			isA = true;
-			transform.SetParent(collision.transform);
-		}
-	}
+	//	if (collision.gameObject.tag == "downMoveBlock")
+	//	{
+	//		isOnMoveBlock = true;
+	//		transform.SetParent(collision.transform);
+	//	}
+	//}
 
-	private void OnCollisionExit2D(Collision2D collision)
-	{
-		if (collision.gameObject.tag == "rightMoveBlock")
-		{
-			isA = false;
-			transform.SetParent(null);
-		}
-	}
+	//private void OnCollisionExit2D(Collision2D collision)
+	//{
+	//	if (collision.gameObject.tag == "rightMoveBlock")
+	//	{
+	//		isOnMoveBlock = false;
+	//		transform.SetParent(null);
+	//	}
+
+	//	if (collision.gameObject.tag == "downMoveBlock")
+	//	{
+	//		isOnMoveBlock = false;
+	//		transform.SetParent(null);
+	//	}
+	//}
 }

@@ -27,7 +27,7 @@ public class RightMoveBlock : MonoBehaviour
 		if (isMove && !floorCheckRight.isFloor)
 		{
 			//“®‚©‚·
-			transform.position += new Vector3(moveSpeed, 0,0);
+			transform.position += new Vector3(moveSpeed, 0, 0);
 		}
 	}
 }
