@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RightMoveBlock : MonoBehaviour
+public class LeftMoveBlock : MonoBehaviour
 {
 	public bool isMove = false;
 
@@ -12,19 +12,20 @@ public class RightMoveBlock : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		rb = gameObject.GetComponent<Rigidbody2D>();
+		rb = GetComponent<Rigidbody2D>();
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
+
+	}
+
+	private void FixedUpdate()
+	{
 		if (isMove)
 		{
-			rb.velocity = new Vector2(moveSpeed,0);
-		}
-		else
-		{
-			rb.velocity = Vector2.zero;
+			rb.MovePosition(transform.position - transform.right * moveSpeed * Time.deltaTime);
 		}
 	}
 }

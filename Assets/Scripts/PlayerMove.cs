@@ -5,16 +5,14 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-	// [[Header("hoge")]] は ScriptのInspectorビューに文字が表示できる
+	// 移動スピード
 	[Header("移動スピード")]
-	// [SerializeField] は privateでもInspectorビューで数値が変更できる
 	[SerializeField] private float moveSpeed;
 
 	// 動いてるかどうか
 	bool isRightMove;
 	bool isLeftMove;
 	bool isControllerMove;
-	bool isMove;
 
 	// スピードと同じようにジャンプ力の変数も作る
 	[Header("ジャンプ力")]
@@ -24,19 +22,18 @@ public class PlayerMove : MonoBehaviour
 	float inputHorizontal;
 	float inputVertical;
 
-	// 移動制限
-	float limitX = 15.5f;
-	float limitY = 8.0f;
+	//// 移動制限
+	//float limitX = 15.5f;
+	//float limitY = 8.0f;
 
 	// 火がついてるかどうかフラグ
 	public bool isLightOn;
 
-	// privateで宣言してStartで取得する
-	// public RigidBody2D rb にしてInspectorビューで直接入れてもいい
 	Rigidbody2D rb;
 
-	// 上に同じ
 	HitFloor hitFloor;
+
+	public bool isA;
 
 	// Start is called before the first frame update
 	void Start()
@@ -45,7 +42,6 @@ public class PlayerMove : MonoBehaviour
 		rb = gameObject.GetComponent<Rigidbody2D>();
 
 		// 子オブジェクト読み込み
-		// Find("hoge")の hoge の部分を完全一致させないと読み取らないので注意
 		GameObject child = transform.Find("HitFloor").gameObject;
 		// class読み込み
 		hitFloor = child.GetComponent<HitFloor>();
@@ -103,6 +99,33 @@ public class PlayerMove : MonoBehaviour
 		if (Input.GetButtonDown("buttonRB") || Input.GetKeyDown(KeyCode.Space))
 		{
 			isLightOn = !isLightOn;
+		}
+	}
+
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		if(collision.gameObject.tag == "rightMoveBlock")
+		{
+			isA = true;
+			transform.SetParent(collision.transform);
+		}
+	}
+
+	private void OnCollisionStay2D(Collision2D collision)
+	{
+		if (collision.gameObject.tag == "rightMoveBlock")
+		{
+			isA = true;
+			transform.SetParent(collision.transform);
+		}
+	}
+
+	private void OnCollisionExit2D(Collision2D collision)
+	{
+		if (collision.gameObject.tag == "rightMoveBlock")
+		{
+			isA = false;
+			transform.SetParent(null);
 		}
 	}
 }

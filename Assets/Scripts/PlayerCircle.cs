@@ -18,6 +18,7 @@ public class PlayerCircle : MonoBehaviour
 
 	PlayerMove playerMove;
 
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -57,7 +58,8 @@ public class PlayerCircle : MonoBehaviour
 			}
 		}
 
-		var circleVec = new Vector3(circleSize, circleSize, circleSize);
+		var circleVec = new Vector3(circleSize, circleSize / 2, circleSize);
+		
 		transform.localScale = circleVec;
 	}
 
@@ -111,7 +113,7 @@ public class PlayerCircle : MonoBehaviour
 		// ç∂Ç…à⁄ìÆÇ∑ÇÈÉuÉçÉbÉN
 		if (collision.gameObject.tag == "leftMoveBlock")
 		{
-			LeftMoveBlock leftMoveBlock = collision.gameObject.GetComponent<LeftMoveBlock>();
+			LeftMoveBlock leftMoveBlock = collision.gameObject.GetComponentInChildren<LeftMoveBlock>();
 			leftMoveBlock.isMove = true;
 		}
 
