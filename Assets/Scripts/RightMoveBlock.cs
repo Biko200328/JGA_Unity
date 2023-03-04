@@ -9,8 +9,9 @@ public class RightMoveBlock : MonoBehaviour
 
 	[Header("動く状態かどうかのフラグ")]
 	public bool isMove = false;
-	[Header("壁との衝突判定")]
-	public bool isFloor = false;
+
+
+	public FloorCheckRight floorCheckRight;
 
 	Rigidbody2D rb;
 	// Start is called before the first frame update
@@ -23,20 +24,10 @@ public class RightMoveBlock : MonoBehaviour
 	void Update()
 	{
 		//円の中かつ衝突判定がない場合に
-		if (isMove && !isFloor)
+		if (isMove && !floorCheckRight.isFloor)
 		{
 			//動かす
 			transform.position += new Vector3(moveSpeed, 0,0);
-		}
-	}
-
-	private void OnCollisionEnter2D(Collision2D collision)
-	{
-		//動いてる状態かつ当たったオブジェクトが床の時に
-		if (collision.gameObject.tag == "Floor")
-		{
-			// 衝突判定をTrueに
-			if(isMove)isFloor = true;
 		}
 	}
 }
