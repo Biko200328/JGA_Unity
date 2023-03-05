@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FloorCheckDown : MonoBehaviour
-{// °‚É“–‚½‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©
+{
+	// °‚É“–‚½‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©
 	public bool isFloor;
 
 	public DownMoveBlock downMoveBlock;

@@ -35,6 +35,12 @@ public class HitFloor : MonoBehaviour
 			player.transform.SetParent(collision.transform);
 		}
 
+		if (collision.gameObject.tag == "leftMoveBlock")
+		{
+			isOnMoveBlock = true;
+			player.transform.SetParent(collision.transform);
+		}
+
 		if (collision.gameObject.tag == "downMoveBlock")
 		{
 			isOnMoveBlock = true;
@@ -53,6 +59,12 @@ public class HitFloor : MonoBehaviour
 		if (collision.gameObject.tag == "Floor") isHit = true;
 
 		if (collision.gameObject.tag == "rightMoveBlock")
+		{
+			isOnMoveBlock = true;
+			player.transform.SetParent(collision.transform);
+		}
+
+		if (collision.gameObject.tag == "leftMoveBlock")
 		{
 			isOnMoveBlock = true;
 			player.transform.SetParent(collision.transform);
@@ -77,6 +89,12 @@ public class HitFloor : MonoBehaviour
 		if (collision.gameObject.tag == "Floor") isHit = false;
 
 		if (collision.gameObject.tag == "rightMoveBlock")
+		{
+			isOnMoveBlock = false;
+			player.transform.SetParent(null);
+		}
+
+		if (collision.gameObject.tag == "leftMoveBlock")
 		{
 			isOnMoveBlock = false;
 			player.transform.SetParent(null);
