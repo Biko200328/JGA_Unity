@@ -9,15 +9,6 @@ public class PlayerMove : MonoBehaviour
 	[Header("移動スピード")]
 	[SerializeField] private float moveSpeed;
 
-	// 動いてるかどうか
-	bool isRightMove;
-	bool isLeftMove;
-	bool isControllerMove;
-
-	// スピードと同じようにジャンプ力の変数も作る
-	[Header("ジャンプ力")]
-	[SerializeField] private float jumpPower;
-
 	// コントローラーの入力数値
 	float inputHorizontal;
 	float inputVertical;
@@ -26,12 +17,24 @@ public class PlayerMove : MonoBehaviour
 	//float limitX = 15.5f;
 	//float limitY = 8.0f;
 
+
+	// 動いてるかどうか
+	bool isRightMove;
+	bool isLeftMove;
+	bool isControllerMove;
+
+	// スピードと同じようにジャンプ力の変数も作る
+	[Header("ジャンプ力")]
+	[SerializeField] private float jumpPower;
 	
 	[Header("フラグ")]
 	// 火がついてるかどうかフラグ
 	public bool isLightOn;
 	// 移動する足場に乗っているかどうか
 	public bool isOnMoveBlock;
+	// 隣に一マスのブロックがあったら
+	public bool isNextBlockL = false;
+	public bool isNextBlockR = false;
 
 	Rigidbody2D rb;
 
@@ -54,6 +57,8 @@ public class PlayerMove : MonoBehaviour
 		Move();
 
 		TakeLight();
+
+		AutoJump();
 	}
 
 	//移動
@@ -90,6 +95,17 @@ public class PlayerMove : MonoBehaviour
 			if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("buttonA"))
 			{
 				rb.velocity += new Vector2(0, jumpPower);
+			}
+		}
+	}
+
+	private void AutoJump()
+	{
+		if(isNextBlockL && hitFloor.isHit)
+		{
+			if (Input.GetKey(KeyCode.A))
+			{
+				rb.velocity = new Vector2(0, jumpPower);
 			}
 		}
 	}
