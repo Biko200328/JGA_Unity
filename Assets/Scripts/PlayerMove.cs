@@ -26,12 +26,12 @@ public class PlayerMove : MonoBehaviour
 	//float limitX = 15.5f;
 	//float limitY = 8.0f;
 
-	// 火がついてるかどうかフラグ
+	
 	[Header("フラグ")]
+	// 火がついてるかどうかフラグ
 	public bool isLightOn;
-
+	// 移動する足場に乗っているかどうか
 	public bool isOnMoveBlock;
-
 
 	Rigidbody2D rb;
 
@@ -56,8 +56,7 @@ public class PlayerMove : MonoBehaviour
 		TakeLight();
 	}
 
-	//動いてるかどうかのフラグ管理
-	// Updateに入れる
+	//移動
 	private void Move()
 	{
 		// コントローラーの左右入力数値を受け取る
@@ -82,6 +81,7 @@ public class PlayerMove : MonoBehaviour
 		}
 	}
 
+	//ジャンプ
 	private void Jump()
 	{
 		//接地しているときにSpace(Jumpボタン)を押した時
@@ -102,34 +102,4 @@ public class PlayerMove : MonoBehaviour
 			isLightOn = !isLightOn;
 		}
 	}
-
-	//private void OnCollisionEnter2D(Collision2D collision)
-	//{
-	//	if(collision.gameObject.tag == "rightMoveBlock")
-	//	{
-	//		isOnMoveBlock = true;
-	//		transform.SetParent(collision.transform);
-	//	}
-
-	//	if (collision.gameObject.tag == "downMoveBlock")
-	//	{
-	//		isOnMoveBlock = true;
-	//		transform.SetParent(collision.transform);
-	//	}
-	//}
-
-	//private void OnCollisionExit2D(Collision2D collision)
-	//{
-	//	if (collision.gameObject.tag == "rightMoveBlock")
-	//	{
-	//		isOnMoveBlock = false;
-	//		transform.SetParent(null);
-	//	}
-
-	//	if (collision.gameObject.tag == "downMoveBlock")
-	//	{
-	//		isOnMoveBlock = false;
-	//		transform.SetParent(null);
-	//	}
-	//}
 }
