@@ -108,6 +108,14 @@ public class PlayerMove : MonoBehaviour
 				rb.velocity = new Vector2(0, jumpPower);
 			}
 		}
+
+		if (isNextBlockR && hitFloor.isHit)
+		{
+			if (Input.GetKey(KeyCode.D))
+			{
+				rb.velocity = new Vector2(0, jumpPower);
+			}
+		}
 	}
 
 	private void TakeLight()
