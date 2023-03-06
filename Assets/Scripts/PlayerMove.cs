@@ -157,20 +157,14 @@ public class PlayerMove : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
 			// ランプを持っているとき
-			// 地面についているとき
-			if (isLampTake && hitFloor.isHit)
+			if (isLampTake)
 			{
-				isLampTake = false;
-				lampSqr.LampThrow();
-
-				// 現在のポジションを取得
-				var pos = transform.position;
-				// 投げたフラグをtrue
-				lampSqr.isThrow = true;
-				// タイムを0に
-				lampSqr.throwNowTime = 0;
-				// スタートポジションを現在のposに変更
-				lampSqr.startPos = new Vector2(transform.position.x,transform.position.y + 1);
+				// 地面についているとき
+				if (hitFloor.isHit || hitFloor.isOnMoveBlock)
+				{
+					isLampTake = false;
+					lampSqr.LampThrow(transform.position);
+				}
 			}
 			// ランプを持っていないとき
 			// ライトの中にいて上にブロックがないとき

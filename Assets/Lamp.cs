@@ -15,6 +15,11 @@ public class Lamp : MonoBehaviour
 
 	public Vector2 pos;
 
+	public bool isFall;
+	private float fallNowTime;
+	private Vector2 fallStartPos;
+	private Vector2 endPos;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -32,9 +37,25 @@ public class Lamp : MonoBehaviour
 			{
 				isThrow = false;
 				throwNowTime = throwTime;
+				isFall = true;
+				fallNowTime = 0;
+				fallStartPos = transform.position;
 			}
 
 			transform.position = QuintOut(throwNowTime, throwTime, startPos, startPos + new Vector2(0, maxY));
+		}
+
+		if(isFall)
+		{
+			fallNowTime += Time.deltaTime;
+			if (rb != null) rb.velocity = Vector2.zero;
+			if (fallNowTime >= throwTime)
+			{
+				isFall = false;
+				fallNowTime = throwTime;
+			}
+
+		transform.position = QuintIn(fallNowTime, throwTime, fallStartPos, fallStartPos + new Vector2(0, -maxY - 1));
 		}
 	}
 
@@ -53,12 +74,26 @@ public class Lamp : MonoBehaviour
 		return max * (t * t * t * t * t + 1) + min;
 	}
 
-	public void LampThrow()
+	public static Vector2 QuintIn(float t, float totaltime, Vector2 min, Vector2 max)
+	{
+		max -= min;
+		t /= totaltime;
+		return max * t * t * t * t * t + min;
+	}
+
+	public void LampThrow(Vector3 pos)
 	{
 		//Rigidbodyつける
 		rb = gameObject.AddComponent<Rigidbody2D>();
 		//FreezeRotationをオンにする
 		rb.freezeRotation = true;
+
+		// 投げたフラグをtrue
+		isThrow = true;
+		// タイムを0に
+		throwNowTime = 0;
+		// スタートポジションを現在のposに変更
+		startPos = new Vector2(pos.x, pos.y + 1);
 	}
 
 	public void RbLost()
