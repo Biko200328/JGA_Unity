@@ -17,7 +17,6 @@ public class PlayerMove : MonoBehaviour
 	//float limitX = 15.5f;
 	//float limitY = 8.0f;
 
-
 	// 動いてるかどうか
 	bool isRightMove;
 	bool isLeftMove;
@@ -26,8 +25,10 @@ public class PlayerMove : MonoBehaviour
 	// スピードと同じようにジャンプ力の変数も作る
 	[Header("ジャンプ力")]
 	[SerializeField] private float jumpPower;
-	
+
 	[Header("フラグ")]
+	// 分裂しているかどうか
+	public bool isLampTake;
 	// 火がついてるかどうかフラグ
 	public bool isLightOn;
 	// 移動する足場に乗っているかどうか
@@ -37,8 +38,8 @@ public class PlayerMove : MonoBehaviour
 	public bool isNextBlockR = false;
 
 	Rigidbody2D rb;
-
 	HitFloor hitFloor;
+	GameObject lamp;
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -49,6 +50,12 @@ public class PlayerMove : MonoBehaviour
 		GameObject child = transform.Find("HitFloor").gameObject;
 		// class読み込み
 		hitFloor = child.GetComponent<HitFloor>();
+
+		//lamp読み込み
+		lamp = GameObject.Find("Lamp");
+
+		//ランプをつける
+		isLightOn = true;
 	}
 
 	// Update is called once per frame
@@ -56,9 +63,11 @@ public class PlayerMove : MonoBehaviour
 	{
 		Move();
 
-		TakeLight();
+		//TakeLight();
 
 		AutoJump();
+
+		TakeLamp();
 	}
 
 	//移動
@@ -124,6 +133,26 @@ public class PlayerMove : MonoBehaviour
 		if (Input.GetButtonDown("buttonRB") || Input.GetKeyDown(KeyCode.Space))
 		{
 			isLightOn = !isLightOn;
+		}
+	}
+
+	private void TakeLamp()
+	{
+		if(Input.GetKeyDown(KeyCode.Space))
+		{
+			//フラグ反転
+			isLampTake = !isLampTake;
+			lamp.transform.SetParent(this.transform);
+			lamp.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 1);
+		}
+		if(isLampTake)
+		{
+			lamp.transform.SetParent(this.transform);
+			lamp.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 1);
+		}
+		else
+		{
+			lamp.transform.SetParent(null);
 		}
 	}
 }

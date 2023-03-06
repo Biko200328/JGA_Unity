@@ -26,15 +26,16 @@ public class Block : MonoBehaviour
 		rb.velocity = new Vector2(0,rb.velocity.y);
 	}
 
-	private void OnCollisionEnter(Collision collision)
-	{
-		//当たっている物のRigidbodyを受け取る
-		Rigidbody2D collisionRb = collision.gameObject.GetComponent<Rigidbody2D>();
-		//それがx軸移動していたら
-		if(collisionRb.velocity.x != 0)
-		{
-			//その分のvelocityをこのブロックに反映させる
-			rb.velocity = new Vector2(collisionRb.velocity.x, rb.velocity.y);
-		}
-	}
+	//円の中にいなくても動かしたいときはコメントアウト
+	//private void OnCollisionEnter(Collision collision)
+	//{
+	//	//当たっている物のRigidbodyを受け取る
+	//	Rigidbody2D collisionRb = collision.gameObject.GetComponent<Rigidbody2D>();
+	//	//それがx軸移動していたら
+	//	if(collisionRb.velocity.x != 0)
+	//	{
+	//		//その分のvelocityをこのブロックに反映させる
+	//		rb.velocity = new Vector2(collisionRb.velocity.x, rb.velocity.y);
+	//	}
+	//}
 }

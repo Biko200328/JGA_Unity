@@ -58,7 +58,7 @@ public class PlayerCircle : MonoBehaviour
 			}
 		}
 
-		var circleVec = new Vector3(circleSize, circleSize / 2, circleSize);
+		var circleVec = new Vector3(circleSize, circleSize, circleSize);
 		
 		transform.localScale = circleVec;
 	}
