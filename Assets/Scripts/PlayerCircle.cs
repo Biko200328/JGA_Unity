@@ -65,43 +65,41 @@ public class PlayerCircle : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		// 普通のブロック
-		if (collision.gameObject.tag == "block")
-		{
-			Rigidbody2D blockRb = collision.gameObject.GetComponent<Rigidbody2D>();
-			blockRb.isKinematic = false;
-		}
+		//ギミックのフラグ管理
+		GimmicksOn(collision);
 
-		// 左に移動するブロック
-		if (collision.gameObject.tag == "leftMoveBlock")
+		// プレイヤー
+		if (collision.gameObject.tag == "Player")
 		{
-			LeftMoveBlock leftMoveBlock = collision.gameObject.GetComponent<LeftMoveBlock>();
-			leftMoveBlock.isMove = true;
-		}
-
-		// 右に移動するブロック
-		if (collision.gameObject.tag == "rightMoveBlock")
-		{
-			RightMoveBlock rightMoveBlock = collision.gameObject.GetComponent<RightMoveBlock>();
-			rightMoveBlock.isMove = true;
-		}
-
-		// 上に移動するブロック
-		if(collision.gameObject.tag == "upMoveBlock")
-		{
-			UpMoveBlock upMoveBlock = collision.gameObject.GetComponent<UpMoveBlock>();
-			upMoveBlock.isMove = true;
-		}
-
-		// 下に移動するブロック
-		if(collision.gameObject.tag == "downMoveBlock")
-		{
-			DownMoveBlock downMoveBlock = collision.gameObject.GetComponent<DownMoveBlock>();
-			downMoveBlock.isMove = true;
+			playerMove.isLightIn = true;
 		}
 	}
 
 	private void OnTriggerStay2D(Collider2D collision)
+	{
+		//ギミックのフラグ管理
+		GimmicksOn(collision);
+
+		// プレイヤー
+		if (collision.gameObject.tag == "Player")
+		{
+			playerMove.isLightIn = true;
+		}
+	}
+
+	private void OnTriggerExit2D(Collider2D collision)
+	{
+		//ギミックのフラグ管理
+		GimmicksOff(collision);
+
+		// プレイヤー
+		if (collision.gameObject.tag == "Player")
+		{
+			playerMove.isLightIn = false;
+		}
+	}
+
+	private void GimmicksOn(Collider2D collision)
 	{
 		// 普通のブロック
 		if (collision.gameObject.tag == "block")
@@ -113,7 +111,7 @@ public class PlayerCircle : MonoBehaviour
 		// 左に移動するブロック
 		if (collision.gameObject.tag == "leftMoveBlock")
 		{
-			LeftMoveBlock leftMoveBlock = collision.gameObject.GetComponentInChildren<LeftMoveBlock>();
+			LeftMoveBlock leftMoveBlock = collision.gameObject.GetComponent<LeftMoveBlock>();
 			leftMoveBlock.isMove = true;
 		}
 
@@ -139,7 +137,7 @@ public class PlayerCircle : MonoBehaviour
 		}
 	}
 
-	private void OnTriggerExit2D(Collider2D collision)
+	private void GimmicksOff(Collider2D collision)
 	{
 		// 普通のブロック
 		if (collision.gameObject.tag == "block")

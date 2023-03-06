@@ -647,7 +647,7 @@ GameObject:
   - component: {fileID: 547921617}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -667,6 +667,7 @@ MonoBehaviour:
   moveSpeed: 6
   jumpPower: 4.5
   isLampTake: 0
+  isLightIn: 0
   isLightOn: 0
   isOnMoveBlock: 0
   isNextBlockL: 0
@@ -799,11 +800,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4893538003596893075, guid: daaea0ed67e7e94468ca598747c4fdc6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.499001
+      value: 13.5
       objectReference: {fileID: 0}
     - target: {fileID: 4893538003596893075, guid: daaea0ed67e7e94468ca598747c4fdc6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.512
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 4893538003596893075, guid: daaea0ed67e7e94468ca598747c4fdc6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10398,6 +10399,8 @@ GameObject:
   - component: {fileID: 1623061253}
   - component: {fileID: 1623061252}
   - component: {fileID: 1623061251}
+  - component: {fileID: 1623061254}
+  - component: {fileID: 1623061255}
   m_Layer: 0
   m_Name: Lamp
   m_TagString: Untagged
@@ -10497,6 +10500,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1623061254
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623061250}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
+--- !u!114 &1623061255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623061250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 575bc4f32c1e82b44a7f6051d248c0d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1627828652
 GameObject:
   m_ObjectHideFlags: 0

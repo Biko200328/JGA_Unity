@@ -29,6 +29,8 @@ public class PlayerMove : MonoBehaviour
 	[Header("フラグ")]
 	// 分裂しているかどうか
 	public bool isLampTake;
+	// 灯りの中にいるかどうか
+	public bool isLightIn;
 	// 火がついてるかどうかフラグ
 	public bool isLightOn;
 	// 移動する足場に乗っているかどうか
@@ -138,7 +140,7 @@ public class PlayerMove : MonoBehaviour
 
 	private void TakeLamp()
 	{
-		if(Input.GetKeyDown(KeyCode.Space))
+		if(Input.GetKeyDown(KeyCode.Space) && isLightIn)
 		{
 			//フラグ反転
 			isLampTake = !isLampTake;
