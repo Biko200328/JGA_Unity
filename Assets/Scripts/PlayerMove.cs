@@ -23,9 +23,10 @@ public class PlayerMove : MonoBehaviour
 	bool isLeftMove;
 	bool isControllerMove;
 
-    // スピードと同じようにジャンプ力の変数も作る
-    [Header("ジャンプ力")]
-    [SerializeField] private float jumpPower;
+	// スピードと同じようにジャンプ力の変数も作る
+	[Header("ジャンプ力")]
+	[SerializeField] private float jumpPower;
+	[SerializeField] private float lampJumpPower;
 
 	[Header("フラグ")]
 	// 分裂しているかどうか
@@ -42,14 +43,12 @@ public class PlayerMove : MonoBehaviour
 	HitFloor hitFloor;
 	HitCeiling hitCeiling;
 	GameObject lampObj;
-	BoxCollider2D boxCol;
+	Rigidbody2D lampRb;
 	// Start is called before the first frame update
 	void Start()
 	{
 		// Rigidbodyを取得
 		rb = gameObject.GetComponent<Rigidbody2D>();
-		// colliderを取得
-		boxCol = GetComponent<BoxCollider2D>();
 
 		// 子オブジェクト読み込み
 		GameObject childFloor = transform.Find("HitFloor").gameObject;
@@ -61,17 +60,19 @@ public class PlayerMove : MonoBehaviour
 		// コンポーネント読み込み
 		hitCeiling = childCeiling.GetComponent<HitCeiling>();
 
-		//lamp読み込み
+		// lamp読み込み
 		lampObj = GameObject.Find("Lamp");
+		// ランプのRigidbodyを取得
+		lampRb = lampObj.GetComponent<Rigidbody2D>();
 
 		//ランプをつける
 		isLightOn = true;
 	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        Move();
+	// Update is called once per frame
+	void Update()
+	{
+		Move();
 
 		//TakeLight();
 
@@ -86,24 +87,24 @@ public class PlayerMove : MonoBehaviour
 		// コントローラーの左右入力数値を受け取る
 		inputHorizontal = Input.GetAxis("cHorizontalL");
 
-        //動いてるかどうか判断
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
-        }
-        else if (inputHorizontal != 0)
-        {
-            rb.velocity = new Vector2(inputHorizontal * moveSpeed, rb.velocity.y);
-        }
-        else
-        {
-            rb.velocity = new Vector2(0, rb.velocity.y);
-        }
-    }
+		//動いてるかどうか判断
+		if (Input.GetKey(KeyCode.A))
+		{
+			rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+		}
+		else if (Input.GetKey(KeyCode.D))
+		{
+			rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+		}
+		else if (inputHorizontal != 0)
+		{
+			rb.velocity = new Vector2(inputHorizontal * moveSpeed, rb.velocity.y);
+		}
+		else
+		{
+			rb.velocity = new Vector2(0, rb.velocity.y);
+		}
+	}
 
 	//ジャンプ
 	private void Jump()
@@ -120,8 +121,8 @@ public class PlayerMove : MonoBehaviour
 
 	private void AutoJump()
 	{
-	
-		if(isNextBlockL && hitFloor.isHit)
+
+		if (isNextBlockL && hitFloor.isHit)
 		{
 			if (Input.GetKey(KeyCode.A))
 			{
@@ -150,15 +151,30 @@ public class PlayerMove : MonoBehaviour
 	private void TakeLamp()
 	{
 		// ライトの中にいてかつプレイヤーの上にブロックがないときにランプを呼ぶ
-		if (Input.GetKeyDown(KeyCode.Space) && isLightIn && !hitCeiling.isHit)
+		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			//フラグ反転
-			isLampTake = !isLampTake;
-			lampObj.transform.SetParent(this.transform);
-			lampObj.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 1);
+			// ランプを持っているとき
+			// 地面についているとき
+			if (isLampTake && hitFloor.isHit)
+			{
+				isLampTake = false;
+				//Rigidbodyつける
+				lampRb = lampObj.AddComponent<Rigidbody2D>();
+				//FreezeRotationをオンにする
+				lampRb.freezeRotation = true;
+				//上に飛ばす
+				lampRb.velocity += new Vector2(0, lampJumpPower);
+			}
+			// ランプを持っていないとき
+			// ライトの中にいて上にブロックがないとき
+			else if(!isLampTake && isLightIn && !hitCeiling.isHit)
+			{
+				isLampTake = true;
+				Destroy(lampRb);
+			}
 		}
 
-		if(isLampTake)
+		if (isLampTake)
 		{
 			// 親子付け
 			lampObj.transform.SetParent(this.transform);

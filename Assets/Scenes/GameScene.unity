@@ -666,6 +666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 6
   jumpPower: 4.5
+  lampJumpPower: 10
   isLampTake: 0
   isLightIn: 0
   isLightOn: 0
