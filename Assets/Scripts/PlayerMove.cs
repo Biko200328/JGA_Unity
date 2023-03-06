@@ -120,6 +120,7 @@ public class PlayerMove : MonoBehaviour
 
 	private void AutoJump()
 	{
+	
 		if(isNextBlockL && hitFloor.isHit)
 		{
 			if (Input.GetKey(KeyCode.A))
