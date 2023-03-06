@@ -33,14 +33,13 @@ public class PlayerMove : MonoBehaviour
 	public bool isLightIn;
 	// 火がついてるかどうかフラグ
 	public bool isLightOn;
-	// 移動する足場に乗っているかどうか
-	public bool isOnMoveBlock;
 	// 隣に一マスのブロックがあったら
 	public bool isNextBlockL = false;
 	public bool isNextBlockR = false;
 
 	Rigidbody2D rb;
 	HitFloor hitFloor;
+	HitCeiling hitCeiling;
 	GameObject lamp;
 	// Start is called before the first frame update
 	void Start()
@@ -49,9 +48,14 @@ public class PlayerMove : MonoBehaviour
 		rb = gameObject.GetComponent<Rigidbody2D>();
 
 		// 子オブジェクト読み込み
-		GameObject child = transform.Find("HitFloor").gameObject;
-		// class読み込み
-		hitFloor = child.GetComponent<HitFloor>();
+		GameObject childFloor = transform.Find("HitFloor").gameObject;
+		// コンポーネント読み込み
+		hitFloor = childFloor.GetComponent<HitFloor>();
+
+		// 子オブジェクト読み込み
+		GameObject childCeiling = transform.Find("HitCeiling").gameObject;
+		// コンポーネント読み込み
+		hitCeiling = childCeiling.GetComponent<HitCeiling>();
 
 		//lamp読み込み
 		lamp = GameObject.Find("Lamp");
@@ -140,13 +144,15 @@ public class PlayerMove : MonoBehaviour
 
 	private void TakeLamp()
 	{
-		if(Input.GetKeyDown(KeyCode.Space) && isLightIn)
+		// ライトの中にいてかつプレイヤーの上にブロックがないときにランプを呼ぶ
+		if (Input.GetKeyDown(KeyCode.Space) && isLightIn && !hitCeiling.isHit)
 		{
 			//フラグ反転
 			isLampTake = !isLampTake;
 			lamp.transform.SetParent(this.transform);
 			lamp.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 1);
 		}
+
 		if(isLampTake)
 		{
 			lamp.transform.SetParent(this.transform);
