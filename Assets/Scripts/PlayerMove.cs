@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager.UI;
 using UnityEditor.U2D.IK;
 using UnityEngine;
 
@@ -40,12 +41,15 @@ public class PlayerMove : MonoBehaviour
 	Rigidbody2D rb;
 	HitFloor hitFloor;
 	HitCeiling hitCeiling;
-	GameObject lamp;
+	GameObject lampObj;
+	BoxCollider2D boxCol;
 	// Start is called before the first frame update
 	void Start()
 	{
 		// Rigidbodyを取得
 		rb = gameObject.GetComponent<Rigidbody2D>();
+		// colliderを取得
+		boxCol = GetComponent<BoxCollider2D>();
 
 		// 子オブジェクト読み込み
 		GameObject childFloor = transform.Find("HitFloor").gameObject;
@@ -58,7 +62,7 @@ public class PlayerMove : MonoBehaviour
 		hitCeiling = childCeiling.GetComponent<HitCeiling>();
 
 		//lamp読み込み
-		lamp = GameObject.Find("Lamp");
+		lampObj = GameObject.Find("Lamp");
 
 		//ランプをつける
 		isLightOn = true;
@@ -149,18 +153,21 @@ public class PlayerMove : MonoBehaviour
 		{
 			//フラグ反転
 			isLampTake = !isLampTake;
-			lamp.transform.SetParent(this.transform);
-			lamp.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 1);
+			lampObj.transform.SetParent(this.transform);
+			lampObj.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 1);
 		}
 
 		if(isLampTake)
 		{
-			lamp.transform.SetParent(this.transform);
-			lamp.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 1);
+			// 親子付け
+			lampObj.transform.SetParent(this.transform);
+			// プレイヤーの上に移動
+			lampObj.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 1);
 		}
 		else
 		{
-			lamp.transform.SetParent(null);
+			// 親子付け解除
+			lampObj.transform.SetParent(null);
 		}
 	}
 }
