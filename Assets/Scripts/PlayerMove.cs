@@ -23,9 +23,9 @@ public class PlayerMove : MonoBehaviour
 	bool isLeftMove;
 	bool isControllerMove;
 
-	// スピードと同じようにジャンプ力の変数も作る
-	[Header("ジャンプ力")]
-	[SerializeField] private float jumpPower;
+    // スピードと同じようにジャンプ力の変数も作る
+    [Header("ジャンプ力")]
+    [SerializeField] private float jumpPower;
 
 	[Header("フラグ")]
 	// 分裂しているかどうか
@@ -68,10 +68,10 @@ public class PlayerMove : MonoBehaviour
 		isLightOn = true;
 	}
 
-	// Update is called once per frame
-	void Update()
-	{
-		Move();
+    // Update is called once per frame
+    void Update()
+    {
+        Move();
 
 		//TakeLight();
 
@@ -86,24 +86,24 @@ public class PlayerMove : MonoBehaviour
 		// コントローラーの左右入力数値を受け取る
 		inputHorizontal = Input.GetAxis("cHorizontalL");
 
-		//動いてるかどうか判断
-		if (Input.GetKey(KeyCode.A))
-		{
-			rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
-		}
-		else if (Input.GetKey(KeyCode.D))
-		{
-			rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
-		}
-		else if (inputHorizontal != 0)
-		{
-			rb.velocity = new Vector2(inputHorizontal * moveSpeed, rb.velocity.y);
-		}
-		else
-		{
-			rb.velocity = new Vector2(0, rb.velocity.y);
-		}
-	}
+        //動いてるかどうか判断
+        if (Input.GetKey(KeyCode.A))
+        {
+            rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+        }
+        else if (inputHorizontal != 0)
+        {
+            rb.velocity = new Vector2(inputHorizontal * moveSpeed, rb.velocity.y);
+        }
+        else
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
+    }
 
 	//ジャンプ
 	private void Jump()
