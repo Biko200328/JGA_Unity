@@ -4,27 +4,30 @@ using UnityEngine;
 
 public class RightMoveBlock : MonoBehaviour
 {
+	[Header("ˆÚ“®‘¬“x")]
+	public float moveSpeed;
+
+	[Header("“®‚­ó‘Ô‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO")]
 	public bool isMove = false;
 
-	public float moveSpeed;
+
+	public FloorCheckRight floorCheckRight;
 
 	Rigidbody2D rb;
 	// Start is called before the first frame update
 	void Start()
 	{
-		rb = gameObject.GetComponent<Rigidbody2D>();
+		rb = GetComponent<Rigidbody2D>();
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		if (isMove)
+		//‰~‚Ì’†‚©‚ÂÕ“Ë”»’è‚ª‚È‚¢ê‡‚É
+		if (isMove && !floorCheckRight.isFloor)
 		{
-			rb.velocity = new Vector2(moveSpeed,0);
-		}
-		else
-		{
-			rb.velocity = Vector2.zero;
+			//“®‚©‚·
+			transform.position += new Vector3(moveSpeed, 0, 0);
 		}
 	}
 }

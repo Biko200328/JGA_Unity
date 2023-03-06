@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class HitFloor : MonoBehaviour
 {
+	//親オブジェクト
+	GameObject player;
+
 	// 接地判定
-	// PlayerMoveに渡すのでpublic宣言
 	public bool isHit;
 
-	Rigidbody2D playerRb;
+	public bool isOnMoveBlock;
 
 	// Start is called before the first frame update
 	void Start()
 	{
-		GameObject player = GameObject.Find("Player");
-		playerRb = player.gameObject.GetComponent<Rigidbody2D>();
+		player = GameObject.Find("Player");
 	}
 
 	// Update is called once per frame
@@ -23,34 +24,62 @@ public class HitFloor : MonoBehaviour
 
 	}
 
-	// OnTriggerEnter     当たった(触れた)瞬間
-	// OnTriggerStay      当たっている(触れている)間
-	// OnTriggerExit      離れた瞬間
-	// Trigger以外にもOncollision~~がある
-	// 読み込んでいるcolliderがTrigger(すり抜ける)かどうかの違い
-	// TriggerにするかどうかはcolliderのInspectorビューにチェックボックスがあるよ
-
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		// 当たったcollisionのtagがFloorなら接地とする
-		// そうしないとどのObjに当たった時でもJumpできてしまう
 		if (collision.gameObject.tag == "Floor") isHit = true;
 
-		// tagはInspectorビューのObjの名前の下で変えるところがある
-		// tagの新規追加もそこでできるからFloorを作ってtilemapに設定する
+		if (collision.gameObject.tag == "rightMoveBlock")
+		{
+			isOnMoveBlock = true;
+			player.transform.SetParent(collision.transform);
+		}
+
+		if (collision.gameObject.tag == "leftMoveBlock")
+		{
+			isOnMoveBlock = true;
+			player.transform.SetParent(collision.transform);
+		}
+
+		if (collision.gameObject.tag == "downMoveBlock")
+		{
+			isOnMoveBlock = true;
+			player.transform.SetParent(collision.transform);
+		}
+
+		if (collision.gameObject.tag == "upMoveBlock")
+		{
+			isOnMoveBlock = true;
+			player.transform.SetParent(collision.transform);
+		}
 	}
 
 	private void OnTriggerStay2D(Collider2D collision)
 	{
 		if (collision.gameObject.tag == "Floor") isHit = true;
 
-		if(collision.gameObject.tag != "Floor")
+		if (collision.gameObject.tag == "rightMoveBlock")
 		{
-			Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
-			if(rb.velocity.x != 0)
-			{
-				playerRb.velocity = new Vector2(rb.velocity.x, playerRb.velocity.y);
-			}
+			isOnMoveBlock = true;
+			player.transform.SetParent(collision.transform);
+		}
+
+		if (collision.gameObject.tag == "leftMoveBlock")
+		{
+			isOnMoveBlock = true;
+			player.transform.SetParent(collision.transform);
+		}
+
+		if (collision.gameObject.tag == "downMoveBlock")
+		{
+			isOnMoveBlock = true;
+			player.transform.SetParent(collision.transform);
+		}
+
+		if (collision.gameObject.tag == "upMoveBlock")
+		{
+			isOnMoveBlock = true;
+			player.transform.SetParent(collision.transform);
 		}
 	}
 
@@ -58,5 +87,29 @@ public class HitFloor : MonoBehaviour
 	{
 		// 離れた時だけfalseにしてあげれば空中にいるときはfalseになる
 		if (collision.gameObject.tag == "Floor") isHit = false;
+
+		if (collision.gameObject.tag == "rightMoveBlock")
+		{
+			isOnMoveBlock = false;
+			player.transform.SetParent(null);
+		}
+
+		if (collision.gameObject.tag == "leftMoveBlock")
+		{
+			isOnMoveBlock = false;
+			player.transform.SetParent(null);
+		}
+
+		if (collision.gameObject.tag == "downMoveBlock")
+		{
+			isOnMoveBlock = false;
+			player.transform.SetParent(null);
+		}
+
+		if (collision.gameObject.tag == "upMoveBlock")
+		{
+			isOnMoveBlock = false;
+			player.transform.SetParent(null);
+		}
 	}
 }
