@@ -43,6 +43,7 @@ public class PlayerMove : MonoBehaviour
 	HitFloor hitFloor;
 	HitCeiling hitCeiling;
 	GameObject lampObj;
+	Lamp lampSqr;
 	Rigidbody2D lampRb;
 	// Start is called before the first frame update
 	void Start()
@@ -64,6 +65,8 @@ public class PlayerMove : MonoBehaviour
 		lampObj = GameObject.Find("Lamp");
 		// ランプのRigidbodyを取得
 		lampRb = lampObj.GetComponent<Rigidbody2D>();
+		// ランプのスクリプトを取得
+		lampSqr = lampObj.GetComponent<Lamp>();
 
 		//ランプをつける
 		isLightOn = true;
@@ -158,19 +161,23 @@ public class PlayerMove : MonoBehaviour
 			if (isLampTake && hitFloor.isHit)
 			{
 				isLampTake = false;
-				//Rigidbodyつける
-				lampRb = lampObj.AddComponent<Rigidbody2D>();
-				//FreezeRotationをオンにする
-				lampRb.freezeRotation = true;
-				//上に飛ばす
-				lampRb.velocity += new Vector2(0, lampJumpPower);
+				lampSqr.LampThrow();
+
+				// 現在のポジションを取得
+				var pos = transform.position;
+				// 投げたフラグをtrue
+				lampSqr.isThrow = true;
+				// タイムを0に
+				lampSqr.throwNowTime = 0;
+				// スタートポジションを現在のposに変更
+				lampSqr.startPos = new Vector2(transform.position.x,transform.position.y + 1);
 			}
 			// ランプを持っていないとき
 			// ライトの中にいて上にブロックがないとき
 			else if(!isLampTake && isLightIn && !hitCeiling.isHit)
 			{
 				isLampTake = true;
-				Destroy(lampRb);
+				lampSqr.RbLost();
 			}
 		}
 
