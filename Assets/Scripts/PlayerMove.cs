@@ -164,6 +164,7 @@ public class PlayerMove : MonoBehaviour
 				{
 					isLampTake = false;
 					lampSqr.LampThrow(transform.position);
+					isLightOn = false;
 				}
 			}
 			// ƒ‰ƒ“ƒv‚ğ‚Á‚Ä‚¢‚È‚¢‚Æ‚«

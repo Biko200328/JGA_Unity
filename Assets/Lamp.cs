@@ -13,6 +13,9 @@ public class Lamp : MonoBehaviour
 	[Header("投げる時間")]
 	[SerializeField] private float throwTime;
 
+	[Header("ランプがつく時間")]
+	[SerializeField] private float lampTime;
+
 	// 始点
 	private Vector2 startPos;
 	[Header("どこまで飛ぶか")]
@@ -54,6 +57,14 @@ public class Lamp : MonoBehaviour
 				throwNowTime += Time.deltaTime;
 				//重力を受けないように
 				if (rb != null) rb.velocity = new Vector2(rb.velocity.x, 0);
+
+				// ランプをつける
+				if(throwNowTime >= lampTime)
+				{
+					// ランプをつける
+					playerMove.isLightOn = true;
+				}
+
 				// トータルの時間を超えた場合
 				if (throwNowTime >= throwTime)
 				{
