@@ -25,6 +25,9 @@ public class Lamp : MonoBehaviour
 	// 投げ終わった後に始点にするようのvec2
 	private Vector2 fallStartPos;
 
+	[Header("パワーで重力をつける")]
+	[SerializeField] private float fallSpeed;
+
 	PlayerMove playerMove;
 
 	// Start is called before the first frame update
@@ -49,8 +52,8 @@ public class Lamp : MonoBehaviour
 			{
 				// 時間を進ませる
 				throwNowTime += Time.deltaTime;
-				// 重力がかからいないように設定
-				rb.velocity = Vector2.zero;
+				//重力を受けないように
+				if (rb != null) rb.velocity = new Vector2(rb.velocity.x, 0);
 				// トータルの時間を超えた場合
 				if (throwNowTime >= throwTime)
 				{
@@ -65,22 +68,25 @@ public class Lamp : MonoBehaviour
 				}
 
 				// positionを変更
-				transform.position = QuintOut(throwNowTime, throwTime, startPos, startPos + new Vector2(0, maxY));
+				transform.position = ExpOut(throwNowTime, throwTime, startPos, startPos + new Vector2(0, maxY));
 			}
 
 			// 落ちるイージング
-			//if (isFall)
-			//{
-			//	fallNowTime += Time.deltaTime;
-			//	if (rb != null) rb.velocity = Vector2.zero;
-			//	if (fallNowTime >= throwTime)
-			//	{
-			//		isFall = false;
-			//		fallNowTime = throwTime;
-			//	}
+			if (isFall)
+			{
+				fallNowTime += Time.deltaTime;
+				//重力を受けないように
+				if (rb != null) rb.velocity = new Vector2(rb.velocity.x, 0);
+				if (fallNowTime >= throwTime)
+				{
+					isFall = false;
+					fallNowTime = throwTime;
+					//自分で落下速度を調節しろ！！！！！！！！
+					rb.velocity = new Vector2(rb.velocity.x, fallSpeed);
+				}
 
-			//	transform.position = QuintIn(fallNowTime, throwTime, fallStartPos, fallStartPos + new Vector2(0, -maxY - 1));
-			//}
+				transform.position = ExpIn(fallNowTime, throwTime, fallStartPos, fallStartPos + new Vector2(0, -maxY - 1));
+			}
 		}
 	}
 
@@ -102,12 +108,24 @@ public class Lamp : MonoBehaviour
 		return max * (t * t * t * t * t + 1) + min;
 	}
 
+	public static Vector2 ExpOut(float t, float totaltime, Vector2 min, Vector2 max)
+	{
+		max -= min;
+		return t == totaltime ? max + min : max * (-Mathf.Pow(2, -10 * t / totaltime) + 1) + min;
+	}
+
 	// イーズイン
 	public static Vector2 QuintIn(float t, float totaltime, Vector2 min, Vector2 max)
 	{
 		max -= min;
 		t /= totaltime;
-		return max * t * t * t * t * t + min;
+		return max * t * t * t * t * t * t * t * t * t * t + min;
+	}
+
+	public static Vector2 ExpIn(float t, float totaltime, Vector2 min, Vector2 max)
+	{
+		max -= min;
+		return t == 0.0 ? min : max * Mathf.Pow(2, 10 * (t / totaltime - 1)) + min;
 	}
 
 	// PlayerMoveに渡すための関数
