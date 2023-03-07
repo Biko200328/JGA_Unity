@@ -32,6 +32,7 @@ public class Lamp : MonoBehaviour
 	[SerializeField] private float fallSpeed;
 
 	PlayerMove playerMove;
+	LampHitFloor lampHitFloor;
 
 	// Start is called before the first frame update
 	void Start()
@@ -42,12 +43,18 @@ public class Lamp : MonoBehaviour
 		// PlayerMoveを取得
 		GameObject playerObj = GameObject.Find("Player");
 		playerMove = playerObj.GetComponent<PlayerMove>();
+
+		// 子オブジェクト読み込み
+		GameObject childObj = transform.Find("HitFloor").gameObject;
+		// コンポーネント読み込み
+		lampHitFloor = childObj.GetComponent<LampHitFloor>();
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
 		// ランプを持っていないときしかイージングは掛けない
+		// ランプが床についていないときも追加
 		if(!playerMove.isLampTake)
 		{
 			// 上昇中の時

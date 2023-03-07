@@ -10,6 +10,7 @@ TagManager:
   - rightMoveBlock
   - upMoveBlock
   - downMoveBlock
+  - platform
   layers:
   - Default
   - TransparentFX
@@ -19,9 +20,9 @@ TagManager:
   - UI
   - Floor
   - Lamp
-  - 
-  - 
-  - 
+  - Platform
+  - NotPlatformPlayer
+  - NotPlatformLamp
   - 
   - 
   - 

@@ -160,7 +160,7 @@ public class PlayerMove : MonoBehaviour
 			if (isLampTake)
 			{
 				// ’n–Ê‚É‚Â‚¢‚Ä‚¢‚é‚Æ‚«
-				if (hitFloor.isHit || hitFloor.isOnMoveBlock)
+				if (hitFloor.isHit)
 				{
 					isLampTake = false;
 					lampSqr.LampThrow(transform.position);
