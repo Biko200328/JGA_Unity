@@ -48,6 +48,9 @@ public class Lamp : MonoBehaviour
 		GameObject childObj = transform.Find("HitFloor").gameObject;
 		// コンポーネント読み込み
 		lampHitFloor = childObj.GetComponent<LampHitFloor>();
+
+		// レイヤーを変更
+		gameObject.layer = 10;
 	}
 
 	// Update is called once per frame
@@ -169,8 +172,6 @@ public class Lamp : MonoBehaviour
 		isFall = false;
 		// 落ちるカウントを0に
 		fallNowTime = 0;
-		//床との当たり判定をオフに
-		lampHitFloor.isHit = false;
 	}
 
 	// rbを消す関数
@@ -178,5 +179,9 @@ public class Lamp : MonoBehaviour
 	public void RbLost()
 	{
 		Destroy(rb);
+		// 床との当たり判定をオフに
+		lampHitFloor.isHit = false;
+		// 判定レイヤーを変更
+		gameObject.layer = 10;
 	}
 }

@@ -69,6 +69,8 @@ public class PlayerMove : MonoBehaviour
 
 		//ƒ‰ƒ“ƒv‚ð‚Â‚¯‚é
 		isLightOn = true;
+
+		gameObject.layer = 9;
 	}
 
 	// Update is called once per frame
