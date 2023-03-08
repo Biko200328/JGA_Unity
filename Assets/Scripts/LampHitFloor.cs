@@ -43,6 +43,8 @@ public class LampHitFloor : MonoBehaviour
 				isHit = true;
 				lamp.layer = 7;
 			}
+
+			GimmickRide(collision);
 		}
 	}
 
@@ -63,6 +65,8 @@ public class LampHitFloor : MonoBehaviour
 				isHit = true;
 				lamp.layer = 7;
 			}
+
+			GimmickRide(collision);
 		}
 	}
 
@@ -82,6 +86,8 @@ public class LampHitFloor : MonoBehaviour
 				isHit = false;
 				lamp.layer = 10;
 			}
+
+			GimmickRideOff(collision);
 		}
 	}
 
@@ -110,6 +116,33 @@ public class LampHitFloor : MonoBehaviour
 		{
 			isHit = true;
 			lamp.transform.SetParent(collision.transform);
+		}
+	}
+
+	private void GimmickRideOff(Collider2D collision)
+	{
+		if (collision.gameObject.tag == "rightMoveBlock")
+		{
+			lamp.transform.SetParent(null);
+			isHit = false;
+		}
+
+		if (collision.gameObject.tag == "leftMoveBlock")
+		{
+			lamp.transform.SetParent(null);
+			isHit = false;
+		}
+
+		if (collision.gameObject.tag == "downMoveBlock")
+		{
+			lamp.transform.SetParent(null);
+			isHit = false;
+		}
+
+		if (collision.gameObject.tag == "upMoveBlock")
+		{
+			lamp.transform.SetParent(null);
+			isHit = false;
 		}
 	}
 }

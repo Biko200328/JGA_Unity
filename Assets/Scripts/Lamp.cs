@@ -163,10 +163,10 @@ public class Lamp : MonoBehaviour
 		rb = gameObject.AddComponent<Rigidbody2D>();
 		//FreezeRotationをオンにする
 		rb.freezeRotation = true;
-		// collisionDetectionを変更
-		rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-		// Interpolateを変更
-		rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+		//// collisionDetectionを変更
+		//rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+		//// Interpolateを変更
+		//rb.interpolation = RigidbodyInterpolation2D.Interpolate;
 
 		// 投げたフラグをtrue
 		isThrow = true;

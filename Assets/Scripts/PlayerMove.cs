@@ -188,6 +188,8 @@ public class PlayerMove : MonoBehaviour
 					isLampTake = false;
 					lampSqr.LampThrow(transform.position);
 					isLightOn = false;
+					// 親子付け解除
+					lampObj.transform.SetParent(null);
 				}
 			}
 			// ランプを持っていないとき
@@ -196,20 +198,13 @@ public class PlayerMove : MonoBehaviour
 			{
 				isLampTake = true;
 				lampSqr.RbLost();
+				//// いったんランプの親子関係を無しに
+				//lampObj.transform.SetParent(null);
+				// プレイヤーの上に移動
+				lampObj.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 1);
+				// 親子付け
+				lampObj.transform.SetParent(this.transform);
 			}
-		}
-
-		if (isLampTake)
-		{
-			// 親子付け
-			lampObj.transform.SetParent(this.transform);
-			// プレイヤーの上に移動
-			lampObj.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 1);
-		}
-		else
-		{
-			// 親子付け解除
-			lampObj.transform.SetParent(null);
 		}
 	}
 }
