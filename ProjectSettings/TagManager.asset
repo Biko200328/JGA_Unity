@@ -11,6 +11,7 @@ TagManager:
   - upMoveBlock
   - downMoveBlock
   - platform
+  - lamp
   layers:
   - Default
   - TransparentFX
