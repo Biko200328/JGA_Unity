@@ -9,7 +9,7 @@ public class HitFloorBlock : MonoBehaviour
 	// 親
 	[SerializeField] GameObject blockObj;
 	Block block;
-	bool isHit;
+	public bool isHit;
 
 	// Start is called before the first frame update
 	void Start()
@@ -40,29 +40,32 @@ public class HitFloorBlock : MonoBehaviour
 
 	private void GimmickRide(Collider2D collision)
 	{
-		// 各移動ブロック
-		if (collision.gameObject.tag == "rightMoveBlock")
+		if (block.isLightIn)
 		{
-			isHit = true;
-			block.transform.SetParent(collision.transform);
-		}
+			// 各移動ブロック
+			if (collision.gameObject.tag == "rightMoveBlock")
+			{
+				isHit = true;
+				blockObj.transform.SetParent(collision.transform);
+			}
 
-		if (collision.gameObject.tag == "leftMoveBlock")
-		{
-			isHit = true;
-			block.transform.SetParent(collision.transform);
-		}
+			if (collision.gameObject.tag == "leftMoveBlock")
+			{
+				isHit = true;
+				blockObj.transform.SetParent(collision.transform);
+			}
 
-		if (collision.gameObject.tag == "downMoveBlock")
-		{
-			isHit = true;
-			block.transform.SetParent(collision.transform);
-		}
+			if (collision.gameObject.tag == "downMoveBlock")
+			{
+				isHit = true;
+				blockObj.transform.SetParent(collision.transform);
+			}
 
-		if (collision.gameObject.tag == "upMoveBlock")
-		{
-			isHit = true;
-			block.transform.SetParent(collision.transform);
+			if (collision.gameObject.tag == "upMoveBlock")
+			{
+				isHit = true;
+				blockObj.transform.SetParent(collision.transform);
+			}
 		}
 	}
 
@@ -70,25 +73,25 @@ public class HitFloorBlock : MonoBehaviour
 	{
 		if (collision.gameObject.tag == "rightMoveBlock")
 		{
-			block.transform.SetParent(null);
+			blockObj.transform.SetParent(null);
 			isHit = false;
 		}
 
 		if (collision.gameObject.tag == "leftMoveBlock")
 		{
-			block.transform.SetParent(null);
+			blockObj.transform.SetParent(null);
 			isHit = false;
 		}
 
 		if (collision.gameObject.tag == "downMoveBlock")
 		{
-			block.transform.SetParent(null);
+			blockObj.transform.SetParent(null);
 			isHit = false;
 		}
 
 		if (collision.gameObject.tag == "upMoveBlock")
 		{
-			block.transform.SetParent(null);
+			blockObj.transform.SetParent(null);
 			isHit = false;
 		}
 	}

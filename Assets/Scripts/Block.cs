@@ -7,7 +7,8 @@ public class Block : MonoBehaviour
 	// Rigidbody宣言
 	Rigidbody2D rb;
 	// rbを有効化できてるか見るフラグ
-	public bool isRbOff;
+	public bool isLightIn;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -20,10 +21,13 @@ public class Block : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		// 物理演算がOnかOffかを見る
-		isRbOff = rb.isKinematic;
 		// velocityを常にOnに
 		rb.velocity = new Vector2(0,rb.velocity.y);
+
+		if(!isLightIn)
+		{
+			transform.SetParent(null);
+		}
 	}
 
 	//円の中にいなくても動かしたいときはコメントアウト

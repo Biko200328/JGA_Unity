@@ -106,6 +106,8 @@ public class PlayerCircle : MonoBehaviour
 		{
 			Rigidbody2D blockRb = collision.gameObject.GetComponent<Rigidbody2D>();
 			blockRb.isKinematic = false;
+			Block block = collision.gameObject.GetComponent<Block>();
+			block.isLightIn = true;
 		}
 
 		// 左に移動するブロック
@@ -145,6 +147,8 @@ public class PlayerCircle : MonoBehaviour
 			Rigidbody2D blockRb = collision.gameObject.GetComponent<Rigidbody2D>();
 			blockRb.isKinematic = true;
 			blockRb.velocity = Vector3.zero;
+			Block block = collision.gameObject.GetComponent<Block>();
+			block.isLightIn = false;
 		}
 
 		// 左に移動するブロック
