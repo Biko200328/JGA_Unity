@@ -65,8 +65,14 @@ public class Lamp : MonoBehaviour
 			{
 				// 時間を進ませる
 				throwNowTime += Time.deltaTime;
-				//重力を受けないように
+				// 重力を受けないように
 				if (rb != null) rb.velocity = new Vector2(rb.velocity.x, 0);
+
+				// 当たり判定レイヤーを変更
+				if (throwNowTime <= lampTime)
+				{
+					gameObject.layer = 10;
+				}
 
 				// ランプをつける
 				if(throwNowTime >= lampTime)
