@@ -13,6 +13,12 @@ public class HitFloor : MonoBehaviour
 	// Ú’n”»’è
 	public bool isHit;
 
+	// “§–¾‰»
+	public bool isGoast;
+	// “§–¾‰»‚ÌŽžŠÔ
+	public float goastTime;
+	private float time;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -24,7 +30,17 @@ public class HitFloor : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if(isGoast)
+		{
+			time += Time.deltaTime;
+			if(time >= goastTime)
+			{
+				isGoast = false;
+			}
 
+			player.layer = 9;
+			if (playerMove.isLampTake) Lamp.layer = 10;
+		}
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -82,6 +98,11 @@ public class HitFloor : MonoBehaviour
 		{
 			isHit = true;
 			player.layer = 3;
+			if (Input.GetKeyDown(KeyCode.S))
+			{
+				isGoast = true;
+				time = 0;
+			}
 		}
 	}
 
