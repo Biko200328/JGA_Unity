@@ -26,7 +26,6 @@ public class PlayerMove : MonoBehaviour
 	// スピードと同じようにジャンプ力の変数も作る
 	[Header("ジャンプ力")]
 	[SerializeField] private float jumpPower;
-	[SerializeField] private float lampJumpPower;
 
 	[Header("フラグ")]
 	// 分裂しているかどうか

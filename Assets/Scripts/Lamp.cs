@@ -86,7 +86,7 @@ public class Lamp : MonoBehaviour
 				}
 
 				// positionを変更
-				transform.position = ExpOut(throwNowTime, throwTime, startPos, startPos + new Vector2(0, maxY));
+				rb.MovePosition(ExpOut(throwNowTime, throwTime, startPos, startPos + new Vector2(0, maxY)));
 			}
 
 			// 落ちるイージング
@@ -103,7 +103,7 @@ public class Lamp : MonoBehaviour
 					rb.velocity = new Vector2(rb.velocity.x, fallSpeed);
 				}
 
-				transform.position = ExpIn(fallNowTime, throwTime, fallStartPos, fallStartPos + new Vector2(0, -maxY - 1));
+				rb.MovePosition(ExpIn(fallNowTime, throwTime, fallStartPos, fallStartPos + new Vector2(0, -maxY - 1)));
 			}
 		}
 	}
@@ -169,6 +169,8 @@ public class Lamp : MonoBehaviour
 		isFall = false;
 		// 落ちるカウントを0に
 		fallNowTime = 0;
+		//床との当たり判定をオフに
+		lampHitFloor.isHit = false;
 	}
 
 	// rbを消す関数

@@ -16,6 +16,8 @@ public class LampHitFloor : MonoBehaviour
 
 		GameObject player = GameObject.Find("Player");
 		playerMove = player.GetComponent<PlayerMove>();
+
+		isHit = false;
 	}
 
 	// Update is called once per frame
@@ -31,6 +33,10 @@ public class LampHitFloor : MonoBehaviour
 
 		if (!playerMove.isLampTake)
 		{
+			if(collision.gameObject.tag == "Floor")
+			{
+				isHit = true;
+			}
 
 			if (collision.gameObject.tag == "platform")
 			{
@@ -47,6 +53,11 @@ public class LampHitFloor : MonoBehaviour
 
 		if (!playerMove.isLampTake)
 		{
+			if (collision.gameObject.tag == "Floor")
+			{
+				isHit = true;
+			}
+
 			if (collision.gameObject.tag == "platform")
 			{
 				isHit = true;
@@ -60,7 +71,12 @@ public class LampHitFloor : MonoBehaviour
 		//if (collision.gameObject.tag == "Floor") isHit = false;
 
 		if (!playerMove.isLampTake)
-		{ 
+		{
+			if (collision.gameObject.tag == "Floor")
+			{
+				isHit = false;
+			}
+
 			if (collision.gameObject.tag == "platform")
 			{
 				isHit = false;
