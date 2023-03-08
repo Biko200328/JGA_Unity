@@ -43,7 +43,12 @@ public class PlayerMove : MonoBehaviour
 	HitCeiling hitCeiling;
 	GameObject lampObj;
 	Lamp lampSqr;
-	Rigidbody2D lampRb;
+
+	JumpHitLeft jumpHitLeft;
+	JumpHitLeft jumpHitLeft2;
+
+	JumpHitRight jumpHitRight;
+	JumpHitRight jumpHitRight2;
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -60,10 +65,26 @@ public class PlayerMove : MonoBehaviour
 		// コンポーネント読み込み
 		hitCeiling = childCeiling.GetComponent<HitCeiling>();
 
+		// 子オブジェクト読み込み
+		GameObject childJumpR = transform.Find("JumpHitRight").gameObject;
+		// コンポーネント読み込み
+		jumpHitRight = childJumpR.GetComponent<JumpHitRight>();
+		// 子オブジェクト読み込み
+		GameObject childJumpR2 = transform.Find("JumpHitRight2").gameObject;
+		// コンポーネント読み込み
+		jumpHitRight2 = childJumpR2.GetComponent<JumpHitRight>();
+
+		// 子オブジェクト読み込み
+		GameObject childJumpL = transform.Find("JumpHitLeft").gameObject;
+		// コンポーネント読み込み
+		jumpHitLeft = childJumpL.GetComponent<JumpHitLeft>();
+		// 子オブジェクト読み込み
+		GameObject childJumpL2 = transform.Find("JumpHitLeft2").gameObject;
+		// コンポーネント読み込み
+		jumpHitLeft2 = childJumpL2.GetComponent<JumpHitLeft>();
+
 		// lamp読み込み
 		lampObj = GameObject.Find("Lamp");
-		// ランプのRigidbodyを取得
-		lampRb = lampObj.GetComponent<Rigidbody2D>();
 		// ランプのスクリプトを取得
 		lampSqr = lampObj.GetComponent<Lamp>();
 
@@ -125,20 +146,21 @@ public class PlayerMove : MonoBehaviour
 
 	private void AutoJump()
 	{
-
-		if (isNextBlockL && hitFloor.isHit)
+		if (jumpHitLeft.isHit && !jumpHitLeft2.isHit && hitFloor.isHit)
 		{
 			if (Input.GetKey(KeyCode.A))
 			{
 				rb.velocity = new Vector2(0, jumpPower);
+				//gameObject.layer = 9;
 			}
 		}
 
-		if (isNextBlockR && hitFloor.isHit)
+		if (jumpHitRight.isHit && !jumpHitRight2.isHit && hitFloor.isHit)
 		{
 			if (Input.GetKey(KeyCode.D))
 			{
 				rb.velocity = new Vector2(0, jumpPower);
+				//gameObject.layer = 9;
 			}
 		}
 	}

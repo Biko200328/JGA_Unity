@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class JumpHitLeft : MonoBehaviour
 {
-	PlayerMove playerMove;
+	public bool isHit;
+
 	// Start is called before the first frame update
 	void Start()
 	{
-		GameObject player = GameObject.Find("Player");
-		playerMove = player.GetComponent<PlayerMove>();
+		
 	}
 
 	// Update is called once per frame
@@ -22,7 +22,7 @@ public class JumpHitLeft : MonoBehaviour
 	{
 		if(collision.gameObject.tag == "Floor")
 		{
-			playerMove.isNextBlockL = true;
+			isHit = true;
 		}
 	}
 
@@ -30,7 +30,7 @@ public class JumpHitLeft : MonoBehaviour
 	{
 		if (collision.gameObject.tag == "Floor")
 		{
-			playerMove.isNextBlockL = false;
+			isHit = false;
 		}
 	}
 }
