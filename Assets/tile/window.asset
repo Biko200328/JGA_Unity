@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: woodbox
+  m_Name: window
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 54e2dca7ff4c4504397f739b08a96da8, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 6c533cd513eaabc4393f2c4b0eb9d8bc, type: 3}
+  m_Color: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
   m_Transform:
     e00: 1
     e01: 0
