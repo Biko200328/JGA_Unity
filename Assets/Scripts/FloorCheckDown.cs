@@ -18,7 +18,8 @@ public class FloorCheckDown : MonoBehaviour
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		//動いてる状態かつ当たったオブジェクトが床の時に
-		if (collision.gameObject.tag == "Floor")
+		if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "rightMoveBlock" || collision.gameObject.tag == "leftMoveBlock" ||
+			collision.gameObject.tag == "block" || collision.gameObject.tag == "upMoveBlock" || collision.gameObject.tag == "downMoveBlock")
 		{
 			// 衝突判定をTrueに
 			if (downMoveBlock.isMove) isFloor = true;
