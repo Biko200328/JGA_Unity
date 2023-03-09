@@ -12,6 +12,8 @@ TagManager:
   - downMoveBlock
   - platform
   - lamp
+  - growth
+  - growthBox
   layers:
   - Default
   - TransparentFX

@@ -73,6 +73,13 @@ public class PlayerCircle : MonoBehaviour
 		{
 			playerMove.isLightIn = true;
 		}
+
+		// 蛇ブロック
+		if(collision.gameObject.tag == "growth")
+		{
+			Growth growth = collision.GetComponent<Growth>();
+			growth.isLightIn = true;
+		}
 	}
 
 	private void OnTriggerStay2D(Collider2D collision)
@@ -85,6 +92,13 @@ public class PlayerCircle : MonoBehaviour
 		{
 			playerMove.isLightIn = true;
 		}
+
+		// 蛇ブロック
+		if (collision.gameObject.tag == "growth")
+		{
+			Growth growth = collision.GetComponent<Growth>();
+			growth.isLightIn = true;
+		}
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
@@ -96,6 +110,13 @@ public class PlayerCircle : MonoBehaviour
 		if (collision.gameObject.tag == "Player")
 		{
 			playerMove.isLightIn = false;
+		}
+
+		// 蛇ブロック
+		if (collision.gameObject.tag == "growth")
+		{
+			Growth growth = collision.GetComponent<Growth>();
+			growth.isLightIn = false;
 		}
 	}
 
