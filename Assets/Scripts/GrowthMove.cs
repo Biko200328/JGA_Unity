@@ -22,6 +22,14 @@ public class GrowthMove : MonoBehaviour
 		}
 	}
 
+	private void Update()
+	{
+		if(!growth.isLightIn)
+		{
+			Destroy(this.gameObject);
+		}
+	}
+
 	private void FixedUpdate()
 	{
 		if (movePoint != null && movePoint.Length > 1 && rb != null && !growth.isEnd)

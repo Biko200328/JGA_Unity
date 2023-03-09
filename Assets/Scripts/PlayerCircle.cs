@@ -75,7 +75,7 @@ public class PlayerCircle : MonoBehaviour
 		}
 
 		// 蛇ブロック
-		if(collision.gameObject.tag == "growth")
+		if(collision.gameObject.tag == "growOriginal")
 		{
 			Growth growth = collision.GetComponent<Growth>();
 			growth.isLightIn = true;
@@ -94,7 +94,7 @@ public class PlayerCircle : MonoBehaviour
 		}
 
 		// 蛇ブロック
-		if (collision.gameObject.tag == "growth")
+		if (collision.gameObject.tag == "growOriginal")
 		{
 			Growth growth = collision.GetComponent<Growth>();
 			growth.isLightIn = true;
@@ -113,10 +113,11 @@ public class PlayerCircle : MonoBehaviour
 		}
 
 		// 蛇ブロック
-		if (collision.gameObject.tag == "growth")
+		if (collision.gameObject.tag == "growOriginal")
 		{
 			Growth growth = collision.GetComponent<Growth>();
 			growth.isLightIn = false;
+			growth.isEnd = false;
 		}
 	}
 

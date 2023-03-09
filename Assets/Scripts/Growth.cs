@@ -24,7 +24,7 @@ public class Growth : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		if(!isEnd)
+		if(!isEnd && isLightIn)
 		{
 			if (isCreate == false)
 			{

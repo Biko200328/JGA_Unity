@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 6379696410244269687}
   - component: {fileID: 7595723419780502712}
   m_Layer: 0
-  m_Name: box
-  m_TagString: Untagged
+  m_Name: GrowBox
+  m_TagString: growBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,7 +127,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: cb5b98fb21332b14fbd71d88c9bde7fb, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -148,3 +148,4 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   speed: 1
+  growth: {fileID: 0}
