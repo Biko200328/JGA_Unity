@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Lamp : MonoBehaviour
 {
-	[SerializeField]Rigidbody2D rb;
+	[SerializeField] Rigidbody2D rb;
 
 	// 投げるフラグ
 	private bool isThrow;
@@ -58,7 +58,7 @@ public class Lamp : MonoBehaviour
 	{
 		// ランプを持っていないときしかイージングは掛けない
 		// ランプが床についていないときも追加
-		if(!playerMove.isLampTake)
+		if (!playerMove.isLampTake)
 		{
 			// 上昇中の時
 			if (isThrow)
@@ -75,7 +75,7 @@ public class Lamp : MonoBehaviour
 				}
 
 				// ランプをつける
-				if(throwNowTime >= lampTime)
+				if (throwNowTime >= lampTime)
 				{
 					// ランプをつける
 					playerMove.isLightOn = true;
@@ -163,13 +163,13 @@ public class Lamp : MonoBehaviour
 		rb = gameObject.AddComponent<Rigidbody2D>();
 		//FreezeRotationをオンにする
 		rb.freezeRotation = true;
-        // collisionDetectionを変更
-        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-        //// Interpolateを変更
-        //rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+		// collisionDetectionを変更
+		rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+		//// Interpolateを変更
+		//rb.interpolation = RigidbodyInterpolation2D.Interpolate;
 
-        // 投げたフラグをtrue
-        isThrow = true;
+		// 投げたフラグをtrue
+		isThrow = true;
 		// タイムを0に
 		throwNowTime = 0;
 		// スタートポジションを現在のposに変更

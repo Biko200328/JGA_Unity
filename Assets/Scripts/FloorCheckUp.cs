@@ -15,6 +15,7 @@ public class FloorCheckUp : MonoBehaviour
 	}
 
 	// Update is called once per frame
+
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		//動いてる状態かつ当たったオブジェクトが床の時に
