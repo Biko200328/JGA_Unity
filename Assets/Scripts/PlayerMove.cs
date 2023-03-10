@@ -201,7 +201,7 @@ public class PlayerMove : MonoBehaviour
 				//// いったんランプの親子関係を無しに
 				//lampObj.transform.SetParent(null);
 				// プレイヤーの上に移動
-				lampObj.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 1);
+				lampObj.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 0.9f);
 				// 親子付け
 				lampObj.transform.SetParent(this.transform);
 			}
