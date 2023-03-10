@@ -104,6 +104,17 @@ public class HitFloor : MonoBehaviour
 				time = 0;
 			}
 		}
+
+		// 蛇ブロック
+		if (collision.gameObject.tag == "growOriginal")
+		{
+			isHit = true;
+		}
+
+		if (collision.gameObject.tag == "growBox")
+		{
+			isHit = true;
+		}
 	}
 
 	private void GimmickRideOff(Collider2D collision)
@@ -138,6 +149,17 @@ public class HitFloor : MonoBehaviour
 			isHit = false;
 			player.layer = 9;
 			if(playerMove.isLampTake)Lamp.layer = 10;
+		}
+
+		// 蛇ブロック
+		if (collision.gameObject.tag == "growOriginal")
+		{
+			isHit = false;
+		}
+
+		if (collision.gameObject.tag == "growBox")
+		{
+			isHit = false;
 		}
 	}
 }

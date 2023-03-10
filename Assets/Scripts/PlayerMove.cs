@@ -49,11 +49,18 @@ public class PlayerMove : MonoBehaviour
 
 	JumpHitRight jumpHitRight;
 	JumpHitRight jumpHitRight2;
+
+	BoxCollider2D playerCollider;
+	BoxCollider2D lampCollider;
+	BoxCollider2D setCollider;
 	// Start is called before the first frame update
 	void Start()
 	{
 		// Rigidbodyを取得
 		rb = gameObject.GetComponent<Rigidbody2D>();
+
+		//boxcolliderを取得
+		playerCollider = GetComponent<BoxCollider2D>();
 
 		// 子オブジェクト読み込み
 		GameObject childFloor = transform.Find("HitFloor").gameObject;
@@ -87,6 +94,8 @@ public class PlayerMove : MonoBehaviour
 		lampObj = GameObject.Find("Lamp");
 		// ランプのスクリプトを取得
 		lampSqr = lampObj.GetComponent<Lamp>();
+		// ランプのコライダーを取得
+		lampCollider = lampObj.GetComponent<BoxCollider2D>();
 
 		//ランプをつける
 		isLightOn = true;
@@ -190,6 +199,17 @@ public class PlayerMove : MonoBehaviour
 					isLightOn = false;
 					// 親子付け解除
 					lampObj.transform.SetParent(null);
+					// 生成したコライダーを捨てる
+					Destroy(setCollider);
+					// 個々のコライダーをつけなおす
+					if(playerCollider == null)
+					{
+						playerCollider = gameObject.AddComponent<BoxCollider2D>();
+					}
+					if(lampCollider == null)
+					{
+						lampCollider = lampObj.AddComponent<BoxCollider2D>();
+					}
 				}
 			}
 			// ランプを持っていないとき
@@ -201,9 +221,14 @@ public class PlayerMove : MonoBehaviour
 				//// いったんランプの親子関係を無しに
 				//lampObj.transform.SetParent(null);
 				// プレイヤーの上に移動
-				lampObj.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 1);
+				lampObj.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 0.9f);
 				// 親子付け
 				lampObj.transform.SetParent(this.transform);
+				// 既存のコライダーをなくす
+				Destroy(playerCollider);
+				Destroy(lampCollider);
+				// 新しくコライダーを生成
+				setCollider = gameObject.AddComponent<BoxCollider2D>();
 			}
 		}
 	}
