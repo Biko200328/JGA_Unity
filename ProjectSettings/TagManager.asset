@@ -15,6 +15,7 @@ TagManager:
   - growOriginal
   - growBox
   - Fade
+  - lampCircle
   layers:
   - Default
   - TransparentFX
