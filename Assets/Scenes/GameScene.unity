@@ -72030,6 +72030,10 @@ PrefabInstance:
       propertyPath: playerCircle
       value: 
       objectReference: {fileID: 735026850}
+    - target: {fileID: 2919794432552654038, guid: 1a7beb02f6aebef4e871def0ead341d0, type: 3}
+      propertyPath: lampCollectTime
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 2919794432552654039, guid: 1a7beb02f6aebef4e871def0ead341d0, type: 3}
       propertyPath: m_Name
       value: Player
