@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1492383482844328590}
   - component: {fileID: 7736750121271608814}
   - component: {fileID: 2476565317899537678}
+  - component: {fileID: 5360331342341339725}
   m_Layer: 0
   m_Name: GrowBox2
   m_TagString: growBox
@@ -97,7 +98,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -148,3 +149,25 @@ MonoBehaviour:
   speed: 1
   growth: {fileID: 0}
   isStop: 0
+--- !u!66 &5360331342341339725
+CompositeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3569642432264237910}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_GeometryType: 0
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths: []
+  m_CompositePaths:
+    m_Paths: []
+  m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.00005

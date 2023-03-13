@@ -23,7 +23,7 @@ public class GrowBoxIsMove : MonoBehaviour
 	{
 		if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "growBox")
 		{
-			growthMove.isStop = true;
+			if(growthMove != null) growthMove.isStop = true;
 		}
 	}
 
@@ -31,7 +31,7 @@ public class GrowBoxIsMove : MonoBehaviour
 	{
 		if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "growBox")
 		{
-			growthMove.isStop = true;
+            if (growthMove != null) growthMove.isStop = true;
 		}
 	}
 
@@ -39,7 +39,7 @@ public class GrowBoxIsMove : MonoBehaviour
 	{
 		if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "growBox")
 		{
-			growthMove.isStop = false;
+            if (growthMove != null) growthMove.isStop = false;
 		}
 	}
 }
