@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class Block : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class Block : MonoBehaviour
 	// rbを有効化できてるか見るフラグ
 	public bool isLightIn;
 
+	Lamp lamp;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -16,6 +19,9 @@ public class Block : MonoBehaviour
 		rb = this.gameObject.GetComponent<Rigidbody2D>();
 		// 物理演算を行わないように設定
 		rb.isKinematic = true;
+
+		GameObject lampObj = GameObject.Find("Lamp");
+		lamp = lampObj.GetComponent<Lamp>();
 	}
 
 	// Update is called once per frame
@@ -27,6 +33,11 @@ public class Block : MonoBehaviour
 		if(!isLightIn)
 		{
 			transform.SetParent(null);
+		}
+
+		if (!lamp.isLampOn)
+		{
+			isLightIn = false;
 		}
 	}
 
