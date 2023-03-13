@@ -35,6 +35,7 @@ public class Growth : MonoBehaviour
 		if(!lamp.isLampOn)
 		{
 			isLightIn = false;
+			isEnd = false;
 		}
 	}
 
