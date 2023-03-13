@@ -43,6 +43,7 @@ public class PlayerMove : MonoBehaviour
 	public bool isNextBlockR = false;
 	// ランプが回収中か
 	public bool isLampCollect;
+	[SerializeField] PlayerCircle playerCircle;
 
 	Rigidbody2D rb;
 	HitFloor hitFloor;
@@ -224,7 +225,6 @@ public class PlayerMove : MonoBehaviour
 				//回収中のフラグをオン
 				isLampCollect = true;
 				collectNowTime = 0;
-				lampObj.SetActive(false);
 				// 親子付け
 				lampObj.transform.SetParent(this.transform);
 				// 既存のコライダーをなくす
@@ -241,10 +241,9 @@ public class PlayerMove : MonoBehaviour
 		if (isLampCollect)
 		{
 			collectNowTime += Time.deltaTime;
-			if(collectNowTime >= lampCollectTime)
+			if (collectNowTime >= lampCollectTime)
 			{
 				lampObj.transform.position = new Vector3(transform.position.x, transform.position.y + 1.0f);
-				lampObj.SetActive(true);
 				isLampCollect = false;
 				// lampをオンに
 				isLightOn = true;

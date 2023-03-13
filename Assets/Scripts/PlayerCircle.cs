@@ -14,7 +14,7 @@ public class PlayerCircle : MonoBehaviour
 	[SerializeField] float changeSize;
 
 	// 現在の円の範囲
-	private float circleSize;
+	public float circleSize;
 
 	PlayerMove playerMove;
 
@@ -23,7 +23,7 @@ public class PlayerCircle : MonoBehaviour
 	void Start()
 	{
 		GameObject player = GameObject.Find("Player");
-		playerMove = player.GetComponent<PlayerMove>();
+		playerMove = player.gameObject.GetComponent<PlayerMove>();
 	}
 
 	// Update is called once per frame
@@ -31,38 +31,40 @@ public class PlayerCircle : MonoBehaviour
 	{
 		if(playerMove.isLampCollect)
 		{
-			circleSize = minCircleSize;
-		}
-
-		if (playerMove.isLightOn)
-		{
-			//最大値より低かったら足す
-			if (circleSize < maxCircleSize)
-			{
-				circleSize += changeSize;
-			}
-
-			//最大値より大きかったら最大値に合わせる
-			if (circleSize > maxCircleSize)
-			{
-				circleSize = maxCircleSize;
-			}
+			circleSize = 0;
 		}
 		else
 		{
-			// 最小値(0)より大きかったら引く
-			if (circleSize > minCircleSize)
+			if (playerMove.isLightOn)
 			{
-				circleSize -= changeSize;
-			}
+				//最大値より低かったら足す
+				if (circleSize < maxCircleSize)
+				{
+					circleSize += changeSize;
+				}
 
-			//最小値より小さかったら最小値に合わせる
-			if (circleSize < minCircleSize)
+				//最大値より大きかったら最大値に合わせる
+				if (circleSize > maxCircleSize)
+				{
+					circleSize = maxCircleSize;
+				}
+			}
+			else
 			{
-				circleSize = minCircleSize;
+				// 最小値(0)より大きかったら引く
+				if (circleSize > minCircleSize)
+				{
+					circleSize -= changeSize;
+				}
+
+				//最小値より小さかったら最小値に合わせる
+				if (circleSize < minCircleSize)
+				{
+					circleSize = minCircleSize;
+				}
 			}
 		}
-
+		
 		var circleVec = new Vector3(circleSize, circleSize, circleSize);
 
 		transform.localScale = circleVec;

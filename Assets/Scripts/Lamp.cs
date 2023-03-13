@@ -36,6 +36,9 @@ public class Lamp : MonoBehaviour
 	PlayerMove playerMove;
 	LampHitFloor lampHitFloor;
 
+	[SerializeField] SpriteRenderer spriteRenderer;
+	[SerializeField] Sprite sprite;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -60,6 +63,14 @@ public class Lamp : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if(playerMove.isLampCollect)
+		{
+			spriteRenderer.sprite = null;
+		}
+		else
+		{
+			spriteRenderer.sprite = sprite;
+		}
 		// ランプを持っていないときしかイージングは掛けない
 		// ランプが床についていないときも追加
 		if (!playerMove.isLampTake)
