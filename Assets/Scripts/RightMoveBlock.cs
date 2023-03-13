@@ -14,10 +14,15 @@ public class RightMoveBlock : MonoBehaviour
 	public FloorCheckRight floorCheckRight;
 
 	Rigidbody2D rb;
+
+	Lamp lamp;
 	// Start is called before the first frame update
 	void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
+
+		GameObject lampObj = GameObject.Find("Lamp");
+		lamp = lampObj.GetComponent<Lamp>();
 	}
 
 	// Update is called once per frame
@@ -28,6 +33,11 @@ public class RightMoveBlock : MonoBehaviour
 		{
 			//“®‚©‚·
 			transform.position += new Vector3(moveSpeed, 0, 0);
+		}
+
+		if (!lamp.isLampOn)
+		{
+			isMove = false;
 		}
 	}
 }

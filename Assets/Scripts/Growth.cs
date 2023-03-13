@@ -20,9 +20,22 @@ public class Growth : MonoBehaviour
 
 	public bool isFirst;
 
+	Lamp lamp;
+
 	private void Start()
 	{
 		isFirst = false;
+
+		GameObject lampObj = GameObject.Find("Lamp");
+		lamp = lampObj.GetComponent<Lamp>();
+	}
+
+	private void Update()
+	{
+		if(!lamp.isLampOn)
+		{
+			isLightIn = false;
+		}
 	}
 
 	private void FixedUpdate()
