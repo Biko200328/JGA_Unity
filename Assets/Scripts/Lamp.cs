@@ -32,6 +32,8 @@ public class Lamp : MonoBehaviour
 	[Header("パワーで重力をつける")]
 	[SerializeField] private float fallSpeed;
 
+	public bool isLampOn;
+
 	PlayerMove playerMove;
 	LampHitFloor lampHitFloor;
 
@@ -52,6 +54,8 @@ public class Lamp : MonoBehaviour
 
 		// レイヤーを変更
 		gameObject.layer = 10;
+
+		isLampOn = true;
 	}
 
 	// Update is called once per frame
@@ -80,6 +84,7 @@ public class Lamp : MonoBehaviour
 				{
 					// ランプをつける
 					playerMove.isLightOn = true;
+					isLampOn = true;
 				}
 
 				// トータルの時間を超えた場合
@@ -171,6 +176,7 @@ public class Lamp : MonoBehaviour
 
 		// 投げたフラグをtrue
 		isThrow = true;
+		isLampOn = false;
 		// タイムを0に
 		throwNowTime = 0;
 		// スタートポジションを現在のposに変更
