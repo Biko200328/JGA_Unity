@@ -29,16 +29,16 @@ public class PlayerCircle : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if(playerMove.isLightOn)
+		if (playerMove.isLightOn)
 		{
 			//最大値より低かったら足す
-			if(circleSize < maxCircleSize)
+			if (circleSize < maxCircleSize)
 			{
 				circleSize += changeSize;
 			}
 
 			//最大値より大きかったら最大値に合わせる
-			if(circleSize > maxCircleSize)
+			if (circleSize > maxCircleSize)
 			{
 				circleSize = maxCircleSize;
 			}
@@ -59,7 +59,7 @@ public class PlayerCircle : MonoBehaviour
 		}
 
 		var circleVec = new Vector3(circleSize, circleSize, circleSize);
-		
+
 		transform.localScale = circleVec;
 	}
 
@@ -75,7 +75,7 @@ public class PlayerCircle : MonoBehaviour
 		}
 
 		// 蛇ブロック
-		if(collision.gameObject.tag == "growOriginal")
+		if (collision.gameObject.tag == "growOriginal")
 		{
 			Growth growth = collision.GetComponent<Growth>();
 			growth.isLightIn = true;
