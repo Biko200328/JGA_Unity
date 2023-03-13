@@ -118,6 +118,7 @@ public class PlayerCircle : MonoBehaviour
 			Growth growth = collision.GetComponent<Growth>();
 			growth.isLightIn = false;
 			growth.isEnd = false;
+			growth.isFirst = false;
 		}
 	}
 

@@ -216,6 +216,7 @@ MonoBehaviour:
   speed: 4
   isLightIn: 0
   a: {fileID: 7653180943119882859, guid: f8c41203095dbf4428091d216a097216, type: 3}
+  secondBox: {fileID: 3569642432264237910, guid: e3731fb574087a640a6f187681ff0e27, type: 3}
   createTime: 0.01
   isEnd: 0
 --- !u!1 &2063124807332360598

@@ -10,6 +10,7 @@ public class Growth : MonoBehaviour
 	public bool isLightIn;
 
 	public GameObject a;
+	public GameObject secondBox;
 
 	public float createTime;
 	float createNowTime;
@@ -17,9 +18,11 @@ public class Growth : MonoBehaviour
 
 	public bool isEnd = false;
 
+	public bool isFirst;
+
 	private void Start()
 	{
-		
+		isFirst = false;
 	}
 
 	private void FixedUpdate()
@@ -36,12 +39,28 @@ public class Growth : MonoBehaviour
 			}
 			else
 			{
-				GrowthMove growthMove = Instantiate(a, transform.position, Quaternion.identity).GetComponent<GrowthMove>();
-				growthMove.movePoint = this.movePoint;
-				growthMove.speed = this.speed;
-				growthMove.growth = this.gameObject.GetComponent<Growth>();
-				createNowTime = 0;
-				isCreate = false;
+				if(isFirst == false)
+				{
+					GrowthMove growthMove = Instantiate(a, transform.position, Quaternion.identity).GetComponent<GrowthMove>();
+					growthMove.movePoint = this.movePoint;
+					growthMove.speed = this.speed;
+					growthMove.growth = this.gameObject.GetComponent<Growth>();
+					createNowTime = 0;
+					isCreate = false;
+					isFirst = true;
+				}
+				else
+				{
+					if(secondBox != null)
+					{
+						GrowthMove growthMove = Instantiate(secondBox, transform.position, Quaternion.identity).GetComponent<GrowthMove>();
+						growthMove.movePoint = this.movePoint;
+						growthMove.speed = this.speed;
+						growthMove.growth = this.gameObject.GetComponent<Growth>();
+						createNowTime = 0;
+						isCreate = false;
+					}
+				}
 			}
 		}
 	}
