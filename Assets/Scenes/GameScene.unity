@@ -616,7 +616,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1623061253}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &155308146
 MonoBehaviour:
@@ -61178,8 +61178,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 547921616}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 241.77, y: -7.38, z: 0}
-  m_LocalPosition: {x: 49.58, y: 2.46, z: 0}
+  m_LocalPosition: {x: 6.29, y: 0.9, z: 0}
   m_LocalScale: {x: 0.95, y: 0.95, z: 1}
   m_Children:
   - {fileID: 188298423}
@@ -61821,53 +61820,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4633808649015319706, guid: 43d2c36feb2754e4faa3b303b5c37a1e, type: 3}
   m_PrefabInstance: {fileID: 1498676321}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &738529390
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 738529391}
-  - component: {fileID: 738529392}
-  m_Layer: 20
-  m_Name: Circle (1)
-  m_TagString: lampCircle
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &738529391
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738529390}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 9, y: 9, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1623061253}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &738529392
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738529390}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!1 &793541625
 GameObject:
   m_ObjectHideFlags: 0
@@ -62721,9 +62673,10 @@ GameObject:
   m_Component:
   - component: {fileID: 889248965}
   - component: {fileID: 889248969}
-  - component: {fileID: 889248968}
+  - component: {fileID: 889248967}
+  - component: {fileID: 889248966}
   m_Layer: 20
-  m_Name: Circle
+  m_Name: CircleSprite
   m_TagString: lampCircle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62743,7 +62696,7 @@ Transform:
   m_Father: {fileID: 1623061253}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &889248968
+--- !u!114 &889248966
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -62752,12 +62705,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 889248964}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9c363ca8b2f73647a37f47e13e0c315, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b5ed4b607fa3704692804ec68c0327a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxCircleSize: 9
   minCircleSize: 1
-  changeSize: 1
+  changeSize: 2
+--- !u!58 &889248967
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889248964}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!212 &889248969
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -66759,12 +66728,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1623061250}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 241.68, y: -6.15, z: 0}
-  m_LocalPosition: {x: 49.68, y: 3.98, z: 0}
+  m_LocalPosition: {x: -5.8, y: 2.5, z: 0}
   m_LocalScale: {x: 0.95, y: 0.95, z: 1}
   m_Children:
   - {fileID: 889248965}
-  - {fileID: 738529391}
   - {fileID: 155308145}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -68858,11 +68825,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2063124807332360596, guid: 8b21082c12aaff142875a0f72f205523, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8b21082c12aaff142875a0f72f205523, type: 3}
---- !u!4 &2121144174 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2063124806886031656, guid: 8b21082c12aaff142875a0f72f205523, type: 3}
-  m_PrefabInstance: {fileID: 1106883723}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2125960570
 GameObject:
   m_ObjectHideFlags: 0
