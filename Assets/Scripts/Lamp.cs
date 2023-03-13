@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Lamp : MonoBehaviour
 {
-	//プッシュ
 	[SerializeField] Rigidbody2D rb;
 
 	// 投げるフラグ

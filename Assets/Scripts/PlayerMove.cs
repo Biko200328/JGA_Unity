@@ -27,6 +27,10 @@ public class PlayerMove : MonoBehaviour
 	[Header("ジャンプ力")]
 	[SerializeField] private float jumpPower;
 
+	[Header("ランプの回収時間")]
+	[SerializeField] private float lampCollectTime;
+	private float collectNowTime;
+
 	[Header("フラグ")]
 	// 分裂しているかどうか
 	public bool isLampTake;
@@ -37,6 +41,8 @@ public class PlayerMove : MonoBehaviour
 	// 隣に一マスのブロックがあったら
 	public bool isNextBlockL = false;
 	public bool isNextBlockR = false;
+	// ランプが回収中か
+	public bool isLampCollect;
 
 	Rigidbody2D rb;
 	HitFloor hitFloor;
@@ -110,6 +116,8 @@ public class PlayerMove : MonoBehaviour
 		AutoJump();
 
 		TakeLamp();
+
+		LampCollect();
 	}
 
 	//移動
@@ -210,9 +218,13 @@ public class PlayerMove : MonoBehaviour
 				isLampTake = true;
 				lampSqr.RbLost();
 				//// いったんランプの親子関係を無しに
-				//lampObj.transform.SetParent(null);
-				// プレイヤーの上に移動
-				lampObj.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 1.0f);
+				// lampObj.transform.SetParent(null);
+				// lampをオフに
+				isLightOn = false;
+				//回収中のフラグをオン
+				isLampCollect = true;
+				collectNowTime = 0;
+				lampObj.SetActive(false);
 				// 親子付け
 				lampObj.transform.SetParent(this.transform);
 				// 既存のコライダーをなくす
@@ -220,6 +232,22 @@ public class PlayerMove : MonoBehaviour
 				Destroy(lampObj.GetComponent<BoxCollider2D>());
 				// 二つ用のコライダーを生成
 				colliderObj.SetActive(true);
+			}
+		}
+	}
+
+	private void LampCollect()
+	{
+		if (isLampCollect)
+		{
+			collectNowTime += Time.deltaTime;
+			if(collectNowTime >= lampCollectTime)
+			{
+				lampObj.transform.position = new Vector3(transform.position.x, transform.position.y + 1.0f);
+				lampObj.SetActive(true);
+				isLampCollect = false;
+				// lampをオンに
+				isLightOn = true;
 			}
 		}
 	}

@@ -29,6 +29,11 @@ public class PlayerCircle : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if(playerMove.isLampCollect)
+		{
+			circleSize = minCircleSize;
+		}
+
 		if (playerMove.isLightOn)
 		{
 			//Å‘å’l‚æ‚è’á‚©‚Á‚½‚ç‘«‚·
