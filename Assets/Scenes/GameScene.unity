@@ -62705,7 +62705,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 889248964}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b5ed4b607fa3704692804ec68c0327a, type: 3}
+  m_Script: {fileID: 11500000, guid: f9c363ca8b2f73647a37f47e13e0c315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxCircleSize: 9
@@ -62766,7 +62766,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -882670731
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 0.7830189, g: 0.5939124, b: 0.5958219, a: 0.53333336}
   m_FlipX: 0
