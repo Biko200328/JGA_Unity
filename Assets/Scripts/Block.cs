@@ -11,7 +11,7 @@ public class Block : MonoBehaviour
 	public bool isLightIn;
 
 	Lamp lamp;
-
+	PlayerMove playerMove;
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -22,6 +22,9 @@ public class Block : MonoBehaviour
 
 		GameObject lampObj = GameObject.Find("Lamp");
 		lamp = lampObj.GetComponent<Lamp>();
+
+		GameObject player = GameObject.Find("Player");
+		playerMove = player.GetComponent<PlayerMove>();
 	}
 
 	// Update is called once per frame
@@ -36,6 +39,11 @@ public class Block : MonoBehaviour
 		}
 
 		if (!lamp.isLampOn)
+		{
+			isLightIn = false;
+		}
+
+		if (playerMove.isLampCollect)
 		{
 			isLightIn = false;
 		}

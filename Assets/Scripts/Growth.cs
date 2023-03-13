@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class Growth : MonoBehaviour
 {
@@ -21,18 +22,27 @@ public class Growth : MonoBehaviour
 	public bool isFirst;
 
 	Lamp lamp;
-
+	PlayerMove playerMove;
 	private void Start()
 	{
 		isFirst = false;
 
 		GameObject lampObj = GameObject.Find("Lamp");
 		lamp = lampObj.GetComponent<Lamp>();
+
+		GameObject player = GameObject.Find("Player");
+		playerMove = player.GetComponent<PlayerMove>();
 	}
 
 	private void Update()
 	{
 		if(!lamp.isLampOn)
+		{
+			isLightIn = false;
+			isEnd = false;
+		}
+
+		if (playerMove.isLampCollect)
 		{
 			isLightIn = false;
 			isEnd = false;
