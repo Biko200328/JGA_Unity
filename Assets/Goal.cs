@@ -19,11 +19,16 @@ public class Goal : MonoBehaviour
 
 	SpriteRenderer gateRenderer;
 
+	PlayerMove playerMove;
+
 
 	// Start is called before the first frame update
 	void Start()
 	{
 		gateRenderer = gate.GetComponent<SpriteRenderer>();
+
+		GameObject playerObj = GameObject.Find("Player");
+		playerMove = playerObj.GetComponent<PlayerMove>();
 	}
 
 	// Update is called once per frame
@@ -54,6 +59,7 @@ public class Goal : MonoBehaviour
 		if(collision.gameObject.tag == "lamp")
 		{
 			isGoal = true;
+			playerMove.respawnPos = this.gameObject.transform.position;
 		}
 	}
 }
