@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 7017015484353492719}
   - component: {fileID: 6379696410244269687}
   - component: {fileID: 7595723419780502712}
+  - component: {fileID: 1882897619977684408}
   m_Layer: 0
   m_Name: GrowBox
   m_TagString: growBox
@@ -159,7 +160,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -212,3 +213,39 @@ MonoBehaviour:
   speed: 1
   growth: {fileID: 0}
   isStop: 0
+--- !u!66 &1882897619977684408
+CompositeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7653180943119882859}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_GeometryType: 0
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths:
+  - m_Collider: {fileID: 7017015484353492719}
+    m_ColliderPaths:
+    - - X: 4999707
+        Y: -5000000
+      - X: 4999707
+        Y: 5000000
+      - X: -5000000
+        Y: 4999707
+      - X: -4999707
+        Y: -5000000
+  m_CompositePaths:
+    m_Paths:
+    - - {x: 0.4999414, y: -0.5}
+      - {x: 0.4999414, y: 0.5}
+      - {x: -0.5, y: 0.4999414}
+      - {x: -0.4999414, y: -0.5}
+  m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.00005
