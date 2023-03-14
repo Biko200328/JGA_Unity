@@ -21,7 +21,7 @@ public class GrowBoxIsMove : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "growBox")
+		if (collision.gameObject.tag == "growBox")
 		{
 			if(growthMove != null) growthMove.isStop = true;
 		}
@@ -29,7 +29,7 @@ public class GrowBoxIsMove : MonoBehaviour
 
 	private void OnTriggerStay2D(Collider2D collision)
 	{
-		if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "growBox")
+		if (collision.gameObject.tag == "growBox")
 		{
             if (growthMove != null) growthMove.isStop = true;
 		}
@@ -37,7 +37,7 @@ public class GrowBoxIsMove : MonoBehaviour
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{
-		if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "growBox")
+		if (collision.gameObject.tag == "growBox")
 		{
             if (growthMove != null) growthMove.isStop = false;
 		}
