@@ -25,10 +25,10 @@ public class GameManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		//if(Input.GetKeyDown(KeyCode.R))
-		//{
-		//	// 現在のシーンを読み直す
-		//	sceneController.sceneChange(SceneManager.GetActiveScene().name);
-		//}
+		if (Input.GetKeyDown(KeyCode.R))
+		{
+			// 現在のシーンを読み直す
+			sceneController.sceneChange(SceneManager.GetActiveScene().name);
+		}
 	}
 }

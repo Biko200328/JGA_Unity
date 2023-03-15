@@ -124,8 +124,6 @@ public class PlayerMove : MonoBehaviour
 
 		AutoJump();
 
-		Respawn();
-
 		TakeLamp();
 
 		LampCollect();
@@ -166,15 +164,6 @@ public class PlayerMove : MonoBehaviour
 			{
 				rb.velocity += new Vector2(0, jumpPower);
 			}
-		}
-	}
-
-	private void Respawn()
-	{
-		if(Input.GetKeyDown(KeyCode.R))
-		{
-			this.transform.position = respawnPos;
-			lampObj.transform.position = respawnPos;
 		}
 	}
 
