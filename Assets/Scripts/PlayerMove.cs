@@ -18,10 +18,7 @@ public class PlayerMove : MonoBehaviour
 	//float limitX = 15.5f;
 	//float limitY = 8.0f;
 
-	// 動いてるかどうか
-	bool isRightMove;
-	bool isLeftMove;
-	bool isControllerMove;
+	public Vector3 respawnPos;
 
 	// スピードと同じようにジャンプ力の変数も作る
 	[Header("ジャンプ力")]
@@ -70,6 +67,9 @@ public class PlayerMove : MonoBehaviour
 		//colliderOvj読み込み
 		colliderObj = transform.Find("SetCollider").gameObject;
 		colliderObj.SetActive(false);
+
+		// リスポーン位置をスタート位置に
+		respawnPos = transform.position;
 
 		// 子オブジェクト読み込み
 		GameObject childFloor = transform.Find("HitFloor").gameObject;
@@ -124,6 +124,8 @@ public class PlayerMove : MonoBehaviour
 
 		AutoJump();
 
+		Respawn();
+
 		TakeLamp();
 
 		LampCollect();
@@ -164,6 +166,15 @@ public class PlayerMove : MonoBehaviour
 			{
 				rb.velocity += new Vector2(0, jumpPower);
 			}
+		}
+	}
+
+	private void Respawn()
+	{
+		if(Input.GetKeyDown(KeyCode.R))
+		{
+			this.transform.position = respawnPos;
+			lampObj.transform.position = respawnPos;
 		}
 	}
 
