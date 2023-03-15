@@ -47,6 +47,12 @@ public class Growth : MonoBehaviour
 			isLightIn = false;
 			isEnd = false;
 		}
+
+		if (playerMove.isPlace)
+		{
+			isLightIn = false;
+			isEnd = false;
+		}
 	}
 
 	private void FixedUpdate()

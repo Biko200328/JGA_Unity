@@ -47,5 +47,10 @@ public class UpMoveBlock : MonoBehaviour
 		{
 			isMove = false;
 		}
+
+		if (playerMove.isPlace)
+		{
+			isMove = false;
+		}
 	}
 }

@@ -152,14 +152,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
+  respawnPos: {x: 0, y: 0, z: 0}
   jumpPower: 8
   lampCollectTime: 0.2
-  isLampTake: 0
-  isLightIn: 0
-  isLightOn: 0
-  isNextBlockL: 0
-  isNextBlockR: 0
-  isLampCollect: 0
+  throwMode: 0
+  collectNoLimit: 0
+  isPlace: 0
+  playerCircle: {fileID: 0}
 --- !u!1 &2919794432906871269
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,7 +347,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.56}
-  m_Size: {x: 0.9, y: 0.1}
+  m_Size: {x: 1, y: 0.1}
   m_Direction: 1
 --- !u!114 &2919794433247903423
 MonoBehaviour:

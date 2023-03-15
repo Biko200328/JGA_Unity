@@ -62,6 +62,8 @@ public class PlayerMove : MonoBehaviour
 
 	RespawnManager respawnManager;
 
+	public bool isJump;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -139,23 +141,46 @@ public class PlayerMove : MonoBehaviour
 		// コントローラーの左右入力数値を受け取る
 		inputHorizontal = Input.GetAxis("cHorizontalL");
 
-		//動いてるかどうか判断
-		if (Input.GetKey(KeyCode.A))
+		//イドウ
+		if(isJump)
 		{
-			rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
-		}
-		else if (Input.GetKey(KeyCode.D))
-		{
-			rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
-		}
-		else if (inputHorizontal != 0)
-		{
-			rb.velocity = new Vector2(inputHorizontal * moveSpeed, rb.velocity.y);
+			if (Input.GetKey(KeyCode.A))
+			{
+				rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+			}
+			else if (Input.GetKey(KeyCode.D))
+			{
+				rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+			}
+			else if (inputHorizontal != 0)
+			{
+				rb.velocity = new Vector2(inputHorizontal * moveSpeed, rb.velocity.y);
+			}
+			else
+			{
+				rb.velocity = new Vector2(0, rb.velocity.y);
+			}
 		}
 		else
 		{
-			rb.velocity = new Vector2(0, rb.velocity.y);
+			if (Input.GetKey(KeyCode.A) && hitFloor.isHit)
+			{
+				rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+			}
+			else if (Input.GetKey(KeyCode.D) && hitFloor.isHit)
+			{
+				rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+			}
+			else if (inputHorizontal != 0 && hitFloor.isHit)
+			{
+				rb.velocity = new Vector2(inputHorizontal * moveSpeed, rb.velocity.y);
+			}
+			else
+			{
+				rb.velocity = new Vector2(0, rb.velocity.y);
+			}
 		}
+		
 	}
 
 	//ジャンプ
@@ -179,6 +204,7 @@ public class PlayerMove : MonoBehaviour
 			{
 				transform.SetParent(null);
 				rb.velocity = new Vector2(0, jumpPower);
+				isJump = true;
 				//gameObject.layer = 9;
 			}
 		}
@@ -189,6 +215,7 @@ public class PlayerMove : MonoBehaviour
 			{
 				transform.SetParent(null);
 				rb.velocity = new Vector2(0, jumpPower);
+				isJump = true;
 				//gameObject.layer = 9;
 			}
 		}
@@ -242,7 +269,7 @@ public class PlayerMove : MonoBehaviour
 			}
 			// ランプを持っていないとき
 			// ライトの中にいて上にブロックがないとき
-			else if (!isLampTake && isLightIn && !hitCeiling.isHit)
+			else if (!isLampTake && isLightIn && !hitCeiling.isHit && !isPlace)
 			{
 				isLampTake = true;
 				lampSqr.RbLost();

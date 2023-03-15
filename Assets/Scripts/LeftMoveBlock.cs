@@ -48,6 +48,10 @@ public class LeftMoveBlock : MonoBehaviour
 		{
 			isMove = false;
 		}
-		
+
+		if (playerMove.isPlace)
+		{
+			isMove = false;
+		}
 	}
 }

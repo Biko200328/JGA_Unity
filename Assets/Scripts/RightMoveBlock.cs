@@ -48,5 +48,10 @@ public class RightMoveBlock : MonoBehaviour
 		{
 			isMove = false;
 		}
+
+		if (playerMove.isPlace)
+		{
+			isMove = false;
+		}
 	}
 }
