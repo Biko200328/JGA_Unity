@@ -37,9 +37,6 @@ public class PlayerMove : MonoBehaviour
 	[System.NonSerialized] public bool isLightIn;
 	// 火がついてるかどうかフラグ
 	[System.NonSerialized] public bool isLightOn;
-	// 隣に一マスのブロックがあったら
-	[System.NonSerialized] public bool isNextBlockL = false;
-	[System.NonSerialized] public bool isNextBlockR = false;
 	// ランプが回収中か
 	[System.NonSerialized] public bool isLampCollect;
 	[SerializeField] PlayerCircle playerCircle;

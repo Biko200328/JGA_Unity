@@ -189,10 +189,6 @@ public class Lamp : MonoBehaviour
 		rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 		//// Interpolate‚ğ•ÏX
 		//rb.interpolation = RigidbodyInterpolation2D.Interpolate;
-		//isLampOn = true;
-
-		//// ƒ‰ƒ“ƒv‚ğ‚Â‚¯‚é
-		//playerMove.isLightOn = true;
 	}
 
 	// PlayerMove‚É“n‚·‚½‚ß‚ÌŠÖ”
