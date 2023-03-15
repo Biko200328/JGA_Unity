@@ -18,7 +18,6 @@ public class PlayerCircle : MonoBehaviour
 
 	PlayerMove playerMove;
 
-
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -29,6 +28,12 @@ public class PlayerCircle : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		// ’u‚¢‚Ä‚éŽž‚Í‰~‚ð‚È‚­‚·
+		if(playerMove.isPlace)
+		{
+			circleSize = 0;
+		}
+
 		if(playerMove.isLampCollect)
 		{
 			circleSize = 0;

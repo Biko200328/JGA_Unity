@@ -42,6 +42,8 @@ public class PlayerMove : MonoBehaviour
 	[System.NonSerialized] public bool isLightOn;
 	// ランプが回収中か
 	[System.NonSerialized] public bool isLampCollect;
+	// 置くときのフラグ
+	/*[System.NonSerialized] */public bool isPlace;
 	[SerializeField] PlayerCircle playerCircle;
 
 	Rigidbody2D rb;
@@ -224,6 +226,10 @@ public class PlayerMove : MonoBehaviour
 					{
 						lampSqr.LampThrow(transform.position);
 						isLightOn = false;
+					}
+					else
+					{
+						isPlace = true;
 					}
 					// 親子付け解除
 					lampObj.transform.SetParent(null);
