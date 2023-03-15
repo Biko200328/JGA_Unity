@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RespawnManager : MonoBehaviour
 {
-	[SerializeField] public static Vector3 respawnPos;
+	[SerializeField] public static Vector3 respawnPos = new Vector3(0,0,0);
 
 	// Start is called before the first frame update
 	void Start()
