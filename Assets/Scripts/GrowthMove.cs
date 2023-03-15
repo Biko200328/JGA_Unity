@@ -31,7 +31,7 @@ public class GrowthMove : MonoBehaviour
 			Destroy(this.gameObject);
 		}
 
-		if(isStop)
+		if(growth.isLightInÅ@&& isStop)
 		{
 			growth.isEnd = true;
 		}
