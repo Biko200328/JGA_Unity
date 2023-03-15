@@ -179,9 +179,7 @@ public class Lamp : MonoBehaviour
 		return t == 0.0 ? min : max * Mathf.Pow(2, 10 * (t / totaltime - 1)) + min;
 	}
 
-	// PlayerMoveに渡すための関数
-	// 変数の初期化
-	public void LampThrow(Vector3 pos)
+	public void GetLampRb()
 	{
 		//Rigidbodyつける
 		rb = gameObject.AddComponent<Rigidbody2D>();
@@ -191,10 +189,18 @@ public class Lamp : MonoBehaviour
 		rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 		//// Interpolateを変更
 		//rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+		//isLampOn = true;
 
+		//// ランプをつける
+		//playerMove.isLightOn = true;
+	}
+
+	// PlayerMoveに渡すための関数
+	// 変数の初期化
+	public void LampThrow(Vector3 pos)
+	{
 		// 投げたフラグをtrue
 		isThrow = true;
-		isLampOn = false;
 		// タイムを0に
 		throwNowTime = 0;
 		// スタートポジションを現在のposに変更

@@ -28,18 +28,20 @@ public class PlayerMove : MonoBehaviour
 	[SerializeField] private float lampCollectTime;
 	private float collectNowTime;
 
-	[Header("フラグ")]
+	[Header("上に投げるのか")]
+	public bool throwMode;
+
 	// 分裂しているかどうか
-	public bool isLampTake;
+	[System.NonSerialized] public bool isLampTake;
 	// 灯りの中にいるかどうか
-	public bool isLightIn;
+	[System.NonSerialized] public bool isLightIn;
 	// 火がついてるかどうかフラグ
-	public bool isLightOn;
+	[System.NonSerialized] public bool isLightOn;
 	// 隣に一マスのブロックがあったら
-	public bool isNextBlockL = false;
-	public bool isNextBlockR = false;
+	[System.NonSerialized] public bool isNextBlockL = false;
+	[System.NonSerialized] public bool isNextBlockR = false;
 	// ランプが回収中か
-	public bool isLampCollect;
+	[System.NonSerialized] public bool isLampCollect;
 	[SerializeField] PlayerCircle playerCircle;
 
 	Rigidbody2D rb;
@@ -209,8 +211,12 @@ public class PlayerMove : MonoBehaviour
 				if (hitFloor.isHit && !isLampCollect)
 				{
 					isLampTake = false;
-					lampSqr.LampThrow(transform.position);
-					isLightOn = false;
+					lampSqr.GetLampRb();
+					if (throwMode)
+					{
+						lampSqr.LampThrow(transform.position);
+						isLightOn = false;
+					}
 					// 親子付け解除
 					lampObj.transform.SetParent(null);
 					// 生成したコライダーを捨てる
