@@ -269,7 +269,7 @@ public class PlayerMove : MonoBehaviour
 			}
 			// ランプを持っていないとき
 			// ライトの中にいて上にブロックがないとき
-			else if (!isLampTake && isLightIn && !hitCeiling.isHit)
+			else if (!isLampTake && isLightIn && !hitCeiling.isHit && !isPlace)
 			{
 				isLampTake = true;
 				lampSqr.RbLost();
