@@ -21,6 +21,8 @@ public class Goal : MonoBehaviour
 
 	PlayerMove playerMove;
 
+	RespawnManager respawnManager;
+
 
 	// Start is called before the first frame update
 	void Start()
@@ -29,6 +31,10 @@ public class Goal : MonoBehaviour
 
 		GameObject playerObj = GameObject.Find("Player");
 		playerMove = playerObj.GetComponent<PlayerMove>();
+
+		// リスポーンマネージャー
+		GameObject respawnManagerObj = GameObject.Find("RespawnManager");
+		respawnManager = respawnManagerObj.GetComponent<RespawnManager>();
 	}
 
 	// Update is called once per frame
@@ -59,7 +65,7 @@ public class Goal : MonoBehaviour
 		if(collision.gameObject.tag == "lamp")
 		{
 			isGoal = true;
-			playerMove.respawnPos = this.gameObject.transform.position;
+			respawnManager.SetRespawnPos(gate.transform.position);
 		}
 	}
 }
