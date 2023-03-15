@@ -31,14 +31,19 @@ public class PlayerMove : MonoBehaviour
 	[Header("上に投げるのか")]
 	public bool throwMode;
 
-	// 分裂しているかどうか
-	[System.NonSerialized] public bool isLampTake;
+    [Header("ランプが範囲外でも回収できるか")]
+    public bool collectNoLimit = false;
+
+    // 分裂しているかどうか
+    [System.NonSerialized] public bool isLampTake;
 	// 灯りの中にいるかどうか
 	[System.NonSerialized] public bool isLightIn;
 	// 火がついてるかどうかフラグ
 	[System.NonSerialized] public bool isLightOn;
 	// ランプが回収中か
 	[System.NonSerialized] public bool isLampCollect;
+	// 置くときのフラグ
+	/*[System.NonSerialized] */public bool isPlace;
 	[SerializeField] PlayerCircle playerCircle;
 
 	Rigidbody2D rb;
@@ -172,6 +177,7 @@ public class PlayerMove : MonoBehaviour
 		{
 			if (Input.GetKey(KeyCode.A))
 			{
+				transform.SetParent(null);
 				rb.velocity = new Vector2(0, jumpPower);
 				//gameObject.layer = 9;
 			}
@@ -181,6 +187,7 @@ public class PlayerMove : MonoBehaviour
 		{
 			if (Input.GetKey(KeyCode.D))
 			{
+				transform.SetParent(null);
 				rb.velocity = new Vector2(0, jumpPower);
 				//gameObject.layer = 9;
 			}
@@ -198,8 +205,14 @@ public class PlayerMove : MonoBehaviour
 
 	private void TakeLamp()
 	{
-		// ライトの中にいてかつプレイヤーの上にブロックがないときにランプを呼ぶ
-		if (Input.GetKeyDown(KeyCode.Space))
+		//光の中にいなくても回収できるように
+		if(collectNoLimit)
+		{
+			isLightIn = true;
+        }
+
+        // ライトの中にいてかつプレイヤーの上にブロックがないときにランプを呼ぶ
+        if (Input.GetKeyDown(KeyCode.Space))
 		{
 			// ランプを持っているとき
 			if (isLampTake)
@@ -213,6 +226,10 @@ public class PlayerMove : MonoBehaviour
 					{
 						lampSqr.LampThrow(transform.position);
 						isLightOn = false;
+					}
+					else
+					{
+						isPlace = true;
 					}
 					// 親子付け解除
 					lampObj.transform.SetParent(null);
