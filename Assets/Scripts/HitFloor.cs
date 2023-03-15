@@ -46,14 +46,22 @@ public class HitFloor : MonoBehaviour
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		// ìñÇΩÇ¡ÇΩcollisionÇÃtagÇ™FloorÇ»ÇÁê⁄ínÇ∆Ç∑ÇÈ
-		if (collision.gameObject.tag == "Floor") isHit = true;
+		if (collision.gameObject.tag == "Floor")
+		{
+			isHit = true;
+			playerMove.isJump = false;
+		}
 
 		GimmickRide(collision);
 	}
 
 	private void OnTriggerStay2D(Collider2D collision)
 	{
-		if (collision.gameObject.tag == "Floor") isHit = true;
+		if (collision.gameObject.tag == "Floor")
+		{
+			isHit = true;
+			playerMove.isJump = false;
+		}
 
 		GimmickRide(collision);
 	}
@@ -72,24 +80,28 @@ public class HitFloor : MonoBehaviour
 		if (collision.gameObject.tag == "rightMoveBlock")
 		{
 			isHit = true;
+			playerMove.isJump = false;
 			player.transform.SetParent(collision.transform);
 		}
 
 		if (collision.gameObject.tag == "leftMoveBlock")
 		{
 			isHit = true;
+			playerMove.isJump = false;
 			player.transform.SetParent(collision.transform);
 		}
 
 		if (collision.gameObject.tag == "downMoveBlock")
 		{
 			isHit = true;
+			playerMove.isJump = false;
 			player.transform.SetParent(collision.transform);
 		}
 
 		if (collision.gameObject.tag == "upMoveBlock")
 		{
 			isHit = true;
+			playerMove.isJump = false;
 			player.transform.SetParent(collision.transform);
 		}
 
@@ -97,6 +109,7 @@ public class HitFloor : MonoBehaviour
 		if(collision.gameObject.tag == "platform")
 		{
 			isHit = true;
+			playerMove.isJump = false;
 			player.layer = 3;
 			if (Input.GetKeyDown(KeyCode.S))
 			{
@@ -109,11 +122,13 @@ public class HitFloor : MonoBehaviour
 		if (collision.gameObject.tag == "growOriginal")
 		{
 			isHit = true;
+			playerMove.isJump = false;
 		}
 
 		if (collision.gameObject.tag == "growBox")
 		{
 			isHit = true;
+			playerMove.isJump = false;
 		}
 	}
 
