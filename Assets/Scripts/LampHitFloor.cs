@@ -36,11 +36,13 @@ public class LampHitFloor : MonoBehaviour
 			if(collision.gameObject.tag == "Floor")
 			{
 				isHit = true;
+				if(!playerMove.throwMode)playerMove.isPlace = false;
 			}
 
 			if (collision.gameObject.tag == "platform")
 			{
 				isHit = true;
+				if (!playerMove.throwMode) playerMove.isPlace = false;
 				lamp.layer = 7;
 			}
 
@@ -58,11 +60,13 @@ public class LampHitFloor : MonoBehaviour
 			if (collision.gameObject.tag == "Floor")
 			{
 				isHit = true;
+				if (!playerMove.throwMode) playerMove.isPlace = false;
 			}
 
 			if (collision.gameObject.tag == "platform")
 			{
 				isHit = true;
+				if (!playerMove.throwMode) playerMove.isPlace = false;
 				lamp.layer = 7;
 			}
 
@@ -98,24 +102,28 @@ public class LampHitFloor : MonoBehaviour
 		{
 			isHit = true;
 			lamp.transform.SetParent(collision.transform);
+			if (!playerMove.throwMode) playerMove.isPlace = false;
 		}
 
 		if (collision.gameObject.tag == "leftMoveBlock")
 		{
 			isHit = true;
 			lamp.transform.SetParent(collision.transform);
+			if (!playerMove.throwMode) playerMove.isPlace = false;
 		}
 
 		if (collision.gameObject.tag == "downMoveBlock")
 		{
 			isHit = true;
 			lamp.transform.SetParent(collision.transform);
+			if (!playerMove.throwMode) playerMove.isPlace = false;
 		}
 
 		if (collision.gameObject.tag == "upMoveBlock")
 		{
 			isHit = true;
 			lamp.transform.SetParent(collision.transform);
+			if (!playerMove.throwMode) playerMove.isPlace = false;
 		}
 	}
 

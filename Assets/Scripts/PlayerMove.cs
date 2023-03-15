@@ -42,6 +42,8 @@ public class PlayerMove : MonoBehaviour
 	[System.NonSerialized] public bool isLightOn;
 	// ランプが回収中か
 	[System.NonSerialized] public bool isLampCollect;
+	// 置くときのフラグ
+	/*[System.NonSerialized] */public bool isPlace;
 	[SerializeField] PlayerCircle playerCircle;
 
 	Rigidbody2D rb;
@@ -59,6 +61,8 @@ public class PlayerMove : MonoBehaviour
 	GameObject colliderObj;
 
 	RespawnManager respawnManager;
+
+	public bool isJump;
 
 	// Start is called before the first frame update
 	void Start()
@@ -137,23 +141,46 @@ public class PlayerMove : MonoBehaviour
 		// コントローラーの左右入力数値を受け取る
 		inputHorizontal = Input.GetAxis("cHorizontalL");
 
-		//動いてるかどうか判断
-		if (Input.GetKey(KeyCode.A))
+		//イドウ
+		if(isJump)
 		{
-			rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
-		}
-		else if (Input.GetKey(KeyCode.D))
-		{
-			rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
-		}
-		else if (inputHorizontal != 0)
-		{
-			rb.velocity = new Vector2(inputHorizontal * moveSpeed, rb.velocity.y);
+			if (Input.GetKey(KeyCode.A))
+			{
+				rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+			}
+			else if (Input.GetKey(KeyCode.D))
+			{
+				rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+			}
+			else if (inputHorizontal != 0)
+			{
+				rb.velocity = new Vector2(inputHorizontal * moveSpeed, rb.velocity.y);
+			}
+			else
+			{
+				rb.velocity = new Vector2(0, rb.velocity.y);
+			}
 		}
 		else
 		{
-			rb.velocity = new Vector2(0, rb.velocity.y);
+			if (Input.GetKey(KeyCode.A) && hitFloor.isHit)
+			{
+				rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+			}
+			else if (Input.GetKey(KeyCode.D) && hitFloor.isHit)
+			{
+				rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+			}
+			else if (inputHorizontal != 0 && hitFloor.isHit)
+			{
+				rb.velocity = new Vector2(inputHorizontal * moveSpeed, rb.velocity.y);
+			}
+			else
+			{
+				rb.velocity = new Vector2(0, rb.velocity.y);
+			}
 		}
+		
 	}
 
 	//ジャンプ
@@ -175,7 +202,9 @@ public class PlayerMove : MonoBehaviour
 		{
 			if (Input.GetKey(KeyCode.A))
 			{
+				transform.SetParent(null);
 				rb.velocity = new Vector2(0, jumpPower);
+				isJump = true;
 				//gameObject.layer = 9;
 			}
 		}
@@ -184,7 +213,9 @@ public class PlayerMove : MonoBehaviour
 		{
 			if (Input.GetKey(KeyCode.D))
 			{
+				transform.SetParent(null);
 				rb.velocity = new Vector2(0, jumpPower);
+				isJump = true;
 				//gameObject.layer = 9;
 			}
 		}
@@ -223,6 +254,10 @@ public class PlayerMove : MonoBehaviour
 						lampSqr.LampThrow(transform.position);
 						isLightOn = false;
 					}
+					else
+					{
+						isPlace = true;
+					}
 					// 親子付け解除
 					lampObj.transform.SetParent(null);
 					// 生成したコライダーを捨てる
@@ -234,7 +269,7 @@ public class PlayerMove : MonoBehaviour
 			}
 			// ランプを持っていないとき
 			// ライトの中にいて上にブロックがないとき
-			else if (!isLampTake && isLightIn && !hitCeiling.isHit)
+			else if (!isLampTake && isLightIn && !hitCeiling.isHit && !isPlace)
 			{
 				isLampTake = true;
 				lampSqr.RbLost();

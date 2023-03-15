@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 8689069681947559955}
   - component: {fileID: 8689069681947559954}
   m_Layer: 20
-  m_Name: CircleSprite
+  m_Name: CircleObj
   m_TagString: lampCircle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
