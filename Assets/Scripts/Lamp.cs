@@ -39,6 +39,8 @@ public class Lamp : MonoBehaviour
 	[SerializeField] SpriteRenderer spriteRenderer;
 	[SerializeField] Sprite sprite;
 
+	RespawnManager respawnManager;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -53,6 +55,12 @@ public class Lamp : MonoBehaviour
 		GameObject childObj = transform.Find("HitFloor").gameObject;
 		// コンポーネント読み込み
 		lampHitFloor = childObj.GetComponent<LampHitFloor>();
+
+		// リスポーンマネージャー
+		GameObject respawnManagerObj = GameObject.Find("RespawnManager");
+		respawnManager = respawnManagerObj.GetComponent<RespawnManager>();
+
+		transform.position = respawnManager.GetRespawnPos();
 
 		// レイヤーを変更
 		gameObject.layer = 10;

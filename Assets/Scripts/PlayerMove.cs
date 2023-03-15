@@ -59,6 +59,8 @@ public class PlayerMove : MonoBehaviour
 
 	GameObject colliderObj;
 
+	RespawnManager respawnManager;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -97,6 +99,10 @@ public class PlayerMove : MonoBehaviour
 		// コンポーネント読み込み
 		jumpHitLeft2 = childJumpL2.GetComponent<JumpHitLeft>();
 
+		// リスポーンマネージャー
+		GameObject respawnManagerObj = GameObject.Find("RespawnManager");
+		respawnManager = respawnManagerObj.GetComponent<RespawnManager>();
+
 		// lamp読み込み
 		lampObj = GameObject.Find("Lamp");
 		// ランプのスクリプトを取得
@@ -105,6 +111,8 @@ public class PlayerMove : MonoBehaviour
 		isLightOn = true;
 
 		gameObject.layer = 9;
+
+		transform.position = respawnManager.GetRespawnPos();
 	}
 
 	// Update is called once per frame
@@ -205,7 +213,7 @@ public class PlayerMove : MonoBehaviour
 					isLightOn = false;
 					// 親子付け解除
 					lampObj.transform.SetParent(null);
-					//// 生成したコライダーを捨てる
+					// 生成したコライダーを捨てる
 					colliderObj.SetActive(false);
 					// 個々のコライダーをつけなおす
 					gameObject.AddComponent<BoxCollider2D>();
@@ -214,7 +222,7 @@ public class PlayerMove : MonoBehaviour
 			}
 			// ランプを持っていないとき
 			// ライトの中にいて上にブロックがないとき
-			else if(!isLampTake && isLightIn && !hitCeiling.isHit)
+			else if (!isLampTake && isLightIn && !hitCeiling.isHit)
 			{
 				isLampTake = true;
 				lampSqr.RbLost();
