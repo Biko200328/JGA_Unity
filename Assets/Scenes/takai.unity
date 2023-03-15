@@ -30639,7 +30639,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1579319723}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: 31.999998, y: 17.999763, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -31286,6 +31286,10 @@ PrefabInstance:
     - target: {fileID: 2919794432552654035, guid: 1a7beb02f6aebef4e871def0ead341d0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919794432552654038, guid: 1a7beb02f6aebef4e871def0ead341d0, type: 3}
+      propertyPath: throwMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2919794432552654038, guid: 1a7beb02f6aebef4e871def0ead341d0, type: 3}
       propertyPath: playerCircle
