@@ -125,20 +125,7 @@ public class LampHitFloor : MonoBehaviour
 			lamp.transform.SetParent(collision.transform);
 			if (!playerMove.throwMode) playerMove.isPlace = false;
 		}
-
-        // é÷ÉuÉçÉbÉN
-        if (collision.gameObject.tag == "growOriginal")
-        {
-            isHit = true;
-            if (!playerMove.throwMode) playerMove.isPlace = false;
-        }
-
-        if (collision.gameObject.tag == "growBox")
-        {
-            isHit = true;
-            if (!playerMove.throwMode) playerMove.isPlace = false;
-        }
-    }
+	}
 
 	private void GimmickRideOff(Collider2D collision)
 	{
