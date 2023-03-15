@@ -172,6 +172,7 @@ public class PlayerMove : MonoBehaviour
 		{
 			if (Input.GetKey(KeyCode.A))
 			{
+				transform.SetParent(null);
 				rb.velocity = new Vector2(0, jumpPower);
 				//gameObject.layer = 9;
 			}
@@ -181,6 +182,7 @@ public class PlayerMove : MonoBehaviour
 		{
 			if (Input.GetKey(KeyCode.D))
 			{
+				transform.SetParent(null);
 				rb.velocity = new Vector2(0, jumpPower);
 				//gameObject.layer = 9;
 			}
