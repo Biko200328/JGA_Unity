@@ -47,5 +47,10 @@ public class DownMoveBlock : MonoBehaviour
 		{
 			isMove = false;
 		}
+
+		if(playerMove.isPlace)
+		{
+			isMove = false;
+		}
 	}
 }

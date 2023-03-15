@@ -47,6 +47,11 @@ public class Block : MonoBehaviour
 		{
 			isLightIn = false;
 		}
+
+		if (playerMove.isPlace)
+		{
+			isLightIn = false;
+		}
 	}
 
 	//円の中にいなくても動かしたいときはコメントアウト
