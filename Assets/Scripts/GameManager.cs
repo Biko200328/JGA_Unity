@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if(Input.GetKeyDown(KeyCode.R))
+		if (Input.GetKeyDown(KeyCode.R))
 		{
 			// Œ»İ‚ÌƒV[ƒ“‚ğ“Ç‚İ’¼‚·
 			sceneController.sceneChange(SceneManager.GetActiveScene().name);

@@ -18,10 +18,7 @@ public class PlayerMove : MonoBehaviour
 	//float limitX = 15.5f;
 	//float limitY = 8.0f;
 
-	// 動いてるかどうか
-	bool isRightMove;
-	bool isLeftMove;
-	bool isControllerMove;
+	public Vector3 respawnPos;
 
 	// スピードと同じようにジャンプ力の変数も作る
 	[Header("ジャンプ力")]
@@ -31,18 +28,17 @@ public class PlayerMove : MonoBehaviour
 	[SerializeField] private float lampCollectTime;
 	private float collectNowTime;
 
-	[Header("フラグ")]
+	[Header("上に投げるのか")]
+	public bool throwMode;
+
 	// 分裂しているかどうか
-	public bool isLampTake;
+	[System.NonSerialized] public bool isLampTake;
 	// 灯りの中にいるかどうか
-	public bool isLightIn;
+	[System.NonSerialized] public bool isLightIn;
 	// 火がついてるかどうかフラグ
-	public bool isLightOn;
-	// 隣に一マスのブロックがあったら
-	public bool isNextBlockL = false;
-	public bool isNextBlockR = false;
+	[System.NonSerialized] public bool isLightOn;
 	// ランプが回収中か
-	public bool isLampCollect;
+	[System.NonSerialized] public bool isLampCollect;
 	[SerializeField] PlayerCircle playerCircle;
 
 	Rigidbody2D rb;
@@ -59,6 +55,8 @@ public class PlayerMove : MonoBehaviour
 
 	GameObject colliderObj;
 
+	RespawnManager respawnManager;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -68,6 +66,9 @@ public class PlayerMove : MonoBehaviour
 		//colliderOvj読み込み
 		colliderObj = transform.Find("SetCollider").gameObject;
 		colliderObj.SetActive(false);
+
+		// リスポーン位置をスタート位置に
+		respawnPos = transform.position;
 
 		// 子オブジェクト読み込み
 		GameObject childFloor = transform.Find("HitFloor").gameObject;
@@ -97,6 +98,10 @@ public class PlayerMove : MonoBehaviour
 		// コンポーネント読み込み
 		jumpHitLeft2 = childJumpL2.GetComponent<JumpHitLeft>();
 
+		// リスポーンマネージャー
+		GameObject respawnManagerObj = GameObject.Find("RespawnManager");
+		respawnManager = respawnManagerObj.GetComponent<RespawnManager>();
+
 		// lamp読み込み
 		lampObj = GameObject.Find("Lamp");
 		// ランプのスクリプトを取得
@@ -105,6 +110,8 @@ public class PlayerMove : MonoBehaviour
 		isLightOn = true;
 
 		gameObject.layer = 9;
+
+		transform.position = respawnManager.GetRespawnPos();
 	}
 
 	// Update is called once per frame
@@ -201,11 +208,15 @@ public class PlayerMove : MonoBehaviour
 				if (hitFloor.isHit && !isLampCollect)
 				{
 					isLampTake = false;
-					lampSqr.LampThrow(transform.position);
-					isLightOn = false;
+					lampSqr.GetLampRb();
+					if (throwMode)
+					{
+						lampSqr.LampThrow(transform.position);
+						isLightOn = false;
+					}
 					// 親子付け解除
 					lampObj.transform.SetParent(null);
-					//// 生成したコライダーを捨てる
+					// 生成したコライダーを捨てる
 					colliderObj.SetActive(false);
 					// 個々のコライダーをつけなおす
 					gameObject.AddComponent<BoxCollider2D>();
@@ -214,7 +225,7 @@ public class PlayerMove : MonoBehaviour
 			}
 			// ランプを持っていないとき
 			// ライトの中にいて上にブロックがないとき
-			else if(!isLampTake && isLightIn && !hitCeiling.isHit)
+			else if (!isLampTake && isLightIn && !hitCeiling.isHit)
 			{
 				isLampTake = true;
 				lampSqr.RbLost();
