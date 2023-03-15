@@ -40,6 +40,7 @@ public class Lamp : MonoBehaviour
 	[SerializeField] Sprite sprite;
 
 	RespawnManager respawnManager;
+	PlayerCircle playerCircle;
 
 	// Start is called before the first frame update
 	void Start()
@@ -55,6 +56,8 @@ public class Lamp : MonoBehaviour
 		GameObject childObj = transform.Find("HitFloor").gameObject;
 		// コンポーネント読み込み
 		lampHitFloor = childObj.GetComponent<LampHitFloor>();
+
+		GameObject circleObj = transform.Find("CircleObj").gameObject;
 
 		// リスポーンマネージャー
 		GameObject respawnManagerObj = GameObject.Find("RespawnManager");

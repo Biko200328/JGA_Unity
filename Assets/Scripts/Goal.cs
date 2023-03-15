@@ -65,7 +65,7 @@ public class Goal : MonoBehaviour
 		if(collision.gameObject.tag == "lamp")
 		{
 			isGoal = true;
-			respawnManager.SetRespawnPos(this.gameObject.transform.position);
+			respawnManager.SetRespawnPos(gate.transform.position);
 		}
 	}
 }

@@ -31,8 +31,11 @@ public class PlayerMove : MonoBehaviour
 	[Header("上に投げるのか")]
 	public bool throwMode;
 
-	// 分裂しているかどうか
-	[System.NonSerialized] public bool isLampTake;
+    [Header("ランプが範囲外でも回収できるか")]
+    public bool collectNoLimit = false;
+
+    // 分裂しているかどうか
+    [System.NonSerialized] public bool isLampTake;
 	// 灯りの中にいるかどうか
 	[System.NonSerialized] public bool isLightIn;
 	// 火がついてるかどうかフラグ
@@ -172,6 +175,7 @@ public class PlayerMove : MonoBehaviour
 		{
 			if (Input.GetKey(KeyCode.A))
 			{
+				transform.SetParent(null);
 				rb.velocity = new Vector2(0, jumpPower);
 				//gameObject.layer = 9;
 			}
@@ -181,6 +185,7 @@ public class PlayerMove : MonoBehaviour
 		{
 			if (Input.GetKey(KeyCode.D))
 			{
+				transform.SetParent(null);
 				rb.velocity = new Vector2(0, jumpPower);
 				//gameObject.layer = 9;
 			}
@@ -198,8 +203,14 @@ public class PlayerMove : MonoBehaviour
 
 	private void TakeLamp()
 	{
-		// ライトの中にいてかつプレイヤーの上にブロックがないときにランプを呼ぶ
-		if (Input.GetKeyDown(KeyCode.Space))
+		//光の中にいなくても回収できるように
+		if(collectNoLimit)
+		{
+			isLightIn = true;
+        }
+
+        // ライトの中にいてかつプレイヤーの上にブロックがないときにランプを呼ぶ
+        if (Input.GetKeyDown(KeyCode.Space))
 		{
 			// ランプを持っているとき
 			if (isLampTake)
