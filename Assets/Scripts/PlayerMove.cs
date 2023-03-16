@@ -235,6 +235,7 @@ public class PlayerMove : MonoBehaviour
 				transform.SetParent(null);
 				rb.velocity = new Vector2(0, jumpPower);
 				isJump = true;
+				jumpHitLeft.isHit = false;
 				//gameObject.layer = 9;
 			}
 		}
@@ -246,6 +247,7 @@ public class PlayerMove : MonoBehaviour
 				transform.SetParent(null);
 				rb.velocity = new Vector2(0, jumpPower);
 				isJump = true;
+				jumpHitRight.isHit = false;
 				//gameObject.layer = 9;
 			}
 		}
