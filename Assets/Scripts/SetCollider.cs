@@ -25,6 +25,15 @@ public class SetCollider : MonoBehaviour
 			Goal goal = collision.gameObject.GetComponent<Goal>();
 			goal.isGoal = true;
 		}
+
+		if(collision.gameObject.tag == "GoalGate")
+		{
+			GoalGate goalGate = collision.gameObject.GetComponent<GoalGate>();
+			if(goalGate.isGoal)
+			{
+				goalGate.RespawnSet();
+			}
+		}
 	}
 
 	private void OnTriggerStay2D(Collider2D collision)
@@ -33,6 +42,15 @@ public class SetCollider : MonoBehaviour
 		{
 			Goal goal = collision.gameObject.GetComponent<Goal>();
 			goal.isGoal = true;
+		}
+
+		if (collision.gameObject.tag == "GoalGate")
+		{
+			GoalGate goalGate = collision.gameObject.GetComponent<GoalGate>();
+			if (goalGate.isGoal)
+			{
+				goalGate.RespawnSet();
+			}
 		}
 	}
 }
