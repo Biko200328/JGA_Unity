@@ -17,4 +17,22 @@ public class SetCollider : MonoBehaviour
 	{
 		gameObject.layer = player.layer;
 	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if(collision.gameObject.tag == "Goal")
+		{
+			Goal goal = collision.gameObject.GetComponent<Goal>();
+			goal.isGoal = true;
+		}
+	}
+
+	private void OnTriggerStay2D(Collider2D collision)
+	{
+		if (collision.gameObject.tag == "Goal")
+		{
+			Goal goal = collision.gameObject.GetComponent<Goal>();
+			goal.isGoal = true;
+		}
+	}
 }

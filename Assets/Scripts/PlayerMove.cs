@@ -278,6 +278,8 @@ public class PlayerMove : MonoBehaviour
 					// 個々のコライダーをつけなおす
 					gameObject.AddComponent<BoxCollider2D>();
 					lampObj.AddComponent<BoxCollider2D>();
+					// レイヤーをプレイヤーに変更
+					gameObject.layer = 3;
 				}
 			}
 			// ランプを持っていないとき
@@ -300,6 +302,8 @@ public class PlayerMove : MonoBehaviour
 				Destroy(lampObj.GetComponent<BoxCollider2D>());
 				// 二つ用のコライダーを生成
 				colliderObj.SetActive(true);
+				// レイヤーをランプに変更
+				gameObject.layer = 10;
 			}
 		}
 	}
