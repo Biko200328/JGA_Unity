@@ -61,6 +61,7 @@ public class PlayerMove : MonoBehaviour
 	GameObject colliderObj;
 
 	RespawnManager respawnManager;
+	GameObject particle;
 
 	public bool isJump;
 
@@ -76,6 +77,9 @@ public class PlayerMove : MonoBehaviour
 
 		// リスポーン位置をスタート位置に
 		respawnPos = transform.position;
+
+		// パーティクル読み込み
+		particle = transform.Find("Particle").gameObject;
 
 		// 子オブジェクト読み込み
 		GameObject childFloor = transform.Find("HitFloor").gameObject;
@@ -133,6 +137,15 @@ public class PlayerMove : MonoBehaviour
 		TakeLamp();
 
 		LampCollect();
+
+		if(isLightIn)
+		{
+			particle.SetActive(true);
+		}
+		else
+		{
+			particle.SetActive(false);
+		}
 	}
 
 	//移動
