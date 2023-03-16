@@ -110,7 +110,16 @@ public class HitFloor : MonoBehaviour
 		{
 			isHit = true;
 			playerMove.isJump = false;
-			player.layer = 3;
+			if (playerMove.isLampTake)
+			{
+				// ランプに
+				player.layer = 7;
+			}
+			else
+			{
+				// プレイヤーに
+				player.layer = 3;
+			}
 			if (Input.GetKeyDown(KeyCode.S))
 			{
 				isGoast = true;
@@ -162,8 +171,17 @@ public class HitFloor : MonoBehaviour
 		if (collision.gameObject.tag == "platform")
 		{
 			isHit = false;
-			player.layer = 9;
-			if(playerMove.isLampTake)Lamp.layer = 10;
+			if (playerMove.isLampTake)
+			{
+				// 当たらない かつ ランプと同じに
+				player.layer = 10;
+				Lamp.layer = 10;
+			}
+			else
+			{
+				// 当たらないプレイヤーレイヤーに
+				player.layer = 9;
+			}
 		}
 
 		// 蛇ブロック

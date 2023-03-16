@@ -62,7 +62,7 @@ public class Goal : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if(collision.gameObject.tag == "lamp")
+		if(collision.gameObject.tag == "lamp" || collision.gameObject.tag == "NotPlatformLamp")
 		{
 			isGoal = true;
 			respawnManager.SetRespawnPos(gate.transform.position);
