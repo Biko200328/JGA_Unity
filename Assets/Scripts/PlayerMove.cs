@@ -300,7 +300,7 @@ public class PlayerMove : MonoBehaviour
 					gameObject.AddComponent<BoxCollider2D>();
 					lampObj.AddComponent<BoxCollider2D>();
 					// レイヤーをプレイヤーに変更
-					gameObject.layer = 3;
+					gameObject.layer = 9;
 				}
 			}
 			// ランプを持っていないとき
