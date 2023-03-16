@@ -40,12 +40,6 @@ public class Goal : MonoBehaviour
 			{
 				circle.transform.localScale = new Vector3(maxCircle, maxCircle);
 			}
-
-			//ゲートを開ける
-			//当たり判定をトリガーに
-			gate.GetComponent<BoxCollider2D>().isTrigger = true;
-			//スプライトの変更
-			gateRenderer.sprite = openTex;
 		}
 	}
 
@@ -54,8 +48,17 @@ public class Goal : MonoBehaviour
 		if(collision.gameObject.tag == "lamp" || collision.gameObject.tag == "NotPlatformLamp")
 		{
 			isGoal = true;
-			GoalGate goalgate = gate.GetComponent<GoalGate>();
-			goalgate.isGoal = true;
 		}
+	}
+
+	public void GoalGateOpen()
+	{
+		GoalGate goalgate = gate.GetComponent<GoalGate>();
+		goalgate.isGoal = true;
+		//ゲートを開ける
+		//当たり判定をトリガーに
+		gate.GetComponent<BoxCollider2D>().isTrigger = true;
+		//スプライトの変更
+		gateRenderer.sprite = openTex;
 	}
 }

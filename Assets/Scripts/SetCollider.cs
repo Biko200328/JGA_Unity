@@ -42,6 +42,7 @@ public class SetCollider : MonoBehaviour
 		{
 			Goal goal = collision.gameObject.GetComponent<Goal>();
 			goal.isGoal = true;
+			goal.GoalGateOpen();
 		}
 
 		if (collision.gameObject.tag == "GoalGate")

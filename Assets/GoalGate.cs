@@ -35,7 +35,7 @@ public class GoalGate : MonoBehaviour
 
 	public void RespawnSet()
 	{
-		respawnManager.SetRespawnPos(transform.position);
+		respawnManager.SetRespawnPos(new Vector3(transform.position.x + 1,transform.position.y,transform.position.z));
 	}
 
 }

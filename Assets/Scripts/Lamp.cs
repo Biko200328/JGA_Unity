@@ -45,6 +45,11 @@ public class Lamp : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
+		// リスポーンマネージャー
+		GameObject respawnManagerObj = GameObject.Find("RespawnManager");
+		respawnManager = respawnManagerObj.GetComponent<RespawnManager>();
+		transform.position = respawnManager.GetRespawnPos();
+
 		// Rigidbodyを取得
 		rb = GetComponent<Rigidbody2D>();
 
@@ -60,12 +65,6 @@ public class Lamp : MonoBehaviour
 		//円
 		GameObject circleObj = transform.Find("CircleObj").gameObject;
 		playerCircle = circleObj.GetComponent<PlayerCircle>();
-
-		// リスポーンマネージャー
-		GameObject respawnManagerObj = GameObject.Find("RespawnManager");
-		respawnManager = respawnManagerObj.GetComponent<RespawnManager>();
-
-		transform.position = respawnManager.GetRespawnPos();
 
 		// レイヤーを変更
 		gameObject.layer = 10;

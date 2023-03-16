@@ -68,15 +68,17 @@ public class PlayerMove : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
+		// リスポーンマネージャー
+		GameObject respawnManagerObj = GameObject.Find("RespawnManager");
+		respawnManager = respawnManagerObj.GetComponent<RespawnManager>();
+		transform.position = respawnManager.GetRespawnPos();
+
 		// Rigidbodyを取得
 		rb = gameObject.GetComponent<Rigidbody2D>();
 
 		//colliderOvj読み込み
 		colliderObj = transform.Find("SetCollider").gameObject;
 		colliderObj.SetActive(false);
-
-		// リスポーン位置をスタート位置に
-		respawnPos = transform.position;
 
 		// パーティクル読み込み
 		particle = transform.Find("Particle").gameObject;
@@ -109,10 +111,6 @@ public class PlayerMove : MonoBehaviour
 		// コンポーネント読み込み
 		jumpHitLeft2 = childJumpL2.GetComponent<JumpHitLeft>();
 
-		// リスポーンマネージャー
-		GameObject respawnManagerObj = GameObject.Find("RespawnManager");
-		respawnManager = respawnManagerObj.GetComponent<RespawnManager>();
-
 		// lamp読み込み
 		lampObj = GameObject.Find("Lamp");
 		// ランプのスクリプトを取得
@@ -121,8 +119,6 @@ public class PlayerMove : MonoBehaviour
 		isLightOn = true;
 
 		gameObject.layer = 9;
-
-		transform.position = respawnManager.GetRespawnPos();
 	}
 
 	// Update is called once per frame
