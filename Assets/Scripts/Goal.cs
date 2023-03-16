@@ -19,22 +19,11 @@ public class Goal : MonoBehaviour
 
 	SpriteRenderer gateRenderer;
 
-	PlayerMove playerMove;
-
-	RespawnManager respawnManager;
-
 
 	// Start is called before the first frame update
 	void Start()
 	{
 		gateRenderer = gate.GetComponent<SpriteRenderer>();
-
-		GameObject playerObj = GameObject.Find("Player");
-		playerMove = playerObj.GetComponent<PlayerMove>();
-
-		// リスポーンマネージャー
-		GameObject respawnManagerObj = GameObject.Find("RespawnManager");
-		respawnManager = respawnManagerObj.GetComponent<RespawnManager>();
 	}
 
 	// Update is called once per frame
@@ -53,8 +42,8 @@ public class Goal : MonoBehaviour
 			}
 
 			//ゲートを開ける
-			//当たり判定を消す
-			Destroy(gate.GetComponent<BoxCollider2D>());
+			//当たり判定をトリガーに
+			gate.GetComponent<BoxCollider2D>().isTrigger = true;
 			//スプライトの変更
 			gateRenderer.sprite = openTex;
 		}
@@ -62,10 +51,11 @@ public class Goal : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if(collision.gameObject.tag == "lamp")
+		if(collision.gameObject.tag == "lamp" || collision.gameObject.tag == "NotPlatformLamp")
 		{
 			isGoal = true;
-			respawnManager.SetRespawnPos(gate.transform.position);
+			GoalGate goalgate = gate.GetComponent<GoalGate>();
+			goalgate.isGoal = true;
 		}
 	}
 }

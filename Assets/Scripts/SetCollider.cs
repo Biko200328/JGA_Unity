@@ -17,4 +17,40 @@ public class SetCollider : MonoBehaviour
 	{
 		gameObject.layer = player.layer;
 	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if(collision.gameObject.tag == "Goal")
+		{
+			Goal goal = collision.gameObject.GetComponent<Goal>();
+			goal.isGoal = true;
+		}
+
+		if(collision.gameObject.tag == "GoalGate")
+		{
+			GoalGate goalGate = collision.gameObject.GetComponent<GoalGate>();
+			if(goalGate.isGoal)
+			{
+				goalGate.RespawnSet();
+			}
+		}
+	}
+
+	private void OnTriggerStay2D(Collider2D collision)
+	{
+		if (collision.gameObject.tag == "Goal")
+		{
+			Goal goal = collision.gameObject.GetComponent<Goal>();
+			goal.isGoal = true;
+		}
+
+		if (collision.gameObject.tag == "GoalGate")
+		{
+			GoalGate goalGate = collision.gameObject.GetComponent<GoalGate>();
+			if (goalGate.isGoal)
+			{
+				goalGate.RespawnSet();
+			}
+		}
+	}
 }

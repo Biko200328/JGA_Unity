@@ -16,6 +16,8 @@ TagManager:
   - growBox
   - Fade
   - lampCircle
+  - Goal
+  - GoalGate
   layers:
   - Default
   - TransparentFX

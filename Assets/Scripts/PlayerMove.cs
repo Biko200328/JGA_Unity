@@ -61,6 +61,7 @@ public class PlayerMove : MonoBehaviour
 	GameObject colliderObj;
 
 	RespawnManager respawnManager;
+	GameObject particle;
 
 	public bool isJump;
 
@@ -76,6 +77,9 @@ public class PlayerMove : MonoBehaviour
 
 		// リスポーン位置をスタート位置に
 		respawnPos = transform.position;
+
+		// パーティクル読み込み
+		particle = transform.Find("Particle").gameObject;
 
 		// 子オブジェクト読み込み
 		GameObject childFloor = transform.Find("HitFloor").gameObject;
@@ -133,6 +137,15 @@ public class PlayerMove : MonoBehaviour
 		TakeLamp();
 
 		LampCollect();
+
+		if(isLightIn)
+		{
+			particle.SetActive(true);
+		}
+		else
+		{
+			particle.SetActive(false);
+		}
 	}
 
 	//移動
@@ -163,24 +176,45 @@ public class PlayerMove : MonoBehaviour
 		}
 		else
 		{
-			if (Input.GetKey(KeyCode.A) && hitFloor.isHit)
+			if (hitFloor.isHit)
 			{
-				rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
-			}
-			else if (Input.GetKey(KeyCode.D) && hitFloor.isHit)
-			{
-				rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
-			}
-			else if (inputHorizontal != 0 && hitFloor.isHit)
-			{
-				rb.velocity = new Vector2(inputHorizontal * moveSpeed, rb.velocity.y);
+				if (Input.GetKey(KeyCode.A))
+				{
+					rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+				}
+				else if (Input.GetKey(KeyCode.D))
+				{
+					rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+				}
+				else if (inputHorizontal != 0)
+				{
+					rb.velocity = new Vector2(inputHorizontal * moveSpeed, rb.velocity.y);
+				}
+				else
+				{
+					rb.velocity = new Vector2(0, rb.velocity.y);
+				}
 			}
 			else
-			{
-				rb.velocity = new Vector2(0, rb.velocity.y);
+            {
+				if (Input.GetKey(KeyCode.A))
+				{
+					rb.velocity = new Vector2(-moveSpeed * 0.05f, rb.velocity.y);
+				}
+				else if (Input.GetKey(KeyCode.D))
+				{
+					rb.velocity = new Vector2(moveSpeed * 0.05f, rb.velocity.y);
+				}
+				else if (inputHorizontal != 0)
+				{
+					rb.velocity = new Vector2(inputHorizontal * moveSpeed * 0.05f, rb.velocity.y);
+				}
+				else
+				{
+					rb.velocity = new Vector2(0, rb.velocity.y);
+				}
 			}
 		}
-		
 	}
 
 	//ジャンプ
@@ -265,6 +299,8 @@ public class PlayerMove : MonoBehaviour
 					// 個々のコライダーをつけなおす
 					gameObject.AddComponent<BoxCollider2D>();
 					lampObj.AddComponent<BoxCollider2D>();
+					// レイヤーをプレイヤーに変更
+					gameObject.layer = 3;
 				}
 			}
 			// ランプを持っていないとき
@@ -287,6 +323,8 @@ public class PlayerMove : MonoBehaviour
 				Destroy(lampObj.GetComponent<BoxCollider2D>());
 				// 二つ用のコライダーを生成
 				colliderObj.SetActive(true);
+				// レイヤーをランプに変更
+				gameObject.layer = 10;
 			}
 		}
 	}
