@@ -134,7 +134,7 @@ public class PlayerMove : MonoBehaviour
 
 		LampCollect();
 
-		if(isLightIn)
+		if(isLightIn && !hitCeiling.isHit)
 		{
 			particle.SetActive(true);
 		}
