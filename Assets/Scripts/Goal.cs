@@ -48,6 +48,7 @@ public class Goal : MonoBehaviour
 		if(collision.gameObject.tag == "lamp" || collision.gameObject.tag == "NotPlatformLamp")
 		{
 			isGoal = true;
+			GoalGateOpen();
 		}
 	}
 
