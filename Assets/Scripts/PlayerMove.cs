@@ -82,7 +82,9 @@ public class PlayerMove : MonoBehaviour
 	public float lightOffTime;
 	float lightOffNowTime;
 
-
+	SpriteRenderer spriteRendererer;
+	[SerializeField] Sprite lightTex;
+	[SerializeField] Sprite normal;
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -131,6 +133,8 @@ public class PlayerMove : MonoBehaviour
 		GameObject childJumpL2 = transform.Find("JumpHitLeft2").gameObject;
 		// コンポーネント読み込み
 		jumpHitLeft2 = childJumpL2.GetComponent<JumpHitLeft>();
+
+		spriteRendererer = gameObject.GetComponent<SpriteRenderer>();
 
 		// lamp読み込み
 		lampObj = GameObject.Find("Lamp");
@@ -186,7 +190,6 @@ public class PlayerMove : MonoBehaviour
 				particle.SetActive(false);
 			}
 		}
-		
 
 		PlaceMode();
 	}
@@ -348,6 +351,10 @@ public class PlayerMove : MonoBehaviour
 					{
 						// 生成したコライダーを捨てる
 						colliderObj2.SetActive(false);
+						// ランプのスプライトをつける
+						lampSqr.spriteRenderer.sprite = lampSqr.sprite;
+						// プレイヤーのスプライトを元に戻す
+						spriteRendererer.sprite = normal;
 					}
 					// 個々のコライダーをつけなおす
 					gameObject.AddComponent<BoxCollider2D>();
@@ -398,6 +405,10 @@ public class PlayerMove : MonoBehaviour
 					// 既存のコライダーをなくす
 					Destroy(gameObject.GetComponent<BoxCollider2D>());
 					Destroy(lampObj.GetComponent<BoxCollider2D>());
+					// ランプのスプライトを消す
+					lampSqr.spriteRenderer.sprite = lampSqr.sprite;
+					// プレイヤーのスプライトを変更
+					spriteRendererer.sprite = lightTex;
 					// 二つ用のコライダーを生成
 					colliderObj2.SetActive(true);
 					// レイヤーをランプに変更
