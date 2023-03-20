@@ -68,11 +68,20 @@ public class PlayerMove : MonoBehaviour
 	JumpHitRight jumpHitRight2;
 
 	GameObject colliderObj;
+	GameObject colliderObj2;
 
 	RespawnManager respawnManager;
 	GameObject particle;
 
 	public bool isJump;
+
+	[Header("2マスにするかどうか")]
+	public bool isPlaceMode;
+
+	[Header("1マスの時にどれくらい消えるか")]
+	public float lightOffTime;
+	float lightOffNowTime;
+
 
 	// Start is called before the first frame update
 	void Start()
@@ -85,9 +94,12 @@ public class PlayerMove : MonoBehaviour
 		// Rigidbodyを取得
 		rb = gameObject.GetComponent<Rigidbody2D>();
 
-		//colliderOvj読み込み
+		//colliderObj読み込み
 		colliderObj = transform.Find("SetCollider").gameObject;
 		colliderObj.SetActive(false);
+
+		colliderObj2 = transform.Find("SetCollider2").gameObject;
+		colliderObj2.SetActive(false);
 
 		// パーティクル読み込み
 		particle = transform.Find("Particle").gameObject;
@@ -152,14 +164,31 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
-		if(isLightIn && !hitCeiling.isHit)
+		if(isPlaceMode)
 		{
-			particle.SetActive(true);
+			if (isLightIn && !hitCeiling.isHit)
+			{
+				particle.SetActive(true);
+			}
+			else
+			{
+				particle.SetActive(false);
+			}
 		}
 		else
 		{
-			particle.SetActive(false);
+			if (isLightIn)
+			{
+				particle.SetActive(true);
+			}
+			else
+			{
+				particle.SetActive(false);
+			}
 		}
+		
+
+		PlaceMode();
 	}
 
 	//移動
@@ -310,8 +339,16 @@ public class PlayerMove : MonoBehaviour
 					}
 					// 親子付け解除
 					lampObj.transform.SetParent(null);
-					// 生成したコライダーを捨てる
-					colliderObj.SetActive(false);
+					if(isPlaceMode)
+					{
+						// 生成したコライダーを捨てる
+						colliderObj.SetActive(false);
+					}
+					else
+					{
+						// 生成したコライダーを捨てる
+						colliderObj2.SetActive(false);
+					}
 					// 個々のコライダーをつけなおす
 					gameObject.AddComponent<BoxCollider2D>();
 					lampObj.AddComponent<BoxCollider2D>();
@@ -320,27 +357,53 @@ public class PlayerMove : MonoBehaviour
 				}
 			}
 			// ランプを持っていないとき
-			// ライトの中にいて上にブロックがないとき
-			else if (!isLampTake && isLightIn && !hitCeiling.isHit && !isPlace)
+			// ライトの中にいて
+			else if (!isLampTake && isLightIn && !isPlace)
 			{
-				isLampTake = true;
-				lampSqr.RbLost();
-				//// いったんランプの親子関係を無しに
-				// lampObj.transform.SetParent(null);
-				// lampをオフに
-				isLightOn = false;
-				//回収中のフラグをオン
-				isLampCollect = true;
-				collectNowTime = 0;
-				// 親子付け
-				lampObj.transform.SetParent(this.transform);
-				// 既存のコライダーをなくす
-				Destroy(gameObject.GetComponent<BoxCollider2D>());
-				Destroy(lampObj.GetComponent<BoxCollider2D>());
-				// 二つ用のコライダーを生成
-				colliderObj.SetActive(true);
-				// レイヤーをランプに変更
-				gameObject.layer = 10;
+				// 2マスの時は上に物がないとき
+				if(isPlaceMode && !hitCeiling.isHit)
+				{
+					isLampTake = true;
+					lampSqr.RbLost();
+					//// いったんランプの親子関係を無しに
+					// lampObj.transform.SetParent(null);
+					// lampをオフに
+					isLightOn = false;
+					//回収中のフラグをオン
+					isLampCollect = true;
+					collectNowTime = 0;
+					// 親子付け
+					lampObj.transform.SetParent(this.transform);
+					// 既存のコライダーをなくす
+					Destroy(gameObject.GetComponent<BoxCollider2D>());
+					Destroy(lampObj.GetComponent<BoxCollider2D>());
+					// 二つ用のコライダーを生成
+					colliderObj.SetActive(true);
+					// レイヤーをランプに変更
+					gameObject.layer = 10;
+				}
+				else if(!isPlaceMode)
+				{
+					isLampTake = true;
+					lampSqr.RbLost();
+					//// いったんランプの親子関係を無しに
+					// lampObj.transform.SetParent(null);
+					// lampをオフに
+					isLightOn = false;
+					//回収中のフラグをオン
+					isLampCollect = true;
+					collectNowTime = 0;
+					// 親子付け
+					lampObj.transform.SetParent(this.transform);
+					// 既存のコライダーをなくす
+					Destroy(gameObject.GetComponent<BoxCollider2D>());
+					Destroy(lampObj.GetComponent<BoxCollider2D>());
+					// 二つ用のコライダーを生成
+					colliderObj2.SetActive(true);
+					// レイヤーをランプに変更
+					gameObject.layer = 10;
+				}
+				
 			}
 		}
 	}
@@ -352,10 +415,36 @@ public class PlayerMove : MonoBehaviour
 			collectNowTime += Time.deltaTime;
 			if (collectNowTime >= lampCollectTime)
 			{
-				lampObj.transform.position = new Vector3(transform.position.x, transform.position.y + 1.0f);
+				if(isPlaceMode)
+				{
+					//上に置く
+					lampObj.transform.position = new Vector3(transform.position.x, transform.position.y + 1.0f);
+				}
+				else
+				{
+					// その場
+					lampObj.transform.position = new Vector3(transform.position.x, transform.position.y);
+				}
+
 				isLampCollect = false;
 				// lampをオンに
 				isLightOn = true;
+			}
+		}
+	}
+
+	public void PlaceMode()
+	{
+		if(!isPlaceMode)
+		{
+			if(isPlace)
+			{
+				lightOffNowTime += Time.deltaTime;
+				if(lightOffNowTime >= lightOffTime)
+				{
+					isPlace = false;
+					lightOffNowTime = 0;
+				}
 			}
 		}
 	}

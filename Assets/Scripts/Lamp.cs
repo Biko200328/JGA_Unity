@@ -42,6 +42,8 @@ public class Lamp : MonoBehaviour
 	RespawnManager respawnManager;
 	PlayerCircle playerCircle;
 
+	
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -75,7 +77,7 @@ public class Lamp : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if(playerMove.isLampCollect)
+		if (playerMove.isLampCollect)
 		{
 			spriteRenderer.sprite = null;
 		}
@@ -84,9 +86,9 @@ public class Lamp : MonoBehaviour
 			spriteRenderer.sprite = sprite;
 		}
 
-        // ランプを持っていないときしかイージングは掛けない
-        // ランプが床についていないときも追加
-        if (!playerMove.isLampTake)
+		// ランプを持っていないときしかイージングは掛けない
+		// ランプが床についていないときも追加
+		if (!playerMove.isLampTake)
 		{
 			// 上昇中の時
 			if (isThrow)
@@ -151,19 +153,19 @@ public class Lamp : MonoBehaviour
 		// nullチェック
 		if (rb != null)
 		{
-            // 横に滑らないように
-            rb.velocity = new Vector2(0, rb.velocity.y);
-        }
+			// 横に滑らないように
+			rb.velocity = new Vector2(0, rb.velocity.y);
+		}
 
 		//ライトがシンクロするか(横に滑るようになってしまうかも)
-        if (!playerMove.isLampTake && playerMove.lightSynchro)
-        {
-            if (!isThrow && !isFall)
-            {
-                rb.velocity = new Vector2(playerMove.rb.velocity.x, rb.velocity.y);
-            }
-        }
-    }
+		if (!playerMove.isLampTake && playerMove.lightSynchro)
+		{
+			if (!isThrow && !isFall)
+			{
+				rb.velocity = new Vector2(playerMove.rb.velocity.x, rb.velocity.y);
+			}
+		}
+	}
 
 	// イーズアウト
 	public static Vector2 QuintOut(float t, float totaltime, Vector2 min, Vector2 max)
