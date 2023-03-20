@@ -36,8 +36,8 @@ public class Lamp : MonoBehaviour
 	PlayerMove playerMove;
 	LampHitFloor lampHitFloor;
 
-	[SerializeField] SpriteRenderer spriteRenderer;
-	[SerializeField] Sprite sprite;
+	public SpriteRenderer spriteRenderer;
+	public Sprite sprite;
 
 	RespawnManager respawnManager;
 	PlayerCircle playerCircle;
@@ -83,7 +83,7 @@ public class Lamp : MonoBehaviour
 		}
 		else
 		{
-			spriteRenderer.sprite = sprite;
+			if (playerMove.isPlaceMode) spriteRenderer.sprite = sprite;
 		}
 
 		// ランプを持っていないときしかイージングは掛けない

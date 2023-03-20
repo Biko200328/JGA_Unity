@@ -238,6 +238,8 @@ MonoBehaviour:
   isJump: 0
   isPlaceMode: 0
   lightOffTime: 0
+  lightTex: {fileID: 21300000, guid: b475f51319becc74faaa9203662c5305, type: 3}
+  normal: {fileID: 21300000, guid: f910376b2444ca74f95f11a4e6ab2202, type: 3}
 --- !u!1 &2919794432906871269
 GameObject:
   m_ObjectHideFlags: 0
