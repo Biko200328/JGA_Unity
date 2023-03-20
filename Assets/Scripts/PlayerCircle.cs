@@ -5,9 +5,10 @@ using UnityEngine;
 public class PlayerCircle : MonoBehaviour
 {
 	[Header("‰~‚ÌÅ‘å’¼Œa")]
-	public float maxCircleSize = 1;
+	public float inputCircleSize = 1;
+	float maxCircleSize = 0;
 
-	[Header("‰~‚ÌÅ¬’¼Œa")]
+    [Header("‰~‚ÌÅ¬’¼Œa")]
 	public float minCircleSize = 0;
 
 	[Header("ƒTƒCƒY‘Œ¸”’l")]
@@ -28,6 +29,22 @@ public class PlayerCircle : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		maxCircleSize = inputCircleSize;
+
+		//Œõ‚Ì”ÍˆÍ‚ª•Ï‚í‚éˆ—
+        if (playerMove.lightSizeChange)
+		{
+			if (playerMove.isLampTake)
+			{
+				maxCircleSize = inputCircleSize;
+			}
+			else
+			{
+				//’u‚¢‚Ä‚¢‚é‚Æ‚«‚ÍŒõ‚Ì”ÍˆÍ‚ğ+3‚·‚é
+				maxCircleSize = inputCircleSize + 3;
+			}
+        }
+
 		// ’u‚¢‚Ä‚é‚Í‰~‚ğ‚È‚­‚·
 		if(playerMove.isPlace)
 		{
