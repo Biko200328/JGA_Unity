@@ -206,10 +206,12 @@ public class PlayerMove : MonoBehaviour
 			if (Input.GetKey(KeyCode.A))
 			{
 				rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+				transform.eulerAngles = new Vector3(0, 0, 0);
 			}
 			else if (Input.GetKey(KeyCode.D))
 			{
 				rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+				transform.eulerAngles = new Vector3(0, 180, 0);
 			}
 			else if (inputHorizontal != 0)
 			{
@@ -227,10 +229,12 @@ public class PlayerMove : MonoBehaviour
 				if (Input.GetKey(KeyCode.A))
 				{
 					rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+					transform.eulerAngles = new Vector3(0, 0, 0);
 				}
 				else if (Input.GetKey(KeyCode.D))
 				{
 					rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+					transform.eulerAngles = new Vector3(0, 180, 0);
 				}
 				else if (inputHorizontal != 0)
 				{
@@ -246,10 +250,12 @@ public class PlayerMove : MonoBehaviour
 				if (Input.GetKey(KeyCode.A))
 				{
 					rb.velocity = new Vector2(-moveSpeed * 0.05f, rb.velocity.y);
+					transform.eulerAngles = new Vector3(0, 0, 0);
 				}
 				else if (Input.GetKey(KeyCode.D))
 				{
 					rb.velocity = new Vector2(moveSpeed * 0.05f, rb.velocity.y);
+					transform.eulerAngles = new Vector3(0, 180, 0);
 				}
 				else if (inputHorizontal != 0)
 				{

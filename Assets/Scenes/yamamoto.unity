@@ -30682,7 +30682,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2919794432552654038, guid: 1a7beb02f6aebef4e871def0ead341d0, type: 3}
       propertyPath: isPlaceMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2919794432552654038, guid: 1a7beb02f6aebef4e871def0ead341d0, type: 3}
       propertyPath: lightOffTime
