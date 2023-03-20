@@ -34,6 +34,15 @@ public class PlayerMove : MonoBehaviour
     [Header("ランプが範囲外でも回収できるか")]
     public bool collectNoLimit = false;
 
+    [Header("ジャンプができるか")]
+    public bool jumpNoLimit = false;
+
+    [Header("光の範囲が置いたときに変わるか")]
+    public bool lightSizeChange = false;
+
+	[Header("ランプがプレイヤーのX軸の動きを真似するか")]
+	public bool lightSynchro = false;
+
     // 分裂しているかどうか
     [System.NonSerialized] public bool isLampTake;
 	// 灯りの中にいるかどうか
@@ -46,7 +55,7 @@ public class PlayerMove : MonoBehaviour
 	/*[System.NonSerialized] */public bool isPlace;
 	[SerializeField] PlayerCircle playerCircle;
 
-	Rigidbody2D rb;
+	public Rigidbody2D rb;
 	HitFloor hitFloor;
 	HitCeiling hitCeiling;
 	GameObject lampObj;
@@ -133,6 +142,15 @@ public class PlayerMove : MonoBehaviour
 		TakeLamp();
 
 		LampCollect();
+
+		if(jumpNoLimit)
+		{
+            if (Input.GetKeyDown(KeyCode.C) && isJump == false)
+            {
+                rb.velocity = new Vector2(0, 10);
+				isJump = true;
+            }
+        }
 
 		if(isLightIn && !hitCeiling.isHit)
 		{
