@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerCircle : MonoBehaviour
 {
 	[Header("â~ÇÃç≈ëÂíºåa")]
-	public float inputCircleSize = 1;
+	public float inputCircleSize = 9;
 	float maxCircleSize = 0;
 
     [Header("â~ÇÃç≈è¨íºåa")]
