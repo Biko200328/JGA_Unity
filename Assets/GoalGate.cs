@@ -8,6 +8,9 @@ public class GoalGate : MonoBehaviour
 
 	RespawnManager respawnManager;
 
+	[Header("リスポーン位置の設定")]
+	[SerializeField] Vector3 RespawnPos;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -28,14 +31,14 @@ public class GoalGate : MonoBehaviour
 		{
 			if(isGoal)
 			{
-				respawnManager.SetRespawnPos(transform.position);
+				respawnManager.SetRespawnPos(transform.position + RespawnPos);
 			}
 		}
 	}
 
 	public void RespawnSet()
 	{
-		respawnManager.SetRespawnPos(new Vector3(transform.position.x + 1,transform.position.y,transform.position.z));
+		respawnManager.SetRespawnPos(transform.position + RespawnPos);
 	}
 
 }
