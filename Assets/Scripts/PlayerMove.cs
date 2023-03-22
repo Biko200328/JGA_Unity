@@ -50,7 +50,7 @@ public class PlayerMove : MonoBehaviour
 	// 火がついてるかどうかフラグ
 	[System.NonSerialized] public bool isLightOn;
 	// ランプが回収中か
-	[System.NonSerialized] public bool isLampCollect;
+	 public bool isLampCollect;
 	// 置くときのフラグ
 	/*[System.NonSerialized] */
 	public bool isPlace;
@@ -81,7 +81,7 @@ public class PlayerMove : MonoBehaviour
 
 	[Header("1マスの時にどれくらい消えるか")]
 	public float lightOffTime;
-	float lightOffNowTime;
+	[SerializeField] float lightOffNowTime;
 
 	SpriteRenderer spriteRendererer;
 	[SerializeField] Sprite lightTex;
@@ -173,11 +173,11 @@ public class PlayerMove : MonoBehaviour
 		{
 			if (isLightIn && !hitCeiling.isHit)
 			{
-				if (!isPlace)particle.SetActive(true);
+				if (!isPlace) particle.SetActive(true);
 			}
 			else
 			{
-				if (!isPlace)particle.SetActive(false);
+				if (!isPlace) particle.SetActive(false);
 			}
 		}
 		else
@@ -349,11 +349,13 @@ public class PlayerMove : MonoBehaviour
 					}
 					// 親子付け解除
 					lampObj.transform.SetParent(null);
+					//ニマスモードの時
 					if (isPlaceMode)
 					{
 						// 生成したコライダーを捨てる
 						colliderObj.SetActive(false);
 					}
+					// 一マスモードの時
 					else
 					{
 						// 生成したコライダーを捨てる
@@ -362,6 +364,8 @@ public class PlayerMove : MonoBehaviour
 						lampSqr.spriteRenderer.sprite = lampSqr.sprite;
 						// プレイヤーのスプライトを元に戻す
 						spriteRendererer.sprite = normal;
+						// 時間をリセット
+						lightOffNowTime = 0;
 					}
 					// 個々のコライダーをつけなおす
 					gameObject.AddComponent<BoxCollider2D>();

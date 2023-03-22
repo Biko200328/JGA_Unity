@@ -23,7 +23,7 @@ public class LampHitFloor : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		
+
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -33,10 +33,10 @@ public class LampHitFloor : MonoBehaviour
 
 		if (!playerMove.isLampTake)
 		{
-			if(collision.gameObject.tag == "Floor")
+			if (collision.gameObject.tag == "Floor")
 			{
 				isHit = true;
-				if(!playerMove.throwMode)playerMove.isPlace = false;
+				if (!playerMove.throwMode) playerMove.isPlace = false;
 			}
 
 			if (collision.gameObject.tag == "platform")
@@ -102,43 +102,43 @@ public class LampHitFloor : MonoBehaviour
 		{
 			isHit = true;
 			lamp.transform.SetParent(collision.transform);
-			if (!playerMove.throwMode) playerMove.isPlace = false;
+			if (!playerMove.throwMode && playerMove.isPlaceMode) playerMove.isPlace = false;
 		}
 
 		if (collision.gameObject.tag == "leftMoveBlock")
 		{
 			isHit = true;
 			lamp.transform.SetParent(collision.transform);
-			if (!playerMove.throwMode) playerMove.isPlace = false;
+			if (!playerMove.throwMode && playerMove.isPlaceMode) playerMove.isPlace = false;
 		}
 
 		if (collision.gameObject.tag == "downMoveBlock")
 		{
 			isHit = true;
 			lamp.transform.SetParent(collision.transform);
-			if (!playerMove.throwMode) playerMove.isPlace = false;
+			if (!playerMove.throwMode && playerMove.isPlaceMode) playerMove.isPlace = false;
 		}
 
 		if (collision.gameObject.tag == "upMoveBlock")
 		{
 			isHit = true;
 			lamp.transform.SetParent(collision.transform);
-			if (!playerMove.throwMode) playerMove.isPlace = false;
+			if (!playerMove.throwMode && playerMove.isPlaceMode) playerMove.isPlace = false;
 		}
 
-        // 蛇ブロック
-        if (collision.gameObject.tag == "growOriginal")
-        {
-            isHit = true;
-            if (!playerMove.throwMode) playerMove.isPlace = false;
-        }
+		// 蛇ブロック
+		if (collision.gameObject.tag == "growOriginal")
+		{
+			isHit = true;
+			if (!playerMove.throwMode && playerMove.isPlaceMode) playerMove.isPlace = false;
+		}
 
-        if (collision.gameObject.tag == "growBox")
-        {
-            isHit = true;
-            if (!playerMove.throwMode) playerMove.isPlace = false;
-        }
-    }
+		if (collision.gameObject.tag == "growBox")
+		{
+			isHit = true;
+			if (!playerMove.throwMode && playerMove.isPlaceMode) playerMove.isPlace = false;
+		}
+	}
 
 	private void GimmickRideOff(Collider2D collision)
 	{

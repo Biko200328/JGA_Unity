@@ -258,20 +258,5 @@ public class Lamp : MonoBehaviour
 		// îªíËÉåÉCÉÑÅ[ÇïœçX
 		gameObject.layer = 10;
 	}
-
-	private void OnCollisionEnter2D(Collision2D collision)
-	{
-		if (!playerMove.isLampTake && collision.gameObject.tag == "growBox")
-		{
-			isHitGrowBox = true;
-		}
-	}
-
-	private void OnCollisionExit2D(Collision2D collision)
-	{
-		if (!playerMove.isLampTake && collision.gameObject.tag == "growBox")
-		{
-			isHitGrowBox = false;
-		}
-	}
+	
 }
