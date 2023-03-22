@@ -285,26 +285,26 @@ public class PlayerMove : MonoBehaviour
 
 	private void AutoJump()
 	{
-		if (jumpHitLeft.isHit && !jumpHitLeft2.isHit && hitFloor.isHit)
+		if (jumpHitLeft.isHit && !jumpHitLeft2.isHit/* && hitFloor.isHit*/)
 		{
 			if (Input.GetKey(KeyCode.A))
 			{
 				transform.SetParent(null);
 				rb.velocity = new Vector2(0, jumpPower);
 				isJump = true;
-				jumpHitLeft.isHit = false;
+				//jumpHitLeft.isHit = false;
 				//gameObject.layer = 9;
 			}
 		}
 
-		if (jumpHitRight.isHit && !jumpHitRight2.isHit && hitFloor.isHit)
+		if (jumpHitRight.isHit && !jumpHitRight2.isHit/* && hitFloor.isHit*/)
 		{
 			if (Input.GetKey(KeyCode.D))
 			{
 				transform.SetParent(null);
 				rb.velocity = new Vector2(0, jumpPower);
 				isJump = true;
-				jumpHitRight.isHit = false;
+				//jumpHitRight.isHit = false;
 				//gameObject.layer = 9;
 			}
 		}

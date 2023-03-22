@@ -41,7 +41,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 334046116591068613}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: cb5b98fb21332b14fbd71d88c9bde7fb, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -225,19 +225,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4
   respawnPos: {x: 0, y: 0, z: 0}
-  jumpPower: 8
+  jumpPower: 4
   lampCollectTime: 0.2
   throwMode: 0
   collectNoLimit: 0
   jumpNoLimit: 0
   lightSizeChange: 0
   lightSynchro: 0
+  isLampCollect: 0
   isPlace: 0
   playerCircle: {fileID: 0}
   rb: {fileID: 0}
   isJump: 0
   isPlaceMode: 0
   lightOffTime: 0
+  lightOffNowTime: 0
   lightTex: {fileID: 21300000, guid: b475f51319becc74faaa9203662c5305, type: 3}
   normal: {fileID: 21300000, guid: f910376b2444ca74f95f11a4e6ab2202, type: 3}
 --- !u!1 &2919794432906871269
@@ -367,7 +369,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 0.5, y: 0.8}
   m_EdgeRadius: 0
 --- !u!114 &2919794433201327929
 MonoBehaviour:
@@ -547,7 +549,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 2919794433591992189}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: cb5b98fb21332b14fbd71d88c9bde7fb, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -632,7 +634,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 0.5, y: 0.8}
   m_EdgeRadius: 0
 --- !u!114 &2919794433727320518
 MonoBehaviour:
