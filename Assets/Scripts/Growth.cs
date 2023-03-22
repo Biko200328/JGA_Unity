@@ -82,6 +82,10 @@ public class Growth : MonoBehaviour
 			isLightIn = false;
 			isEnd = false;
 			lamp.isHitGrowBox = false;
+			jumpHitLeft.isHit = false;
+			jumpHitLeft2.isHit = false;
+			jumpHitRight.isHit = false;
+			jumpHitRight2.isHit = false;
 		}
 	}
 
