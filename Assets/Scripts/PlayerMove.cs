@@ -50,13 +50,13 @@ public class PlayerMove : MonoBehaviour
 	// 火がついてるかどうかフラグ
 	[System.NonSerialized] public bool isLightOn;
 	// ランプが回収中か
-	 public bool isLampCollect;
+	[System.NonSerialized] public bool isLampCollect;
 	// 置くときのフラグ
 	/*[System.NonSerialized] */
-	public bool isPlace;
+	[System.NonSerialized] public bool isPlace;
 	[SerializeField] PlayerCircle playerCircle;
 
-	public Rigidbody2D rb;
+	[System.NonSerialized] public Rigidbody2D rb;
 	HitFloor hitFloor;
 	HitCeiling hitCeiling;
 	GameObject lampObj;
@@ -74,14 +74,14 @@ public class PlayerMove : MonoBehaviour
 	RespawnManager respawnManager;
 	GameObject particle;
 
-	public bool isJump;
+	[System.NonSerialized] public bool isJump;
 
 	[Header("2マスにするかどうか")]
 	public bool isPlaceMode;
 
 	[Header("1マスの時にどれくらい消えるか")]
 	public float lightOffTime;
-	[SerializeField] float lightOffNowTime;
+	float lightOffNowTime;
 
 	SpriteRenderer spriteRendererer;
 	[SerializeField] Sprite lightTex;

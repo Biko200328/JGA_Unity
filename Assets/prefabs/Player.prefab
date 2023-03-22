@@ -226,7 +226,7 @@ MonoBehaviour:
   moveSpeed: 4
   respawnPos: {x: 0, y: 0, z: 0}
   jumpPower: 4
-  lampCollectTime: 0.2
+  lampCollectTime: 0.3
   throwMode: 0
   collectNoLimit: 0
   jumpNoLimit: 0

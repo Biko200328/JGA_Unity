@@ -23,6 +23,11 @@ public class Growth : MonoBehaviour
 
 	Lamp lamp;
 	PlayerMove playerMove;
+
+	JumpHitLeft jumpHitLeft;
+	JumpHitLeft jumpHitLeft2;
+	JumpHitRight jumpHitRight;
+	JumpHitRight jumpHitRight2;
 	private void Start()
 	{
 		isFirst = false;
@@ -32,6 +37,24 @@ public class Growth : MonoBehaviour
 
 		GameObject player = GameObject.Find("Player");
 		playerMove = player.GetComponent<PlayerMove>();
+
+		// 子オブジェクト読み込み
+		GameObject childJumpR = player.transform.Find("JumpHitRight").gameObject;
+		// コンポーネント読み込み
+		jumpHitRight = childJumpR.GetComponent<JumpHitRight>();
+		// 子オブジェクト読み込み
+		GameObject childJumpR2 = player.transform.Find("JumpHitRight2").gameObject;
+		// コンポーネント読み込み
+		jumpHitRight2 = childJumpR2.GetComponent<JumpHitRight>();
+
+		// 子オブジェクト読み込み
+		GameObject childJumpL = player.transform.Find("JumpHitLeft").gameObject;
+		// コンポーネント読み込み
+		jumpHitLeft = childJumpL.GetComponent<JumpHitLeft>();
+		// 子オブジェクト読み込み
+		GameObject childJumpL2 = player.transform.Find("JumpHitLeft2").gameObject;
+		// コンポーネント読み込み
+		jumpHitLeft2 = childJumpL2.GetComponent<JumpHitLeft>();
 	}
 
 	private void Update()
@@ -48,6 +71,10 @@ public class Growth : MonoBehaviour
 			isLightIn = false;
 			isEnd = false;
 			lamp.isHitGrowBox = false;
+			jumpHitLeft.isHit = false;
+			jumpHitLeft2.isHit = false;
+			jumpHitRight.isHit = false;
+			jumpHitRight2.isHit = false;
 		}
 
 		if (playerMove.isPlace)
