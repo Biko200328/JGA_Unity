@@ -42,6 +42,8 @@ public class Lamp : MonoBehaviour
 	RespawnManager respawnManager;
 	PlayerCircle playerCircle;
 
+	public bool isHitGrowBox;
+
 	
 
 	// Start is called before the first frame update
@@ -165,6 +167,29 @@ public class Lamp : MonoBehaviour
 				rb.velocity = new Vector2(playerMove.rb.velocity.x, rb.velocity.y);
 			}
 		}
+
+		// ランプをグリッドに合うように
+		if (!playerMove.isLampTake && !isHitGrowBox)
+		{
+			// 整数部分
+			int intLampPosX = (int)rb.position.x;
+			// 小数部分
+			float fltLampPosX = rb.position.x - intLampPosX;
+			// 数値代入
+			var pos = rb.position;
+
+			if (fltLampPosX < 0.1f)
+			{
+				intLampPosX -= 1;
+			}
+			else if (fltLampPosX > 0.9f)
+			{
+				intLampPosX += 1;
+			}
+
+			pos.x = (float)intLampPosX + 0.5f;
+			rb.position = pos;
+		}
 	}
 
 	// イーズアウト
@@ -234,14 +259,19 @@ public class Lamp : MonoBehaviour
 		gameObject.layer = 10;
 	}
 
-	//private void OnCollisionEnter2D(Collision2D collision)
-	//{
-	//	if(lampHitFloor.isHit && playerMove.isPlace)
-	//	{
-	//		if(collision.gameObject.tag == "Floor")
-	//		{
-	//			playerMove.isPlace = false;
-	//		}
-	//	}
-	//}
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		if (!playerMove.isLampTake && collision.gameObject.tag == "growBox")
+		{
+			isHitGrowBox = true;
+		}
+	}
+
+	private void OnCollisionExit2D(Collision2D collision)
+	{
+		if (!playerMove.isLampTake && collision.gameObject.tag == "growBox")
+		{
+			isHitGrowBox = false;
+		}
+	}
 }

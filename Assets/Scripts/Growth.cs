@@ -40,18 +40,21 @@ public class Growth : MonoBehaviour
 		{
 			isLightIn = false;
 			isEnd = false;
+			lamp.isHitGrowBox = false;
 		}
 
 		if (playerMove.isLampCollect)
 		{
 			isLightIn = false;
 			isEnd = false;
+			lamp.isHitGrowBox = false;
 		}
 
 		if (playerMove.isPlace)
 		{
 			isLightIn = false;
 			isEnd = false;
+			lamp.isHitGrowBox = false;
 		}
 	}
 

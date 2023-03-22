@@ -18,12 +18,16 @@ public class PlayerCircle : MonoBehaviour
 	public float circleSize;
 
 	PlayerMove playerMove;
+	Lamp lamp;
 
 	// Start is called before the first frame update
 	void Start()
 	{
 		GameObject player = GameObject.Find("Player");
 		playerMove = player.gameObject.GetComponent<PlayerMove>();
+
+		GameObject lampObj = GameObject.Find("Lamp");
+		lamp = lampObj.GetComponent<Lamp>();
 	}
 
 	// Update is called once per frame
@@ -91,7 +95,6 @@ public class PlayerCircle : MonoBehaviour
 
 		transform.localScale = circleVec;
 	}
-
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		//ギミックのフラグ管理
@@ -148,6 +151,7 @@ public class PlayerCircle : MonoBehaviour
 			growth.isLightIn = false;
 			growth.isFirst = false;
 			growth.isEnd = false;
+			lamp.isHitGrowBox = false;
 		}
 	}
 

@@ -154,6 +154,7 @@ MonoBehaviour:
   isLampOn: 0
   spriteRenderer: {fileID: 8689069681067485136}
   sprite: {fileID: 21300000, guid: 110b5c80a466fd84cb89c2caef9055e6, type: 3}
+  isHitGrowBox: 0
 --- !u!1 &8689069681947559952
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c363ca8b2f73647a37f47e13e0c315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxCircleSize: 9
+  inputCircleSize: 9.9
   minCircleSize: 1
   changeSize: 2
   circleSize: 0

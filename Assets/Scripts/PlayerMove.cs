@@ -31,20 +31,20 @@ public class PlayerMove : MonoBehaviour
 	[Header("上に投げるのか")]
 	public bool throwMode;
 
-    [Header("ランプが範囲外でも回収できるか")]
-    public bool collectNoLimit = false;
+	[Header("ランプが範囲外でも回収できるか")]
+	public bool collectNoLimit = false;
 
-    [Header("ジャンプができるか")]
-    public bool jumpNoLimit = false;
+	[Header("ジャンプができるか")]
+	public bool jumpNoLimit = false;
 
-    [Header("光の範囲が置いたときに変わるか")]
-    public bool lightSizeChange = false;
+	[Header("光の範囲が置いたときに変わるか")]
+	public bool lightSizeChange = false;
 
 	[Header("ランプがプレイヤーのX軸の動きを真似するか")]
 	public bool lightSynchro = false;
 
-    // 分裂しているかどうか
-    [System.NonSerialized] public bool isLampTake;
+	// 分裂しているかどうか
+	[System.NonSerialized] public bool isLampTake;
 	// 灯りの中にいるかどうか
 	[System.NonSerialized] public bool isLightIn;
 	// 火がついてるかどうかフラグ
@@ -52,7 +52,8 @@ public class PlayerMove : MonoBehaviour
 	// ランプが回収中か
 	[System.NonSerialized] public bool isLampCollect;
 	// 置くときのフラグ
-	/*[System.NonSerialized] */public bool isPlace;
+	/*[System.NonSerialized] */
+	public bool isPlace;
 	[SerializeField] PlayerCircle playerCircle;
 
 	public Rigidbody2D rb;
@@ -159,35 +160,35 @@ public class PlayerMove : MonoBehaviour
 
 		LampCollect();
 
-		if(jumpNoLimit)
+		if (jumpNoLimit)
 		{
-            if (Input.GetKeyDown(KeyCode.C) && isJump == false)
-            {
-                rb.velocity = new Vector2(0, 10);
+			if (Input.GetKeyDown(KeyCode.C) && isJump == false)
+			{
+				rb.velocity = new Vector2(0, 10);
 				isJump = true;
-            }
-        }
+			}
+		}
 
-		if(isPlaceMode)
+		if (isPlaceMode)
 		{
 			if (isLightIn && !hitCeiling.isHit)
 			{
-				particle.SetActive(true);
+				if (!isPlace)particle.SetActive(true);
 			}
 			else
 			{
-				particle.SetActive(false);
+				if (!isPlace)particle.SetActive(false);
 			}
 		}
 		else
 		{
 			if (isLightIn)
 			{
-				particle.SetActive(true);
+				if (!isPlace) particle.SetActive(true);
 			}
 			else
 			{
-				particle.SetActive(false);
+				if (!isPlace) particle.SetActive(false);
 			}
 		}
 
@@ -201,7 +202,7 @@ public class PlayerMove : MonoBehaviour
 		inputHorizontal = Input.GetAxis("cHorizontalL");
 
 		//イドウ
-		if(isJump)
+		if (isJump)
 		{
 			if (Input.GetKey(KeyCode.A))
 			{
@@ -246,7 +247,7 @@ public class PlayerMove : MonoBehaviour
 				}
 			}
 			else
-            {
+			{
 				if (Input.GetKey(KeyCode.A))
 				{
 					rb.velocity = new Vector2(-moveSpeed * 0.05f, rb.velocity.y);
@@ -321,13 +322,13 @@ public class PlayerMove : MonoBehaviour
 	private void TakeLamp()
 	{
 		//光の中にいなくても回収できるように
-		if(collectNoLimit)
+		if (collectNoLimit)
 		{
 			isLightIn = true;
-        }
+		}
 
-        // ライトの中にいてかつプレイヤーの上にブロックがないときにランプを呼ぶ
-        if (Input.GetKeyDown(KeyCode.Space))
+		// ライトの中にいてかつプレイヤーの上にブロックがないときにランプを呼ぶ
+		if (Input.GetKeyDown(KeyCode.Space))
 		{
 			// ランプを持っているとき
 			if (isLampTake)
@@ -348,7 +349,7 @@ public class PlayerMove : MonoBehaviour
 					}
 					// 親子付け解除
 					lampObj.transform.SetParent(null);
-					if(isPlaceMode)
+					if (isPlaceMode)
 					{
 						// 生成したコライダーを捨てる
 						colliderObj.SetActive(false);
@@ -374,7 +375,7 @@ public class PlayerMove : MonoBehaviour
 			else if (!isLampTake && isLightIn && !isPlace)
 			{
 				// 2マスの時は上に物がないとき
-				if(isPlaceMode && !hitCeiling.isHit)
+				if (isPlaceMode && !hitCeiling.isHit)
 				{
 					isLampTake = true;
 					lampSqr.RbLost();
@@ -395,7 +396,7 @@ public class PlayerMove : MonoBehaviour
 					// レイヤーをランプに変更
 					gameObject.layer = 10;
 				}
-				else if(!isPlaceMode)
+				else if (!isPlaceMode)
 				{
 					isLampTake = true;
 					lampSqr.RbLost();
@@ -420,7 +421,7 @@ public class PlayerMove : MonoBehaviour
 					// レイヤーをランプに変更
 					gameObject.layer = 10;
 				}
-				
+
 			}
 		}
 	}
@@ -432,7 +433,7 @@ public class PlayerMove : MonoBehaviour
 			collectNowTime += Time.deltaTime;
 			if (collectNowTime >= lampCollectTime)
 			{
-				if(isPlaceMode)
+				if (isPlaceMode)
 				{
 					//上に置く
 					lampObj.transform.position = new Vector3(transform.position.x, transform.position.y + 1.0f);
@@ -452,12 +453,12 @@ public class PlayerMove : MonoBehaviour
 
 	public void PlaceMode()
 	{
-		if(!isPlaceMode)
+		if (!isPlaceMode)
 		{
-			if(isPlace)
+			if (isPlace)
 			{
 				lightOffNowTime += Time.deltaTime;
-				if(lightOffNowTime >= lightOffTime)
+				if (lightOffNowTime >= lightOffTime)
 				{
 					isPlace = false;
 					lightOffNowTime = 0;
