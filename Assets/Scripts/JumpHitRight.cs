@@ -35,6 +35,15 @@ public class JumpHitRight : MonoBehaviour
 		{
 			isHit = true;
 		}
+
+		if (collision.gameObject.tag == "LightBlock")
+		{
+			LightBlock lightblock = collision.GetComponent<LightBlock>();
+			if (lightblock.isLightHit)
+			{
+				isHit = true;
+			}
+		}
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
@@ -45,6 +54,16 @@ public class JumpHitRight : MonoBehaviour
 		{
 			isHit = false;
 			playerMove.isJump = false;
+		}
+
+		if (collision.gameObject.tag == "LightBlock")
+		{
+			LightBlock lightblock = collision.GetComponent<LightBlock>();
+			if (lightblock.isLightHit)
+			{
+				isHit = false;
+				playerMove.isJump = false;
+			}
 		}
 	}
 }

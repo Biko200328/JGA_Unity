@@ -52,6 +52,16 @@ public class HitFloor : MonoBehaviour
 			playerMove.isJump = false;
 		}
 
+		if(collision.gameObject.tag == "LightBlock")
+		{
+			LightBlock lightblock = collision.GetComponent<LightBlock>();
+			if (lightblock.isLightHit)
+			{
+				isHit = true;
+				playerMove.isJump = false;
+			}
+		}
+
 		GimmickRide(collision);
 	}
 
@@ -63,6 +73,16 @@ public class HitFloor : MonoBehaviour
 			playerMove.isJump = false;
 		}
 
+		if (collision.gameObject.tag == "LightBlock")
+		{
+			LightBlock lightblock = collision.GetComponent<LightBlock>();
+			if (lightblock.isLightHit)
+			{
+				isHit = true;
+				playerMove.isJump = false;
+			}
+		}
+
 		GimmickRide(collision);
 	}
 
@@ -70,6 +90,15 @@ public class HitFloor : MonoBehaviour
 	{
 		// —£‚ê‚½Žž‚¾‚¯false‚É‚µ‚Ä‚ ‚°‚ê‚Î‹ó’†‚É‚¢‚é‚Æ‚«‚Ífalse‚É‚È‚é
 		if (collision.gameObject.tag == "Floor") isHit = false;
+
+		if (collision.gameObject.tag == "LightBlock")
+		{
+			LightBlock lightblock = collision.GetComponent<LightBlock>();
+			if (lightblock.isLightHit)
+			{
+				isHit = false;
+			}
+		}
 
 		GimmickRideOff(collision);
 	}

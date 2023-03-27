@@ -18,6 +18,7 @@ TagManager:
   - lampCircle
   - Goal
   - GoalGate
+  - LightBlock
   layers:
   - Default
   - TransparentFX

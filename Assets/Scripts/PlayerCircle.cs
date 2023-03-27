@@ -135,6 +135,23 @@ public class PlayerCircle : MonoBehaviour
 			Growth growth = collision.GetComponent<Growth>();
 			growth.isLightIn = true;
 		}
+
+		// 円の中だと出るブロック
+		if(collision.gameObject.tag == "LightBlock")
+		{
+			LightBlock lightBlock = collision.GetComponent<LightBlock>();
+			lightBlock.isLightHit = true;
+			lightBlock.time = 0;
+			lightBlock.isAlphaZero = false;
+			SpriteRenderer render = collision.GetComponent<SpriteRenderer>();
+			Color color = render.color;
+			color.a = 100;
+			render.color = color;
+			// 当たり判定をつけなおす
+			BoxCollider2D boxCollider2D = collision.GetComponent<BoxCollider2D>();
+			boxCollider2D.isTrigger = false;
+		}
+
 	}
 
 	private void OnTriggerStay2D(Collider2D collision)
@@ -153,6 +170,22 @@ public class PlayerCircle : MonoBehaviour
 		{
 			Growth growth = collision.GetComponent<Growth>();
 			growth.isLightIn = true;
+		}
+
+		// 円の中だと出るブロック
+		if (collision.gameObject.tag == "LightBlock")
+		{
+			LightBlock lightBlock = collision.GetComponent<LightBlock>();
+			lightBlock.isLightHit = true;
+			lightBlock.time = 0;
+			lightBlock.isAlphaZero = false;
+			SpriteRenderer render = collision.GetComponent<SpriteRenderer>();
+			Color color = render.color;
+			color.a = 100;
+			render.color = color;
+			// 当たり判定をつけなおす
+			CompositeCollider2D boxCollider2D = collision.GetComponent<CompositeCollider2D>();
+			boxCollider2D.isTrigger = false;
 		}
 	}
 
@@ -179,6 +212,13 @@ public class PlayerCircle : MonoBehaviour
 			jumpHitLeft2.isHit = false;
 			jumpHitRight.isHit = false;
 			jumpHitRight2.isHit = false;
+		}
+
+		// 円の中だと出るブロック
+		if (collision.gameObject.tag == "LightBlock")
+		{
+			LightBlock lightBlock = collision.GetComponent<LightBlock>();
+			lightBlock.isLightHit = false;
 		}
 	}
 

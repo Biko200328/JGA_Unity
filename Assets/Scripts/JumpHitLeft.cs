@@ -21,7 +21,6 @@ public class JumpHitLeft : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-
 		Vector3 _parent = transform.parent.transform.localRotation.eulerAngles;
 
 		//èCê≥â”èä
@@ -41,16 +40,35 @@ public class JumpHitLeft : MonoBehaviour
 		{
 			isHit = true;
 		}
+
+		if(collision.gameObject.tag == "LightBlock")
+		{
+			LightBlock lightblock = collision.GetComponent<LightBlock>();
+			if(lightblock.isLightHit)
+			{
+				isHit = true;
+			}
+		}
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{
 		if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "rightMoveBlock" || collision.gameObject.tag == "leftMoveBlock" ||
 			collision.gameObject.tag == "block" || collision.gameObject.tag == "upMoveBlock" || collision.gameObject.tag == "downMoveBlock" ||
-			collision.gameObject.tag == "growOriginal" || collision.gameObject.tag == "growBox")
+			collision.gameObject.tag == "growOriginal" || collision.gameObject.tag == "growBox" || collision.gameObject.tag == "LightBlock")
 		{
 			isHit = false;
 			playerMove.isJump = false;
+		}
+
+		if (collision.gameObject.tag == "LightBlock")
+		{
+			LightBlock lightblock = collision.GetComponent<LightBlock>();
+			if (lightblock.isLightHit)
+			{
+				isHit = false;
+				playerMove.isJump = false;
+			}
 		}
 	}
 }

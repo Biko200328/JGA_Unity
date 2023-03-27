@@ -32059,7 +32059,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2919794432552654035, guid: 1a7beb02f6aebef4e871def0ead341d0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 96.52
+      value: -10.88
       objectReference: {fileID: 0}
     - target: {fileID: 2919794432552654035, guid: 1a7beb02f6aebef4e871def0ead341d0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -32096,6 +32096,10 @@ PrefabInstance:
     - target: {fileID: 2919794432552654035, guid: 1a7beb02f6aebef4e871def0ead341d0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919794432552654038, guid: 1a7beb02f6aebef4e871def0ead341d0, type: 3}
+      propertyPath: lightOffTime
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2919794432552654038, guid: 1a7beb02f6aebef4e871def0ead341d0, type: 3}
       propertyPath: playerCircle
