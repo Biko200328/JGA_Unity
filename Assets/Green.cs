@@ -6,6 +6,12 @@ public class Green : MonoBehaviour
 {
 	public bool isCollect;
 
+	[Header("円の最大値")]
+	public float maxSize;
+
+	[Header("サイズ増減数値")]
+	public float changeSize;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -28,5 +34,10 @@ public class Green : MonoBehaviour
 	public void SetCollect(bool a)
 	{
 		isCollect = a;
+	}
+
+	public bool GetCollect()
+	{
+		return isCollect;
 	}
 }

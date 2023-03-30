@@ -221,20 +221,20 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 144241924}
     m_ColliderPaths:
-    - - X: 4999707
+    - - X: 112239707
         Y: -5000000
-      - X: 4999707
+      - X: 112239707
         Y: 5000000
-      - X: -5000000
+      - X: -112240000
         Y: 4999707
-      - X: -4999707
+      - X: -112239707
         Y: -5000000
   m_CompositePaths:
     m_Paths:
-    - - {x: 0.4999414, y: -0.5}
-      - {x: 0.4999414, y: 0.5}
-      - {x: -0.5, y: 0.4999414}
-      - {x: -0.4999414, y: -0.5}
+    - - {x: 11.223942, y: -0.5}
+      - {x: 11.223942, y: 0.5}
+      - {x: -11.224, y: 0.4999414}
+      - {x: -11.223942, y: -0.5}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
 --- !u!50 &144241923
@@ -343,8 +343,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 144241920}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.001, y: -1.002, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.0010003, y: -1.002, z: 0}
+  m_LocalScale: {x: 22.448, y: 1, z: 1}
   m_Children:
   - {fileID: 871239610}
   m_Father: {fileID: 0}
@@ -361,6 +361,7 @@ GameObject:
   - component: {fileID: 493444470}
   - component: {fileID: 493444472}
   - component: {fileID: 493444471}
+  - component: {fileID: 493444473}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -449,6 +450,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &493444473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493444469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb1460a02d22c5c4e99616a12f6ffa4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &755512918
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,6 +558,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3104f272431aa429f25fda0b423164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCollect: 0
+  maxSize: 9
+  changeSize: 1
 --- !u!1 &871239609
 GameObject:
   m_ObjectHideFlags: 0
@@ -869,7 +885,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5429cc5d89949d249ba2355dbe67daaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isCollect: 0
+  maxSize: 9
+  changeSize: 1
 --- !u!1 &1579319723
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,6 +1031,7 @@ GameObject:
   - component: {fileID: 1836464739}
   - component: {fileID: 1836464741}
   - component: {fileID: 1836464740}
+  - component: {fileID: 1836464742}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -1102,3 +1120,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1836464742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836464738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d3e60d33d726541b2c0e31ea313242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
