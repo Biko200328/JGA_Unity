@@ -459,6 +459,7 @@ GameObject:
   m_Component:
   - component: {fileID: 755512920}
   - component: {fileID: 755512919}
+  - component: {fileID: 755512921}
   m_Layer: 0
   m_Name: GreenFire
   m_TagString: Untagged
@@ -532,6 +533,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &755512921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755512918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a3104f272431aa429f25fda0b423164, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &871239609
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,6 +772,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
+  state: 0
 --- !u!1 &1551204978
 GameObject:
   m_ObjectHideFlags: 0
@@ -769,6 +783,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1551204980}
   - component: {fileID: 1551204979}
+  - component: {fileID: 1551204981}
   m_Layer: 0
   m_Name: RedFire
   m_TagString: Untagged
@@ -842,6 +857,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1551204981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551204978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5429cc5d89949d249ba2355dbe67daaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCollect: 0
 --- !u!1 &1579319723
 GameObject:
   m_ObjectHideFlags: 0
