@@ -2,20 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RedBlock : MonoBehaviour
+public class GreenBlock : MonoBehaviour
 {
 	// フェードアウトするまでの時間(0.5sec)
 	public float fadeTime = 0.5f;
 	[System.NonSerialized] public float time;
 	private SpriteRenderer render;
 
-	CompositeCollider2D collider2D;
+	[System.NonSerialized]  CompositeCollider2D collider;
 
 	public bool isLightHit = false;
 
 	[System.NonSerialized] public bool isAlphaZero;
-
-
 	void Start()
 	{
 		render = GetComponent<SpriteRenderer>();
@@ -23,7 +21,7 @@ public class RedBlock : MonoBehaviour
 		color.a = 0;
 		render.color = color;
 
-		collider2D = GetComponent<CompositeCollider2D>();
+		collider = GetComponent<CompositeCollider2D>();
 	}
 
 	void Update()
@@ -47,14 +45,14 @@ public class RedBlock : MonoBehaviour
 				color.a = 0;
 				render.color = color;
 				// 当たり判定を消す
-				collider2D.isTrigger = true;
+				collider.isTrigger = true;
 				// αフラグを0に
 				isAlphaZero = true;
 			}
 		}
 		else
 		{
-			collider2D.isTrigger = false;
+			collider.isTrigger = false;
 			time = 0;
 			isAlphaZero = false;
 			Color color = render.color;

@@ -36,4 +36,31 @@ public class GreenCircle : MonoBehaviour
 		var circleVec = new Vector3(circleSize, circleSize, circleSize);
 		transform.localScale = circleVec;
 	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.gameObject.tag == "GreenBlock")
+		{
+			GreenBlock greenBlock = collision.GetComponent<GreenBlock>();
+			greenBlock.isLightHit = true;
+		}
+	}
+
+	private void OnTriggerStay2D(Collider2D collision)
+	{
+		if (collision.gameObject.tag == "GreenBlock")
+		{
+			GreenBlock greenBlock = collision.GetComponent<GreenBlock>();
+			greenBlock.isLightHit = true;
+		}
+	}
+
+	private void OnTriggerExit2D(Collider2D collision)
+	{
+		if (collision.gameObject.tag == "GreenBlock")
+		{
+			GreenBlock greenBlock = collision.GetComponent<GreenBlock>();
+			greenBlock.isLightHit = false;
+		}
+	}
 }
