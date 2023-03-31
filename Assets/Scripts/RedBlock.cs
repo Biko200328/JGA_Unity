@@ -15,7 +15,6 @@ public class RedBlock : MonoBehaviour
 
 	[System.NonSerialized] public bool isAlphaZero;
 
-
 	void Start()
 	{
 		render = GetComponent<SpriteRenderer>();
@@ -51,6 +50,8 @@ public class RedBlock : MonoBehaviour
 				// ƒ¿ƒtƒ‰ƒO‚ð0‚É
 				isAlphaZero = true;
 			}
+
+			render.sortingLayerName = "Default";
 		}
 		else
 		{
@@ -60,6 +61,12 @@ public class RedBlock : MonoBehaviour
 			Color color = render.color;
 			color.a = 100;
 			render.color = color;
+			render.sortingLayerName = "Player";
 		}
+	}
+
+	public bool GetIsLightHit()
+	{
+		return isLightHit;
 	}
 }

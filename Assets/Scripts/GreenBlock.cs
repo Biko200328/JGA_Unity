@@ -49,6 +49,8 @@ public class GreenBlock : MonoBehaviour
 				// ƒ¿ƒtƒ‰ƒO‚ð0‚É
 				isAlphaZero = true;
 			}
+
+			render.sortingLayerName = "Default";
 		}
 		else
 		{
@@ -58,6 +60,12 @@ public class GreenBlock : MonoBehaviour
 			Color color = render.color;
 			color.a = 100;
 			render.color = color;
+
+			render.sortingLayerName = "Player";
 		}
+	}
+	public bool GetIsLightHit()
+	{
+		return isLightHit;
 	}
 }
