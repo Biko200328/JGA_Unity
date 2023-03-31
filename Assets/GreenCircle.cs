@@ -29,7 +29,7 @@ public class GreenCircle : MonoBehaviour
 		}
 		else
 		{
-			circleSize = 0;
+			//circleSize = 0;
 		}
 
 

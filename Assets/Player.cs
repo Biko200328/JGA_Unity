@@ -9,8 +9,11 @@ public class Player : MonoBehaviour
 	bool isRightMove;
 	bool isLeftMove;
 
+	[Header("回収パターン")]
+	[SerializeField] bool isCollectPattern = false;
+
 	[Header("プレイヤー状態")]
-	[SerializeField]int state = 0;
+	[SerializeField]int[] state = {0,0};
 
 	// 赤
 	GameObject redObj;
@@ -39,62 +42,92 @@ public class Player : MonoBehaviour
 	{
 		MoveUpdate();
 
+
 		// 状態変化
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			state++;
+			if(!isCollectPattern)
+			{
+				state[0]++;
 
-			// ループさせる
-			if (state > 3)
-			{
-				state = 0;
-			}
+				// ループさせる
+				if (state[0] > 3)
+				{
+					state[0] = 0;
+				}
 
-			//赤回収
-			if (state == 1)
-			{
-				// プレイヤーに親子付けする
-				redObj.transform.SetParent(transform);
-				// ポジションをプレイヤーと同じに
-				redObj.transform.position = transform.position;
+				//赤回収
+				if (state[0] == 1)
+				{
+					// プレイヤーに親子付けする
+					redObj.transform.SetParent(transform);
+					// ポジションをプレイヤーと同じに
+					redObj.transform.position = transform.position;
+				}
+				// 赤設置
+				else if (state[0] == 2)
+				{
+					// 親子付けを解除する
+					redObj.transform.SetParent(null);
+				}
+				// 緑回収
+				else if (state[0] == 3)
+				{
+					// プレイヤーに親子付けする
+					greenObj.transform.SetParent(transform);
+					// ポジションをプレイヤーと同じに
+					greenObj.transform.position = transform.position;
+				}
+				//緑設置
+				else if (state[0] == 0)
+				{
+					// 親子付けを解除する
+					greenObj.transform.SetParent(null);
+				}
 			}
-			// 赤設置
-			else if(state == 2)
+			else
 			{
-				// 親子付けを解除する
-				redObj.transform.SetParent(null);
-			}
-			// 緑回収
-			else if(state == 3)
-			{
-				// プレイヤーに親子付けする
-				greenObj.transform.SetParent(transform);
-				// ポジションをプレイヤーと同じに
-				greenObj.transform.position = transform.position;
-			}
-			//緑設置
-			else if (state == 0)
-			{
-				// 親子付けを解除する
-				greenObj.transform.SetParent(null);
+				state[1]++;
+				// ループさせる
+				if (state[1] > 1)
+				{
+					state[1] = 0;
+				}
+
+				// 赤テレポート
+				if (state[1] == 1)
+				{
+					// ポジションをプレイヤーと同じに
+					redObj.transform.position = transform.position;
+				}
+				// 緑テレポート
+				else
+				{
+					// ポジションをプレイヤーと同じに
+					greenObj.transform.position = transform.position;
+				}
 			}
 		}
 
-		switch (state)
+		if(!isCollectPattern)
 		{
-			case 0:
-				green.SetCollect(false);
-				break;
-			case 1:
-				red.SetCollect(true);
-				break;
-			case 2:
-				red.SetCollect(false);
-				break;
-			case 3:
-				green.SetCollect(true);
-				break;
+			switch (state[0])
+			{
+				case 0:
+					green.SetCollect(false);
+					break;
+				case 1:
+					red.SetCollect(true);
+					break;
+				case 2:
+					red.SetCollect(false);
+					break;
+				case 3:
+					green.SetCollect(true);
+					break;
+			}
 		}
+		
 	}
 
 	private void FixedUpdate()

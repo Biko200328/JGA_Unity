@@ -30,9 +30,8 @@ public class RedCircle : MonoBehaviour
 		}
 		else
 		{
-			circleSize = 0;
+			//circleSize = 0;
 		}
-
 
 		var circleVec = new Vector3(circleSize, circleSize, circleSize);
 		transform.localScale = circleVec;

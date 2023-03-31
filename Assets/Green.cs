@@ -12,16 +12,35 @@ public class Green : MonoBehaviour
 	[Header("サイズ増減数値")]
 	public float changeSize;
 
+	Rigidbody2D rb;
+
 	// Start is called before the first frame update
 	void Start()
 	{
-
+		rb = GetComponent<Rigidbody2D>();
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
+		// グリッドに合うように
+		if (!isCollect)
+		{
+			// 整数部分
+			int intLampPosX = (int)rb.position.x;
+			// 小数部分
+			float fltLampPosX = rb.position.x - intLampPosX;
+			// 数値代入
+			var pos = rb.position;
 
+			if (fltLampPosX < 1 && fltLampPosX > 0.5f)
+			{
+				intLampPosX += 1;
+			}
+
+			pos.x = (float)intLampPosX;
+			rb.position = pos;
+		}
 	}
 
 	/// <summary>

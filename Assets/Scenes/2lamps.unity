@@ -1113,6 +1113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 755512920}
   - component: {fileID: 755512919}
+  - component: {fileID: 755512922}
   - component: {fileID: 755512921}
   m_Layer: 0
   m_Name: GreenFire
@@ -1202,6 +1203,27 @@ MonoBehaviour:
   isCollect: 0
   maxSize: 9
   changeSize: 1
+--- !u!50 &755512922
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755512918}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!4 &776454147 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8987194401051191273, guid: 2e9f53de151b08a49b8ce1cb73cd55ed, type: 3}
@@ -1706,7 +1728,7 @@ Transform:
   m_GameObject: {fileID: 1077199506}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.502, y: 1.395, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -1724,7 +1746,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
-  state: 0
+  isCollectPattern: 1
+  state: 0000000000000000
 --- !u!4 &1118634539 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7486382063415763491, guid: 9326472e695e1fa449e7ec2589b99f30, type: 3}
@@ -2336,6 +2359,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1551204980}
   - component: {fileID: 1551204979}
+  - component: {fileID: 1551204982}
   - component: {fileID: 1551204981}
   m_Layer: 0
   m_Name: RedFire
@@ -2403,7 +2427,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1551204978}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.43, y: 1.45, z: 0}
+  m_LocalPosition: {x: 4.01, y: 0.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 493444470}
@@ -2424,6 +2448,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSize: 9
   changeSize: 1
+--- !u!50 &1551204982
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551204978}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1579319723
 GameObject:
   m_ObjectHideFlags: 0
