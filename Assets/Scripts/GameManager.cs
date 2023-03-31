@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 	// フェード用のシーンコントローラー
 	SceneController sceneController;
 
+	[SerializeField] bool isMove = true;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -30,5 +32,15 @@ public class GameManager : MonoBehaviour
 			// 現在のシーンを読み直す
 			sceneController.sceneChange(SceneManager.GetActiveScene().name);
 		}
+
+		if (Input.GetKeyDown(KeyCode.N))
+		{
+			isMove = !isMove;
+		}
+	}
+
+	public bool GetIsMove()
+	{
+		return isMove;
 	}
 }
